@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.Models", "VideocartLab.Models\VideocartLab.Models.csproj", "{9E77E15A-C641-4A57-9436-EE5343AE643E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.NUnitTest", "VideocartLab.NUnitTest\VideocartLab.NUnitTest.csproj", "{ABCEADDF-5B96-46D5-BA47-D99DB9443C5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9E77E15A-C641-4A57-9436-EE5343AE643E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E77E15A-C641-4A57-9436-EE5343AE643E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E77E15A-C641-4A57-9436-EE5343AE643E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABCEADDF-5B96-46D5-BA47-D99DB9443C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABCEADDF-5B96-46D5-BA47-D99DB9443C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABCEADDF-5B96-46D5-BA47-D99DB9443C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABCEADDF-5B96-46D5-BA47-D99DB9443C5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
