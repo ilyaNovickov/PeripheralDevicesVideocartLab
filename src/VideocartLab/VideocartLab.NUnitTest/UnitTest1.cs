@@ -57,6 +57,16 @@ namespace VideocartLab.NUnitTest
             Assert.AreEqual(right, vRAM.EffectiveFrequency);
         }
 
+        [Test]
+        public void ChangeGDDRRation()
+        {
+            GDDRType type = new(GDDRTypes.GDDR);
+
+            type.Type = GDDRTypes.GDDR6X;
+
+            Assert.AreEqual(16, type.EffectiveRatio);
+        }
+
         /*
         [Test]
         public void IsPalindrome_ShouldReturnFalse_ForNonPalindrome()
