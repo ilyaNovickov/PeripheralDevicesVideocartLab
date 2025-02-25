@@ -3,8 +3,8 @@ using VideocartLab.Models.GPUMemory;
 
 namespace VideocartLab.NUnitTest
 {
-
-    public class Tests
+    [TestFixture]
+    public class VRAMTests
     {
         private VRAM vram;
 
