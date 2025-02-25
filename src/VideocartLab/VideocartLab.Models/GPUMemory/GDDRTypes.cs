@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VideocartLab.Models
+namespace VideocartLab.Models.GPUMemory
 {
     public enum GDDRTypes
     {

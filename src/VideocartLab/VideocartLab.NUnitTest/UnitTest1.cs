@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Utilities;
-using VideocartLab.Models;
+using VideocartLab.Models.GPUMemory;
 
 namespace VideocartLab.NUnitTest
 {

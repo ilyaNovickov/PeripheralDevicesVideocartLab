@@ -1,4 +1,4 @@
-﻿namespace VideocartLab.Models
+﻿namespace VideocartLab.Models.GPUMemory
 {
     /// <summary>
     /// Класс видеопамяти видеокарты
@@ -32,11 +32,11 @@
         public GDDRType Type
         {
             get => type;
-            set 
+            set
             {
                 type = value;
                 OnChangeFrequencyAndBusCapcity(needToChangeFreq: true);
-            } 
+            }
         }
 
         /// <summary>
@@ -55,7 +55,7 @@
         public int MemoryBusCapacity
         {
             get => memoryBusCapacitiy;
-            set 
+            set
             {
                 memoryBusCapacitiy = value;
                 OnChangeFrequencyAndBusCapcity(needToChangeFreq: false);
@@ -99,7 +99,7 @@
             set
             {
                 effectiveFrequency = value;
-                OnChangeFrequencyAndBusCapcity(needToChangeFreq: true, effectiveFreqChanged:true);
+                OnChangeFrequencyAndBusCapcity(needToChangeFreq: true, effectiveFreqChanged: true);
             }
         }
 
@@ -115,15 +115,15 @@
 
             if (effectiveFreqChanged)
             {
-                this.realFrequency = EffectiveFrequency * Type.RealRatio;
+                realFrequency = EffectiveFrequency * Type.RealRatio;
             }
             else
             {
-                this.effectiveFrequency = (int)(RealFrequency * Type.EffectiveRatio);
+                effectiveFrequency = (int)(RealFrequency * Type.EffectiveRatio);
             }
 
-            Changed:
-            this.memoryBandwidth = MemoryBusCapacity * EffectiveFrequency / 8;
+        Changed:
+            memoryBandwidth = MemoryBusCapacity * EffectiveFrequency / 8;
         }
     }
 }
