@@ -14,13 +14,18 @@ namespace VideocartLab.Models
         private int rop = 1;
         private int frequency = 1;
 
-
+        /// <summary>
+        /// Имя графического процессора GPU
+        /// </summary>
         public string? Name
         {
             get => name;
             set => name = value;
         }
 
+        /// <summary>
+        /// Кол-во потоковых ядер (CUDA/SM) [шт]
+        /// </summary>
         public int Cores
         {
             get => cores;
@@ -31,6 +36,9 @@ namespace VideocartLab.Models
             }
         }
 
+        /// <summary>
+        /// Кол-во текстурных блоков [шт]
+        /// </summary>
         public int TextureMappingUnits
         {
             get => tmu;
@@ -41,6 +49,9 @@ namespace VideocartLab.Models
             }
         }
 
+        /// <summary>
+        /// Кол-во блоков растеризации [шт]
+        /// </summary>
         public int RenderOutputPipelines
         {
             get => rop;
@@ -51,6 +62,9 @@ namespace VideocartLab.Models
             }
         }
 
+        /// <summary>
+        /// Частота GPU [МГц]
+        /// </summary>
         public int Frequency
         {
             get => frequency;
@@ -60,12 +74,25 @@ namespace VideocartLab.Models
                 frequency = value;
             }
         }
+
+        /// <summary>
+        /// Производительность пикселей 
+        /// Показывает, сколько пикселей просчитывается за 1 секунду 
+        /// [ГПикселей/с]
+        /// </summary>
+        public int PixelFillRate
+        {
+            get => rop * frequency / 1000;
+        }
+
+        /// <summary>
+        /// Текстурная производительность
+        /// Показывает кол-во текстелей, которые обрабатываются за 1 секунду
+        /// [ГТекстелей/с]
+        /// </summary>
+        public int TextureFillRate
+        {
+            get => frequency * tmu / 1000;
+        }
     }
 }
-
-/*
- * TODO:
- * Дописать этот класс
- * Рефакторить тесты
- * 
- */
