@@ -8,9 +8,7 @@
         private GDDRType type = new GDDRType(GDDRTypes.GDDR);
         private int capacity = 1024;
         private int memoryBusCapacitiy = 8;
-        private double memoryBandwidth = 1;
-        private double realFrequency = 1000d;
-        private int effectiveFrequency = 1000;
+        private double realFrequency = 1000;
 
         /// <summary>
         /// Создаёт экземпляр памяти с характеристиками:
@@ -27,15 +25,14 @@
 
         /// <summary>
         /// Тип памяти GDDR
-        /// Изменение этого свойства изменяет эффективную частоту 
         /// </summary>
         public GDDRType Type
         {
             get => type;
             set
             {
+                ValuesValidator.ValidUnnullObject(value);
                 type = value;
-                OnChangeFrequencyAndBusCapcity(needToChangeFreq: true);
             }
         }
 
@@ -45,20 +42,23 @@
         public int Capacity
         {
             get => capacity;
-            set => capacity = value;
+            set 
+            {
+                ValuesValidator.ValidUnnegativeArgument(value);
+                capacity = value;
+            } 
         }
 
         /// <summary>
         /// Ширина шины памяти [бит]
-        /// При изменении этого свойства меняется пропускная способность
         /// </summary>
         public int MemoryBusCapacity
         {
             get => memoryBusCapacitiy;
             set
             {
+                ValuesValidator.ValidUnnegativeArgument(value);
                 memoryBusCapacitiy = value;
-                OnChangeFrequencyAndBusCapcity(needToChangeFreq: false);
             }
         }
 
@@ -68,62 +68,41 @@
         /// </summary>
         public double MemoryBandwidth
         {
-            get => memoryBandwidth;
-            private set => memoryBandwidth = value;
+            get
+            {
+                return EffectiveFrequency * MemoryBusCapacity / 8d;
+            }
         }
 
         /// <summary>
         /// Реальаня частота памяти [МГц]
         /// Высчитывается, как [Эффективная частота] / [Множитель GDDR]
-        /// При изменении этого свойства меняется и эффективная частота, 
-        /// и пропускная способность
         /// </summary>
         public double RealFrequency
         {
             get => realFrequency;
             set
             {
+                ValuesValidator.ValidUnnegativeArgument(value);
+
                 realFrequency = value;
-                OnChangeFrequencyAndBusCapcity(needToChangeFreq: true);
             }
         }
 
         /// <summary>
         /// Эффективная частота памяти [МГц]
         /// Высчитывается, как [Реальная частота] * [Множитель GDDR]
-        /// При изменении этого свойства меняется и реальная частота, и пропускная способность
         /// </summary>
-        public int EffectiveFrequency
+        public double EffectiveFrequency
         {
-            get => effectiveFrequency;
+            get => realFrequency * type.EffectiveRatio;
             set
             {
-                effectiveFrequency = value;
-                OnChangeFrequencyAndBusCapcity(needToChangeFreq: true, effectiveFreqChanged: true);
+                ValuesValidator.ValidUnnegativeArgument(value);
+
+                realFrequency = type.RealRatio * value;
             }
         }
 
-        /// <summary>
-        /// Синхронизация изменений пропускной способности памяти и её частот
-        /// </summary>
-        /// <param name="needToChangeFreq">Указывает, что нужно изменить частоты памяты</param>
-        /// <param name="effectiveFreqChanged">Указывает, то изменилась эффективная частота</param>
-        private void OnChangeFrequencyAndBusCapcity(bool needToChangeFreq, bool effectiveFreqChanged = false)
-        {
-            if (!needToChangeFreq)
-                goto Changed;
-
-            if (effectiveFreqChanged)
-            {
-                realFrequency = EffectiveFrequency * Type.RealRatio;
-            }
-            else
-            {
-                effectiveFrequency = (int)(RealFrequency * Type.EffectiveRatio);
-            }
-
-        Changed:
-            memoryBandwidth = MemoryBusCapacity * EffectiveFrequency / 8;
-        }
     }
 }

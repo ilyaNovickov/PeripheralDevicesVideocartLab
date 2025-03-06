@@ -8,7 +8,7 @@ namespace VideocartLab.Models
 {
     public class GPU
     {
-        private string? name;
+        private string? name = null;
         private int cores = 1;
         private int tmu = 1;
         private int rop = 1;
@@ -66,8 +66,6 @@ namespace VideocartLab.Models
 /*
  * TODO:
  * Дописать этот класс
- * Избавиться от свойств, которые вычисляются из других параметров (этот класс и VRAM)
- * Ввести валидацию в VRAM
  * Рефакторить тесты
  * 
  */
