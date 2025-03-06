@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace VideocartLab.Models.GPUMemory
 {
+    /// <summary>
+    /// Перечесление основных типов VRAM для видеокарты
+    /// </summary>
     public enum GDDRTypes
     {
         GDDR,
