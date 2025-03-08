@@ -70,7 +70,7 @@
         {
             get
             {
-                return EffectiveFrequency * MemoryBusCapacity / 8d;
+                return EffectiveFrequency * MemoryBusCapacity / 8d / 1000d;
             }
         }
 
