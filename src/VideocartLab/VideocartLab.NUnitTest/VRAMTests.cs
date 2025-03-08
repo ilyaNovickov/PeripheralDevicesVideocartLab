@@ -67,72 +67,46 @@ namespace VideocartLab.NUnitTest
             Assert.AreEqual(16, type.EffectiveRatio);
         }
 
-        /*
         [Test]
-        public void IsPalindrome_ShouldReturnFalse_ForNonPalindrome()
+        public void Test1080Bandwidth()
         {
-            // Arrange
-            var input = "hello";
+            VRAM ram = new VRAM()
+            {
+                MemoryBusCapacity = 256,
+                EffectiveFrequency = 10000
+            };
 
-            // Act
-            var result = _stringUtilities.IsPalindrome(input);
+            double res = 320;
 
-            // Assert
-            Assert.IsFalse(result);
-        }
-
-        [Test]
-        public void IsPalindrome_ShouldReturnFalse_ForEmptyString()
-        {
-            // Arrange
-            var input = "";
-
-            // Act
-            var result = _stringUtilities.IsPalindrome(input);
-
-            // Assert
-            Assert.IsFalse(result);
+            Assert.AreEqual(res, ram.MemoryBandwidth);
         }
 
         [Test]
-        public void IsPalindrome_ShouldReturnFalse_ForNull()
+        public void TestChangeEffectiveFreq()
         {
-            // Arrange
-            string input = null;
+            VRAM ram = new VRAM();
 
-            // Act
-            var result = _stringUtilities.IsPalindrome(input);
+            ram.EffectiveFrequency = 2000;
 
-            // Assert
-            Assert.IsFalse(result);
+            ram.Type = GDDRType.GDDR4;
+
+            double res = 2000d * 2d;
+
+            Assert.AreEqual(res, ram.EffectiveFrequency);
         }
 
         [Test]
-        public void IsPalindrome_ShouldIgnoreCase()
+        public void TestChangeEffectiveFreq2()
         {
-            // Arrange
-            var input = "Level";
+            VRAM ram = new VRAM();
 
-            // Act
-            var result = _stringUtilities.IsPalindrome(input);
+            ram.Type = GDDRType.GDDR4;
 
-            // Assert
-            Assert.IsTrue(result);
+            ram.EffectiveFrequency = 2000;
+
+            double res = 2000d / 2d;
+
+            Assert.AreEqual(res, ram.RealFrequency);
         }
-
-        [TestCase("madam", true)] // Тестовый случай
-        [TestCase("step on no pets", false)] // Не обрабатываем пробелы
-        [TestCase("racecar", true)]
-        [TestCase("12321", true)]
-        [TestCase("12345", false)]
-        public void IsPalindrome_ShouldHandleMultipleCases(string input, bool expected)
-        {
-            // Act
-            var result = _stringUtilities.IsPalindrome(input);
-
-            // Assert
-            Assert.AreEqual(expected, result);
-        }
-        */
     }
 }
