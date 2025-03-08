@@ -102,7 +102,7 @@ namespace VideocartLab.Models.ConnectionInterface
         }
 
         /// <summary>
-        /// Частота работы интерфейса
+        /// Частота работы интерфейса [МГц]
         /// </summary>
         public double Frequency
         {
@@ -115,7 +115,7 @@ namespace VideocartLab.Models.ConnectionInterface
         }
 
         /// <summary>
-        /// Кол-во линий передачи
+        /// Кол-во линий передачи [шт]
         /// </summary>
         public int Lines
         {
@@ -128,7 +128,7 @@ namespace VideocartLab.Models.ConnectionInterface
         }
 
         /// <summary>
-        /// Пропускная способность 
+        /// Пропускная способность [ГБ/с]
         /// </summary>
         public override double Bandwidth
         {

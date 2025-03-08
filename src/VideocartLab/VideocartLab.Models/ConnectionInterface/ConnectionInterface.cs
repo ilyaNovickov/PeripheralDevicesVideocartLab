@@ -12,7 +12,7 @@ namespace VideocartLab.Models.ConnectionInterface
     public abstract class ConnectionInterface
     {
         /// <summary>
-        /// Абстрактное свойство пропускной способности интерфейса подключения
+        /// Абстрактное свойство пропускной способности интерфейса подключения [ГБ/с]
         /// </summary>
         public abstract double Bandwidth
         {
