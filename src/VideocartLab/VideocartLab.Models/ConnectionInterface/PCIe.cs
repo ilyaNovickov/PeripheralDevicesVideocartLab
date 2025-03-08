@@ -41,8 +41,8 @@ namespace VideocartLab.Models.ConnectionInterface
         /// <summary>
         /// Иницилизация интерфейса PCIe с пользовательской кодировкой
         /// </summary>
-        /// <param name="countofLines">Кол-во линий передачи</param>
-        /// <param name="frequency">Частота</param>
+        /// <param name="countofLines">Кол-во линий передачи [шт]</param>
+        /// <param name="frequency">Частота [МГц]</param>
         /// <param name="bitPerClock">Кол-во бит, передаваемых за 1-он такт</param>
         /// <param name="encodingType">Пользовательское значение кодировки, которое меньше 1, но больше 0</param>
         public PCIe(int countofLines, double frequency, int bitPerClock, double encodingType) : 
@@ -55,8 +55,8 @@ namespace VideocartLab.Models.ConnectionInterface
         /// <summary>
         /// Иницилизация интерфейса PCIe 
         /// </summary>
-        /// <param name="countofLines">Кол-во линий передачи</param>
-        /// <param name="frequency">Частота</param>
+        /// <param name="countofLines">Кол-во линий передачи [шт]</param>
+        /// <param name="frequency">Частота [МГц]</param>
         /// <param name="bitPerClock">Кол-во бит, передаваемых за 1-он такт</param>
         /// <param name="encodingType">Тип кодировки данных</param>
         public PCIe(int countofLines, double frequency, int bitPerClock, EncodingType encodingType) :
@@ -68,8 +68,8 @@ namespace VideocartLab.Models.ConnectionInterface
         /// <summary>
         /// Иницилизация PCIe
         /// </summary>
-        /// <param name="countofLines">Кол-во линий передачи</param>
-        /// <param name="frequency">Частота</param>
+        /// <param name="countofLines">Кол-во линий передачи [шт</param>
+        /// <param name="frequency">Частота [МГц</param>
         /// <param name="bitPerClock">Кол-во бит, передаваемых за 1-он такт</param>
         private PCIe(int countofLines, double frequency, int bitPerClock)
         {
