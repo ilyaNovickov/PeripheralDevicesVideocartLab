@@ -6,11 +6,23 @@ using System.Threading.Tasks;
 
 namespace VideocartLab.Models.ConnectionInterface
 {
+    /// <summary>
+    /// Интерфейс подключения PCIexpress
+    /// </summary>
     public class PCIe : ConnectionInterface
     {
+        /// <summary>
+        /// Экземпляр PCEe6.0x16
+        /// </summary>
         public static PCIe PCIe6dot0x16 => new PCIe(16, 32000, 2, EncodingType._242On256);
+        /// <summary>
+        /// Экземпляр PCEe4.0x8
+        /// </summary>
         public static PCIe PCIe4dot0x8 => new PCIe(8, 16000, 1, EncodingType._128On130b);
-        public static PCIe PCIe2dot0x4 => new PCIe(2, 5000, 1, EncodingType._8bOn10b);
+        /// <summary>
+        /// Экземпляр PCE2.0x4
+        /// </summary>
+        public static PCIe PCIe2dot0x4 => new PCIe(4, 5000, 1, EncodingType._8bOn10b);
 
         private double frequency = 2500;
         private int lines = 1;
@@ -18,11 +30,21 @@ namespace VideocartLab.Models.ConnectionInterface
         private EncodingType type = EncodingType._8bOn10b;
         private int bitPerClock = 1;
 
+        /// <summary>
+        /// Иницилизация PCIe1.0x1
+        /// </summary>
         public PCIe()
         {
 
         }
 
+        /// <summary>
+        /// Иницилизация интерфейса PCIe с пользовательской кодировкой
+        /// </summary>
+        /// <param name="countofLines">Кол-во линий передачи</param>
+        /// <param name="frequency">Частота</param>
+        /// <param name="bitPerClock">Кол-во бит, передаваемых за 1-он такт</param>
+        /// <param name="encodingType">Пользовательское значение кодировки, которое меньше 1, но больше 0</param>
         public PCIe(int countofLines, double frequency, int bitPerClock, double encodingType) : 
             this(countofLines, frequency, bitPerClock)
         {
@@ -30,12 +52,25 @@ namespace VideocartLab.Models.ConnectionInterface
             Type = EncodingType.Another;
         }
 
+        /// <summary>
+        /// Иницилизация интерфейса PCIe 
+        /// </summary>
+        /// <param name="countofLines">Кол-во линий передачи</param>
+        /// <param name="frequency">Частота</param>
+        /// <param name="bitPerClock">Кол-во бит, передаваемых за 1-он такт</param>
+        /// <param name="encodingType">Тип кодировки данных</param>
         public PCIe(int countofLines, double frequency, int bitPerClock, EncodingType encodingType) :
             this(countofLines, frequency, bitPerClock)
         {
             Type = encodingType;
         }
 
+        /// <summary>
+        /// Иницилизация PCIe
+        /// </summary>
+        /// <param name="countofLines">Кол-во линий передачи</param>
+        /// <param name="frequency">Частота</param>
+        /// <param name="bitPerClock">Кол-во бит, передаваемых за 1-он такт</param>
         private PCIe(int countofLines, double frequency, int bitPerClock)
         {
             BitPerClock = bitPerClock;
@@ -43,7 +78,10 @@ namespace VideocartLab.Models.ConnectionInterface
             Lines = countofLines;
         }
 
-        private int BitPerClock
+        /// <summary>
+        /// Кол-во бит передаваемых за 1-н такт
+        /// </summary>
+        public int BitPerClock
         {
             get => bitPerClock;
             set
@@ -54,12 +92,18 @@ namespace VideocartLab.Models.ConnectionInterface
             }
         }
 
+        /// <summary>
+        /// Тип кодирования передаваемых данных
+        /// </summary>
         public EncodingType Type
         {
             get => type;
             set => type = value;
         }
 
+        /// <summary>
+        /// Частота работы интерфейса
+        /// </summary>
         public double Frequency
         {
             get => frequency;
@@ -70,6 +114,9 @@ namespace VideocartLab.Models.ConnectionInterface
             }
         }
 
+        /// <summary>
+        /// Кол-во линий передачи
+        /// </summary>
         public int Lines
         {
             get => lines;
@@ -80,6 +127,9 @@ namespace VideocartLab.Models.ConnectionInterface
             }
         }
 
+        /// <summary>
+        /// Пропускная способность 
+        /// </summary>
         public override double Bandwidth
         {
             get
@@ -88,6 +138,9 @@ namespace VideocartLab.Models.ConnectionInterface
             }
         }
 
+        /// <summary>
+        /// Пользовательский коэффициент передачи в пределах от 0 (строго больше) до 1 (включительно)
+        /// </summary>
         public double UserEncodingType
         {
             get => encodingType;
@@ -100,6 +153,12 @@ namespace VideocartLab.Models.ConnectionInterface
             }
         }
 
+        /// <summary>
+        /// Сопоставление выбранного типа кодирования
+        /// </summary>
+        /// <param name="type">Тип кодирования</param>
+        /// <returns>Значение от 0 до 1, обозначаещее коэффициент полезной длины сообщения</returns>
+        /// <exception cref="Exception">Введён неизместный тип кодирования</exception>
         private double MatchEncodingType(EncodingType type)
         {
             switch (type)
