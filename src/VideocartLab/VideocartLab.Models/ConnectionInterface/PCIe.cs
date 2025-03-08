@@ -12,11 +12,16 @@ namespace VideocartLab.Models.ConnectionInterface
         public static PCIe PCIe4dot0x8 => new PCIe(8, 16000, 1, EncodingType._128On130b);
         public static PCIe PCIe2dot0x4 => new PCIe(2, 5000, 1, EncodingType._8bOn10b);
 
-        private double frequency = 1000;
-        private int lines = 0;
+        private double frequency = 2500;
+        private int lines = 1;
         private double encodingType = 8d / 10d;
         private EncodingType type = EncodingType._8bOn10b;
         private int bitPerClock = 1;
+
+        public PCIe()
+        {
+
+        }
 
         public PCIe(int countofLines, double frequency, int bitPerClock, double encodingType) : 
             this(countofLines, frequency, bitPerClock)
@@ -75,11 +80,11 @@ namespace VideocartLab.Models.ConnectionInterface
             }
         }
 
-        public override int Bandwidth
+        public override double Bandwidth
         {
             get
             {
-                return (int)(Lines * MatchEncodingType(Type) * BitPerClock * Frequency);
+                return Lines * MatchEncodingType(Type) * BitPerClock * Frequency / 8d / 1000d;
             }
         }
 

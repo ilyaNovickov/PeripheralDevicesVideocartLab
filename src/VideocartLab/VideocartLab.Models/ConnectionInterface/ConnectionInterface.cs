@@ -8,7 +8,7 @@ namespace VideocartLab.Models.ConnectionInterface
 {
     public abstract class ConnectionInterface
     {
-        public abstract int Bandwidth
+        public abstract double Bandwidth
         {
             get;
         }
