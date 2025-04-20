@@ -4,12 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:pnz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
-             x:Class="VideocartLab.Avalonia.MainCanvas">
+             x:Class="VideocartLab.Avalonia.MainCanvas"
+			 >
 	<pnz:ZoomBorder >
 		<Canvas x:Name="canvas" PointerPressed="Canvas_PointerPressed"
 				PointerMoved="Canvas_PointerMoved"
 				Width="5000" Height="5000"
-				Background="White">
+				Background="White"
+				ClipToBounds="True">
 			
 		</Canvas>
 	</pnz:ZoomBorder>

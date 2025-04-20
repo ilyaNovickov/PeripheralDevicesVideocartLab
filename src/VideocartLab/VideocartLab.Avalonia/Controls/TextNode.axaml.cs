@@ -48,10 +48,10 @@ public partial class TextNode : UserControl, INodeView
     {
         e.Handled = true;
 
-        //if (mainCanvasView is not MainCanvas canvas)
-        //    return;
+        if (mainCanvasView is not MainCanvas canvas)
+            return;
 
-        Clicked?.Invoke(this, new MousePressedArgs(e.GetPosition(this).X, e.GetPosition(this).X,
+        Clicked?.Invoke(this, new MousePressedArgs(e.GetPosition(canvas.canvas).X, e.GetPosition(canvas.canvas).Y,
             Videocart.Views.EventsArgs.MouseButton.Undef));
     }
 

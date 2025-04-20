@@ -76,6 +76,7 @@ namespace Videocart.Presenters
                     //
                     var node = mainCanvasView.NodeFactory.CreateNode("string", e.X, e.Y);
                     NodePresenter nodePresenter = new NodePresenter(node, mainCanvasView);
+                    node.Parent = mainCanvasView;
                     mainCanvasView.AddNode(node);
                     break;
                 case WorkMode.Moving:
