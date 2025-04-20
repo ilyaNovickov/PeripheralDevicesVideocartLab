@@ -4,6 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="VideocartLab.View.Avalonia.MainWindow"
+		xmlns:controls="clr-namespace:VideocartLab.View.Avalonia.Controls;assembly=VideocartLab.View.Avalonia"
         Title="VideocartLab.View.Avalonia">
-    Welcome to Avalonia!
+	<Canvas Background="White">
+		<controls:GPUMemoryNodeContent Background="Red"/>
+	</Canvas>
 </Window>

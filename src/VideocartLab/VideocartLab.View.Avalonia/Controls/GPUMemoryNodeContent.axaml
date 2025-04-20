@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VideocartLab.View.Avalonia.Controls.GPUMemoryNodeContent">
+	<UserControl.Styles>
+		<Style Selector="Label.center">
+			<Setter  Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+	</UserControl.Styles>
+	<Border BorderThickness="2" BorderBrush="Black">
+		<StackPanel Orientation="Vertical">
+            <DockPanel LastChildFill="True">
+				<Label Content="Hello World"
+					   Margin="5,5,5,5"
+					   Classes="center"/>
+			</DockPanel>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Label Content="Test"
+					   Classes="center"
+					   Grid.Column="0"
+					   Grid.Row="0"/>
+				<Label Content="Test2"
+					   Classes="center"
+					   Grid.Column="1"
+					   Grid.Row="0"/>
+			</Grid>
+		</StackPanel>
+	</Border>
+</UserControl>

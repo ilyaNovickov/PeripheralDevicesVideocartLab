@@ -19,4 +19,10 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\GPUMemoryNodeContent.axaml.cs">
+      <DependentUpon>GPUMemoryNodeContent.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
