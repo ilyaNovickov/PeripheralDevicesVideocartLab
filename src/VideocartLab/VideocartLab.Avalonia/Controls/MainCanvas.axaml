@@ -5,14 +5,19 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:pnz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
              x:Class="VideocartLab.Avalonia.MainCanvas"
+			 xmlns:cntr="clr-namespace:VideocartLab.Avalonia;assembly=VideocartLab.Avalonia"
 			 >
 	<pnz:ZoomBorder >
-		<Canvas x:Name="canvas" PointerPressed="Canvas_PointerPressed"
+		<Canvas x:Name="canvas" 
+				PointerPressed="Canvas_PointerPressed"
 				PointerMoved="Canvas_PointerMoved"
+				PointerReleased="Canvas_PointerReleased"
 				Width="5000" Height="5000"
 				Background="White"
 				ClipToBounds="True">
-			
+			<cntr:TextNode InnerContent="Wer2" 
+						   Background="Red"
+						   X="50" Y="50" Width="100" Height="100"/>
 		</Canvas>
 	</pnz:ZoomBorder>
 </UserControl>

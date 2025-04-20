@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Videocart.Views.EventsArgs
 {
-    public enum MouseButton
-    {
-        Left, Right, Middle, Undef
-    }
+    
 
     public class MousePressedArgs : EventArgs
     {

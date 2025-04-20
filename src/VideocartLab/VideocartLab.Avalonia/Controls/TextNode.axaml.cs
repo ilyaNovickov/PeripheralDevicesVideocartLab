@@ -16,8 +16,13 @@ public partial class TextNode : UserControl, INodeView
     public static readonly StyledProperty<double> YProperty =
         Canvas.TopProperty.AddOwner<TextNode>();
 
-    public static readonly  StyledProperty<string?> TextProperty =
-        TextBlock.TextProperty.AddOwner<TextNode>();
+    //public static readonly  StyledProperty<string?> TextProperty =
+    //    TextBlock.TextProperty.AddOwner<TextNode>();
+
+    //InnerContent
+
+    public static readonly AvaloniaProperty<object?> InnerProperty =
+        AvaloniaProperty<object?>.Register<TextNode, object?>(nameof(InnerContent));
 
     public TextNode()
     {
@@ -36,32 +41,29 @@ public partial class TextNode : UserControl, INodeView
         set => SetValue(YProperty, value);
     }
 
-    IMainCanvasView mainCanvasView = null;
+    //IMainCanvasView mainCanvasView = null;
 
-    IMainCanvasView INodeView.Parent 
-    {
-        get => mainCanvasView;
-        set => mainCanvasView = value;
-    }
+    //IMainCanvasView INodeView.Parent 
+    //{
+    //    get => mainCanvasView;
+    //    set => mainCanvasView = value;
+    //}
 
     private void StackPanel_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         e.Handled = true;
 
-        if (mainCanvasView is not MainCanvas canvas)
-            return;
-
-        Clicked?.Invoke(this, new MousePressedArgs(e.GetPosition(canvas.canvas).X, e.GetPosition(canvas.canvas).Y,
-            Videocart.Views.EventsArgs.MouseButton.Undef));
+        Clicked?.Invoke(this, new NodeClickedArgs(this, e.GetPosition(this).X, e.GetPosition(this).Y));
     }
 
-    private string? str = null;
+    //private string? str = null;
 
-    object? INodeView.Content 
+    public object? InnerContent 
     {
-        get => GetValue(TextProperty);// str;
+        get => GetValue(InnerProperty);//textBlock.Text; //GetValue(TextProperty);// str;
         set
         {
+            SetValue(InnerProperty, value);
             SetContent(value);
         }
     }
@@ -71,16 +73,10 @@ public partial class TextNode : UserControl, INodeView
         if (value is not string)
             return;
         //str = (string)value;
-        SetValue(TextProperty, value);
+        //SetValue(TextProperty, value);
         textBlock.Text = (string)value;
     }
 
-    public event EventHandler<MousePressedArgs> Clicked;
+    public event EventHandler<NodeClickedArgs>? Clicked;
 
-    public (double, double) GetPointFromParent()
-    {
-        //if (mainCanvasView is MainCanvas canvas)
-        //    return equals.
-        return (0d, 0d);
-    }
 }

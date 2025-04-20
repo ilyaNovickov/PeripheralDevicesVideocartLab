@@ -10,20 +10,20 @@ namespace Videocart.Presenters
 {
     public class NodePresenter
     {
-        private INodeView nodeView;
-        private IMainCanvasView canvasView;
+        private INodeView? nodeView;
+        private IMainCanvasView? canvasView;
 
         public NodePresenter(INodeView nodeView, IMainCanvasView canvasView)
         {
             this.nodeView = nodeView;
 
-            nodeView.Clicked += NodeView_Clicked;
-            this.canvasView = canvasView;
+        //    nodeView.Clicked += NodeView_Clicked;
+        //    this.canvasView = canvasView;
         }
 
-        private void NodeView_Clicked(object? sender, MousePressedArgs e)
-        {
-            canvasView.SetSelectedNode(nodeView, e.X, e.Y);
-        }
+        //private void NodeView_Clicked(object? sender, NodeClickedArgs e)
+        //{
+        //    canvasView.SetSelectedNode(nodeView);
+        //}
     }
 }

@@ -9,16 +9,15 @@ namespace Videocart.Views
 {
     public interface IMainCanvasView
     {
+        //Файбрика для создания узлов
         public INodeFactory NodeFactory { get; }
 
         public event EventHandler<MousePressedArgs> MousePressed;
         public event EventHandler<MouseMovedArgs> MouseMoved;
+        public event EventHandler MouseRelease;
         //public void OnMousePressed(MousePressedArgs e);
 
-        public event EventHandler<NodeSelectedArgs> NodeSelected;
-
-        public void SetSelectedNode(INodeView nodeView, double x, double y);
-
+        //Добавления узла в представления
         public void AddNode(INodeView node);
     }
 }

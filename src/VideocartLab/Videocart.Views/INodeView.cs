@@ -12,14 +12,12 @@ namespace Videocart.Views
         public double X { get; set; }
         public double Y { get; set; } 
 
-        public object? Content { get; set; }
+        public object? InnerContent { get; set; }
 
-        public IMainCanvasView Parent { get; set; }
+        //public IMainCanvasView Parent { get; set; }
 
         public void SetContent(object? obj);
 
-        public (double, double) GetPointFromParent();
-
-        public event EventHandler<MousePressedArgs> Clicked;
+        public event EventHandler<NodeClickedArgs> Clicked;
     }
 }

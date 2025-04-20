@@ -10,9 +10,14 @@ namespace Videocart.Views.EventsArgs
     {
         public INodeView SenderNode { get; private set; }
 
-        public NodeClickedArgs(INodeView senderNode)
+        public double X { get; private set; }
+        public double Y { get; private set; }
+
+        public NodeClickedArgs(INodeView senderNode, double x, double y)
         {
             SenderNode = senderNode;
+            X = x;
+            Y = y;
         }
     }
 }

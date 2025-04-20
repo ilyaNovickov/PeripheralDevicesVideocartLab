@@ -8,13 +8,13 @@ namespace Videocart.Views.EventsArgs
 {
     public class MouseMovedArgs : EventArgs
     {
-        public double dX { get; private set; }
-        public double dY { get; private set; }
+        public double NewX { get; private set; }
+        public double NewY { get; private set; }
 
         public MouseMovedArgs(double dX, double dY)
         {
-            this.dX = dX;
-            this.dY = dY;
+            this.NewX = dX;
+            this.NewY = dY;
         }
     }
 }
