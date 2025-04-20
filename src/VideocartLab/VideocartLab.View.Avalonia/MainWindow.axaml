@@ -6,7 +6,7 @@
         x:Class="VideocartLab.View.Avalonia.MainWindow"
 		xmlns:controls="clr-namespace:VideocartLab.View.Avalonia.Controls;assembly=VideocartLab.View.Avalonia"
         Title="VideocartLab.View.Avalonia">
-	<Canvas Background="White">
-		<controls:GPUMemoryNodeContent Background="Red"/>
-	</Canvas>
+	<controls:MainCanvas>
+        
+	</controls:MainCanvas>
 </Window>

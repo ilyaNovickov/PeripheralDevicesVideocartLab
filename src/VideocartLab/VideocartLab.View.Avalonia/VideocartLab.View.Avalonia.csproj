@@ -21,8 +21,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VideocartLab.Presenter\VideocartLab.Presenter.csproj" />
+    <ProjectReference Include="..\VideocartLab.View\VideocartLab.View.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Controls\GPUMemoryNodeContent.axaml.cs">
       <DependentUpon>GPUMemoryNodeContent.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MainCanvas.axaml.cs">
+      <DependentUpon>MainCanvas.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
