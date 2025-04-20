@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Videocart.Models\Videocart.Models.csproj" />
+    <ProjectReference Include="..\Videocart.Views\Videocart.Views.csproj" />
   </ItemGroup>
 
 </Project>
