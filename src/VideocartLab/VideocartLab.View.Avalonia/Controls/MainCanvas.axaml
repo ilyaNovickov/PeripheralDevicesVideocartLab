@@ -14,7 +14,7 @@
 					MinOffsetX="-500"
 					MaxOffsetY="6000"
 					MinOffsetY="-500">
-		<Canvas Background="White" Width="5000" Height="5000">
+		<Canvas x:Name="canvas" Background="White" Width="5000" Height="5000" PointerPressed="Canvas_PointerPressed">
 			<Label Content="HW" Background="Red"/>
 		</Canvas>
 	</pnz:ZoomBorder>

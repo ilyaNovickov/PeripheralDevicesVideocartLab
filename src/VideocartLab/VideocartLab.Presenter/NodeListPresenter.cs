@@ -35,6 +35,10 @@ namespace VideocartLab.Presenter
 
         private List<NodeType> nodesTypes = new List<NodeType>()
         {
+            new NodeType() 
+            {
+                Type = typeof(Node), Name = "Text node"
+            },
             new NodeType()
             {
                 Type = typeof(int), Name = "int32"
