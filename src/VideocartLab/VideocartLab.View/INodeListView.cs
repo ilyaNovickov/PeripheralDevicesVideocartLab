@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,6 @@ namespace VideocartLab.View
 {
     public interface INodeListView
     {
-        public bool HasSelectedItem { get; }
-
-        public Type? SelectedNodeType { get; }
+        public IEnumerable? ItemsList { get; set; }
     }
 }

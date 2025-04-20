@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 
 namespace VideocartLab.View.Avalonia.Controls;
@@ -20,17 +21,17 @@ public partial class NodeList : UserControl, INodeListView
 
         if (selectedItems.Count == 0)
         {
-            HasSelectedItem = false;
-            SelectedNodeType = null;
+
             return;
         }
 
-        HasSelectedItem = true;
-        //SelectedNodeType = ???
+
     }
 
 
-    public bool HasSelectedItem { get; set; }
-
-    public Type? SelectedNodeType { get; set; }
+    public IEnumerable? ItemsList
+    {
+        get => listBox.ItemsSource;
+        set => listBox.ItemsSource = value;
+    }
 }
