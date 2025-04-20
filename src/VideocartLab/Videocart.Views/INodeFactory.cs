@@ -2,6 +2,6 @@
 {
     public interface INodeFactory
     {
-        public INodeView CreateNodeText(string name, double x, double y);
+        public INodeView CreateNode(object? content, double x, double y);
     }
 }

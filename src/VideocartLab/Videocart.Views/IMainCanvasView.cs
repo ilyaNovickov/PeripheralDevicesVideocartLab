@@ -9,6 +9,8 @@ namespace Videocart.Views
 {
     public interface IMainCanvasView
     {
+        public INodeFactory NodeFactory { get; }
+
         public event EventHandler<MousePressedArgs> MousePressed;
         //public void OnMousePressed(MousePressedArgs e);
 
