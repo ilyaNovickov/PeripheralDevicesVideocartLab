@@ -12,5 +12,7 @@ namespace Videocart.Views
         public double Y { get; set; } 
 
         public object? Content { get; set; }
+
+        public event EventHandler Clicked;
     }
 }
