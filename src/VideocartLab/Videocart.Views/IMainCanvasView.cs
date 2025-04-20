@@ -12,10 +12,13 @@ namespace Videocart.Views
         public INodeFactory NodeFactory { get; }
 
         public event EventHandler<MousePressedArgs> MousePressed;
+        public event EventHandler<MouseMovedArgs> MouseMoved;
         //public void OnMousePressed(MousePressedArgs e);
 
-        public event EventHandler NodeSelected;
+        public event EventHandler<NodeSelectedArgs> NodeSelected;
 
-        public void SetSelectedNode(INodeView nodeView);
+        public void SetSelectedNode(INodeView nodeView, double x, double y);
+
+        public void AddNode(INodeView node);
     }
 }

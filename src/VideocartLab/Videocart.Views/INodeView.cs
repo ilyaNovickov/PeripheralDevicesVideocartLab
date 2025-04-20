@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Videocart.Views.EventsArgs;
 
 namespace Videocart.Views
 {
@@ -13,6 +14,12 @@ namespace Videocart.Views
 
         public object? Content { get; set; }
 
-        public event EventHandler Clicked;
+        public IMainCanvasView Parent { get; set; }
+
+        public void SetContent(object? obj);
+
+        public (double, double) GetPointFromParent();
+
+        public event EventHandler<MousePressedArgs> Clicked;
     }
 }

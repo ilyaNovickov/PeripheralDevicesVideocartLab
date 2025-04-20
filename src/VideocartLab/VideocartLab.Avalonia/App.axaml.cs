@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Videocart.Presenters;
 
 namespace VideocartLab.Avalonia
 {
@@ -15,7 +16,11 @@ namespace VideocartLab.Avalonia
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow();
+                var mainWindow = new MainWindow();
+
+                MainCanvasPresenter mainCanvasPresenter = new MainCanvasPresenter(mainWindow.mainCanvas);
+
+                desktop.MainWindow = mainWindow;
             }
 
             base.OnFrameworkInitializationCompleted();

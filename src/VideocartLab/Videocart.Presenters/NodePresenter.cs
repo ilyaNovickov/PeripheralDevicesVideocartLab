@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Videocart.Views;
+using Videocart.Views.EventsArgs;
 
 namespace Videocart.Presenters
 {
@@ -20,9 +21,9 @@ namespace Videocart.Presenters
             this.canvasView = canvasView;
         }
 
-        private void NodeView_Clicked(object? sender, EventArgs e)
+        private void NodeView_Clicked(object? sender, MousePressedArgs e)
         {
-            throw new NotImplementedException();
+            canvasView.SetSelectedNode(nodeView, e.X, e.Y);
         }
     }
 }

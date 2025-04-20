@@ -6,7 +6,8 @@
 			 xmlns:pnz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
              x:Class="VideocartLab.Avalonia.MainCanvas">
 	<pnz:ZoomBorder >
-		<Canvas x:Name="canvas"
+		<Canvas x:Name="canvas" PointerPressed="Canvas_PointerPressed"
+				PointerMoved="Canvas_PointerMoved"
 				Width="5000" Height="5000"
 				Background="White">
 			
