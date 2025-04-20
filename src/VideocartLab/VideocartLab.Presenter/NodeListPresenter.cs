@@ -7,7 +7,7 @@ using VideocartLab.View;
 
 namespace VideocartLab.Presenter
 {
-    struct NodeType
+    public class NodeType
     {
         public Type Type { get; set; }
         public string Name { get; set; }
@@ -18,9 +18,20 @@ namespace VideocartLab.Presenter
         }
     }
 
+    public class NodeTypeSelectedArgs : EventArgs
+    {
+        public NodeType? NodeType { get; private set; }
+
+        public NodeTypeSelectedArgs(NodeType? type)
+        {
+            NodeType = type;
+        }
+    }
+
     public class NodeListPresenter
     {
         private INodeListView nodeListView;
+        private NodeType? selectedNodeType = null;
 
         private List<NodeType> nodesTypes = new List<NodeType>()
         {
@@ -39,9 +50,28 @@ namespace VideocartLab.Presenter
             nodeListView = view;
 
             view.ItemsList = nodesTypes;
+            view.SelectedItemChanged += View_SelectedItemChanged;
         }
 
+        private void View_SelectedItemChanged(object? sender, SelectedItemChagedArgs e)
+        {
+            if (e.SelectedItem is not NodeType)
+                return;
 
+            SelectedNodeType = (NodeType)e.SelectedItem;
+        }
+
+        public NodeType? SelectedNodeType
+        {
+            get => selectedNodeType;
+            set
+            {
+                selectedNodeType = value;
+                NodeTypeSelectedChanged?.Invoke(this, new NodeTypeSelectedArgs(value));
+            }
+        }
+
+        public event EventHandler<NodeTypeSelectedArgs>? NodeTypeSelectedChanged;
 
     }
 }

@@ -13,6 +13,10 @@ namespace VideocartLab.View.Avalonia
             InitializeComponent();
 
             nodeListPresenter = new NodeListPresenter(this.nodeList);
+            nodeListPresenter.NodeTypeSelectedChanged += (sender, e) =>
+            {
+                mainCanvasPresenter.NodeToAdd = e.NodeType;
+            };
         }
     }
 }

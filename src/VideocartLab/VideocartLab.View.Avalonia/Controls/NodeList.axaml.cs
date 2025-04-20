@@ -21,11 +21,11 @@ public partial class NodeList : UserControl, INodeListView
 
         if (selectedItems.Count == 0)
         {
-
+            SelectedItemChanged?.Invoke(this, new SelectedItemChagedArgs(null));
             return;
         }
 
-
+        SelectedItemChanged?.Invoke(this, new SelectedItemChagedArgs(selectedItems[0]));
     }
 
 
@@ -34,4 +34,7 @@ public partial class NodeList : UserControl, INodeListView
         get => listBox.ItemsSource;
         set => listBox.ItemsSource = value;
     }
+
+    public event EventHandler<SelectedItemChagedArgs> SelectedItemChanged;
+
 }
