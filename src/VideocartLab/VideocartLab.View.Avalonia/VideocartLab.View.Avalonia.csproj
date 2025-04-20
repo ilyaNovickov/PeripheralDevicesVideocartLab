@@ -30,5 +30,8 @@
     <Compile Update="Controls\MainCanvas.axaml.cs">
       <DependentUpon>MainCanvas.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\NodeList.axaml.cs">
+      <DependentUpon>NodeList.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

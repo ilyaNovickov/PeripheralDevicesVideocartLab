@@ -10,4 +10,9 @@
     <Folder Include="Interfaces\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VideocartLab.Models\VideocartLab.Models.csproj" />
+    <ProjectReference Include="..\VideocartLab.View\VideocartLab.View.csproj" />
+  </ItemGroup>
+
 </Project>
