@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="clr-namespace:VideocartLab.ModelVIews;assembly=VideocartLab.ModelVIews"
+             xmlns:pnz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
+			 x:Class="VideocartLab.Views.Avalonia.ProjectView"
+			 x:DataType="vm:ProjectModelView">
+	<Design.DataContext>
+		<vm:ProjectModelView/>
+	</Design.DataContext>
+	<pnz:ZoomBorder>
+		<Border BorderBrush="Red" BorderThickness="2">
+			<Canvas x:Name="canvas"
+					Height="5000" Width="5000" 
+					Background="White"/>
+		</Border>
+	</pnz:ZoomBorder>
+</UserControl>

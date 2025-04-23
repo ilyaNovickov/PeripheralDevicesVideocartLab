@@ -28,5 +28,4 @@ public class ModelsTests
         Assert.AreEqual(count2, 3);
     }
 
-    public void Connection
 }

@@ -23,18 +23,52 @@ namespace VideocartLab.ModelVIews
             private set
             {
                 model = value;
-                SetModelValues(model);
+                //SetModelValues(model);
             }
         }
 
-        private void SetModelValues(Node node)
+        //private void SetModelValues(Node node)
+        //{
+        //    this.X = node.X;
+        //    this.Y = node.Y;
+        //    this.Width = node.Width;
+        //    this.Height = node.Height;
+        //}
+
+        public double X
         {
-            this.X = node.X;
-            this.Y = node.Y;
-            this.Width = node.Width;
-            this.Height = node.Height;
+            get => model.X;
+            set => model.X = value;
         }
 
+        public double Y
+        {
+            get => model.Y;
+            set => model.Y = value;
+        }
+
+        public double Width
+        {
+            get => model.Width;
+            set => model.Width = value;
+        }
+
+        public double Height
+        {
+            get => model.Height;
+            set => model.Height = value;
+        }
+
+        public object? Content
+        {
+            get => model.Content;
+            private set
+            {
+                model.Content = value;
+            }
+        }
+
+        /*
         public double X
         {
             get => x;
@@ -74,5 +108,6 @@ namespace VideocartLab.ModelVIews
                 OnPropertyChanged();
             }
         }
+        */
     }
 }

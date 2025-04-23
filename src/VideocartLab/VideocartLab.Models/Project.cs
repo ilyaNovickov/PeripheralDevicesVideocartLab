@@ -42,7 +42,8 @@ namespace VideocartLab.Models
             switch (e.Action)
             {
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-                    OnNodeAdded((List<Node>)e.NewItems!);
+                    //OnNodeAdded((List<Node>)e.NewItems!);
+                    OnNodeAdded(new List<Node>() { (Node)e.NewItems![0]! });
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
                     break;
