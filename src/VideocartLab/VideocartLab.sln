@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.Views.Avalonia", "VideocartLab.Views.Avalonia\VideocartLab.Views.Avalonia.csproj", "{D04F2D70-15BC-4A20-909F-D955537EF924}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D04F2D70-15BC-4A20-909F-D955537EF924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D04F2D70-15BC-4A20-909F-D955537EF924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D04F2D70-15BC-4A20-909F-D955537EF924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D04F2D70-15BC-4A20-909F-D955537EF924}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {614B5EC7-A065-4283-BCA5-953ABCF19372}
+	EndGlobalSection
+EndGlobal
