@@ -43,9 +43,14 @@ public partial class ProjectView : UserControl
         if (e.Handled)
             return;
 
+        VideocartLab.ModelVIews.MouseButton button = MouseButtonHelper.GetMouseButton(e.GetCurrentPoint(canvas));
+
+        if (button == VideocartLab.ModelVIews.MouseButton.Middle)
+            return;
+
         var p = e.GetPosition(canvas);
 
-        projectModelView.OnMousePressed(p.X, p.Y, MouseButtonHelper.GetMouseButton(e.GetCurrentPoint(canvas)));
+        projectModelView.OnMousePressed(p.X, p.Y, button);
 
         //AddNode(factory.Create(p.X, p.Y, 100, 100, "HH"));
     }

@@ -8,6 +8,7 @@ using VideocartLab.ModelVIews;
 using Avalonia.Data.Converters;
 using System;
 using System.Globalization;
+using VideocartLab.Models;
 
 namespace VideocartLab.Views.Avalonia;
 
@@ -110,6 +111,17 @@ public partial class NodeView : UserControl
                 }
             });
         }
+        else if (InnerContent is TestClass test)
+        {
+            innerPanel.Children.Clear();
+            innerPanel.Children.Add(new TestView()
+            {
+                DataContext = new TestModelView(this.NodeModelView)
+                //{
+                //    Content = test
+                //}
+            });
+        }
     }
 
     private void Panel_PointerPressed(object? sender, PointerPressedEventArgs e)
@@ -120,7 +132,7 @@ public partial class NodeView : UserControl
 
         this.NodeModelView.Click(p.X, p.Y);
 
-        InnerContent = "Hwew";
+        //InnerContent = "Hwew";
     }
 
     private void Panel_PointerReleased(object? sender, PointerReleasedEventArgs e)

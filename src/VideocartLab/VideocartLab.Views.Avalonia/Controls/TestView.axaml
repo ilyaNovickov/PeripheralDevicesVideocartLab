@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="clr-namespace:VideocartLab.ModelVIews;assembly=VideocartLab.ModelVIews"
+			 x:DataType="vm:TestModelView"
+             x:Class="VideocartLab.Views.Avalonia.TestView">
+	<Design.DataContext>
+		<vm:TestModelView/>
+	</Design.DataContext>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<TextBlock Text="Count = " Grid.Column="0" Grid.Row="0"/>
+		<NumericUpDown Value="{Binding Count}" Grid.Column="1" Grid.Row="0"/>
+		<TextBlock Text="Str = " Grid.Column="0" Grid.Row="1"/>
+		<TextBox Text="{Binding Str}" Grid.Column="1" Grid.Row="1"/>
+	</Grid>
+</UserControl>

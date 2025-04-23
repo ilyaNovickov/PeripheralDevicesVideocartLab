@@ -35,5 +35,8 @@
     <Compile Update="Controls\StringContentView.axaml.cs">
       <DependentUpon>StringContentView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\TestView.axaml.cs">
+      <DependentUpon>TestView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
