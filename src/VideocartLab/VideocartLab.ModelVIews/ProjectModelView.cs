@@ -20,32 +20,33 @@ namespace VideocartLab.ModelVIews
         }
     }
 
+    public struct Point
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+    }
+
     public class ProjectModelView : ModelViewBase
     {
         private Project project = new();
+        
 
         private ObservableCollection<NodeModelView> nodes = new();
 
         public ProjectModelView()
         {
-            project.NodeAdded += Project_NodeAdded;
+
         }
 
         public void AddNode(NodeModelView nodeModelView)
         {
             project.Nodes.Add(nodeModelView.Node);
+            nodes.Add(nodeModelView);
+            NodeModelViewAdded?.Invoke(this, new NodeModelViewAddedArgs(nodeModelView));
         }
 
-        public event EventHandler<NodeModelViewAddedArgs> NodeModelViewAdded;
+        public event EventHandler<NodeModelViewAddedArgs>? NodeModelViewAdded;
 
-        private void Project_NodeAdded(object? sender, NodeAddedArgs e)
-        {
-            foreach (Node node in e.Nodes)
-            {
-                NodeModelView nodeVM = new NodeModelView(node);
-                nodes.Add(nodeVM);
-                NodeModelViewAdded?.Invoke(this, new NodeModelViewAddedArgs(nodeVM));
-            }
-        }
+
     }
 }

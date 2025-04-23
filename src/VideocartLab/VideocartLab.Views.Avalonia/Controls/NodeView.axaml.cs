@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
@@ -12,6 +13,9 @@ public partial class NodeView : UserControl
     public static StyledProperty<double> XProperty = Canvas.LeftProperty.AddOwner<NodeView>();
     public static StyledProperty<double> YProperty = Canvas.TopProperty.AddOwner<NodeView>();
 
+    public static StyledProperty<object?> InnerContentProperty = 
+        StyledProperty<object?>.Register<NodeView, object?>(nameof(InnerContent));
+
     private NodeModelView? nodeModelView;
 
     public NodeView()
@@ -21,7 +25,7 @@ public partial class NodeView : UserControl
 
     public NodeView(NodeModelView nodeModelView) : this()
     {
-        this.nodeModelView = nodeModelView;
+        this.NodeModelView = nodeModelView;
         DataContext = this.nodeModelView;
 
         Binding bindingX = new();
@@ -35,6 +39,27 @@ public partial class NodeView : UserControl
         bindingY.Path = nameof(nodeModelView.Y);
 
         this.Bind(YProperty, bindingY);
+
+        Binding bindingContent = new();
+        bindingContent.Source = nodeModelView;
+        bindingContent.Path = nameof(nodeModelView.Content);
+
+        this.Bind(InnerContentProperty, bindingContent);
+
+        Rectangle rectangle = new Rectangle();
+        Canvas.SetTop(rectangle, this.Width / 2);
+        
+    }
+
+    private NodeModelView NodeModelView
+    {
+        get => nodeModelView;
+        set
+        {
+            nodeModelView = value;
+
+            panel2.Children.Add(new StringContentView());
+        }
     }
 
     public double X
@@ -55,8 +80,27 @@ public partial class NodeView : UserControl
         }
     }
 
+    public object? InnerContent
+    {
+        get => GetValue(InnerContentProperty);
+        set => SetValue(InnerContentProperty, value);
+    }
+
     private void Panel_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         e.Handled = true;
+
+        var p = e.GetPosition(canvas);
+
+        this.NodeModelView.Click(p.X, p.Y);
+    }
+
+    private void Panel_PointerReleased(object? sender, PointerReleasedEventArgs e)
+    {
+        e.Handled = true;
+
+        var p = e.GetPosition(canvas);
+
+        this.NodeModelView.Realese(p.X, p.Y);
     }
 }

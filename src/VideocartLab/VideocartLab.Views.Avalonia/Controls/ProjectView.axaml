@@ -14,7 +14,8 @@
 		<Border BorderBrush="Red" BorderThickness="2">
 			<Canvas x:Name="canvas"
 					Height="5000" Width="5000" 
-					Background="White"/>
+					Background="White"
+					PointerPressed="Canvas_PointerPressed"/>
 		</Border>
 	</pnz:ZoomBorder>
 </UserControl>

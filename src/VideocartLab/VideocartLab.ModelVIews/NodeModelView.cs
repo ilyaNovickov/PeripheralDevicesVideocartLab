@@ -3,19 +3,42 @@ using VideocartLab.Models;
 
 namespace VideocartLab.ModelVIews
 {
+    public class NodeModelViewClickedArgs : EventArgs
+    {
+        public NodeModelView Node { get; private set; }
+        public double X { get; private set; }
+        public double Y { get; private set; }
+
+        public NodeModelViewClickedArgs(NodeModelView node, double x, double y)
+        {
+            Node = node;
+            X = x;
+            Y = y;
+        }
+    }
+
+    public class NodeModelViewRealeseArgs : NodeModelViewClickedArgs
+    {
+        public NodeModelViewRealeseArgs(NodeModelView node, double x, double y) : base(node, x, y)
+        {
+
+        }
+    }
+
     public class NodeModelView : ModelViewBase, IPlaceObject
     {
-        private double x;
-        private double y;
-        private double width;
-        private double height;
+        private string name = "undef";
 
         private Node model;
 
-        public NodeModelView(Node model)
+        public NodeModelView()
         {
-            this.Node = model;
+            this.Node = new Node();
         }
+
+        public event EventHandler<NodeModelViewClickedArgs>? Clicked;
+
+        public event EventHandler<NodeModelViewRealeseArgs>? Realesed;
 
         internal Node Node
         {
@@ -23,17 +46,18 @@ namespace VideocartLab.ModelVIews
             private set
             {
                 model = value;
-                //SetModelValues(model);
             }
         }
 
-        //private void SetModelValues(Node node)
-        //{
-        //    this.X = node.X;
-        //    this.Y = node.Y;
-        //    this.Width = node.Width;
-        //    this.Height = node.Height;
-        //}
+        public string Name
+        {
+            get => name;
+            set
+            {
+                name = value;
+                OnPropertyChanged();
+            }
+        }
 
         public double X
         {
@@ -62,52 +86,20 @@ namespace VideocartLab.ModelVIews
         public object? Content
         {
             get => model.Content;
-            private set
+            set
             {
                 model.Content = value;
             }
         }
 
-        /*
-        public double X
+        public void Click(double x, double y)
         {
-            get => x;
-            set
-            {
-                x = value;
-                OnPropertyChanged();
-            }
+            Clicked?.Invoke(this, new NodeModelViewClickedArgs(this, x, y));
         }
 
-        public double Y
+        public void Realese(double x, double y)
         {
-            get => y;
-            set
-            {
-                y = value;
-                OnPropertyChanged();
-            }
+            Realesed?.Invoke(this, new NodeModelViewRealeseArgs(this, x, y));
         }
-
-        public double Width
-        {
-            get => width;
-            set
-            {
-                width = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public double Height
-        {
-            get => height;
-            set
-            {
-                height = value;
-                OnPropertyChanged();
-            }
-        }
-        */
     }
 }

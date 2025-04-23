@@ -8,12 +8,20 @@
 	<Design.DataContext>
 		<vm:NodeModelView/>
 	</Design.DataContext>
-	<Panel Background="Red"
-		   MinHeight="10"
-		   MinWidth="10"
-		   PointerPressed="Panel_PointerPressed">
-		<StackPanel>
-			
-		</StackPanel>
-	</Panel>
+	<Border BorderBrush="Black"
+			BorderThickness="2">
+		<Panel x:Name="canvas"
+				Background="Red"
+			   MinHeight="10"
+			   MinWidth="10"
+			   PointerPressed="Panel_PointerPressed"
+			   PointerReleased="Panel_PointerReleased">
+			<StackPanel>
+				<TextBlock Text="Test"/>
+				<Panel x:Name="panel2">
+
+				</Panel>
+			</StackPanel>
+		</Panel>
+	</Border>
 </UserControl>
