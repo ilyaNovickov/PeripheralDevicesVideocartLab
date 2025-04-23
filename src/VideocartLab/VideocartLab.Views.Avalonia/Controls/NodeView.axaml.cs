@@ -5,6 +5,9 @@ using Avalonia.Input;
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 using VideocartLab.ModelVIews;
+using Avalonia.Data.Converters;
+using System;
+using System.Globalization;
 
 namespace VideocartLab.Views.Avalonia;
 
@@ -28,6 +31,12 @@ public partial class NodeView : UserControl
         this.NodeModelView = nodeModelView;
         DataContext = this.nodeModelView;
 
+        BindProperties();
+    }
+
+    private void BindProperties()
+    {
+
         Binding bindingX = new();
         bindingX.Source = nodeModelView;
         bindingX.Path = nameof(nodeModelView.X);
@@ -44,6 +53,8 @@ public partial class NodeView : UserControl
         bindingContent.Source = nodeModelView;
         bindingContent.Path = nameof(nodeModelView.Content);
 
+        //bindingContent.Converter = new Foo();
+
         this.Bind(InnerContentProperty, bindingContent);
     }
 
@@ -54,7 +65,7 @@ public partial class NodeView : UserControl
         {
             nodeModelView = value;
 
-            panel2.Children.Add(new StringContentView());
+            InnerContent = nodeModelView.Content;
         }
     }
 
@@ -88,7 +99,17 @@ public partial class NodeView : UserControl
 
     private void OnInnerContentChanged()
     {
-
+        if (InnerContent is string str)
+        {
+            innerPanel.Children.Clear();
+            innerPanel.Children.Add(new StringContentView()
+            {
+                DataContext = new StringContentModelView(this.NodeModelView)
+                {
+                    Content = str
+                }
+            });
+        }
     }
 
     private void Panel_PointerPressed(object? sender, PointerPressedEventArgs e)
@@ -98,6 +119,8 @@ public partial class NodeView : UserControl
         var p = e.GetPosition(canvas);
 
         this.NodeModelView.Click(p.X, p.Y);
+
+        InnerContent = "Hwew";
     }
 
     private void Panel_PointerReleased(object? sender, PointerReleasedEventArgs e)
@@ -107,5 +130,18 @@ public partial class NodeView : UserControl
         var p = e.GetPosition(canvas);
 
         this.NodeModelView.Realese(p.X, p.Y);
+    }
+}
+
+public class Foo : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        return value;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

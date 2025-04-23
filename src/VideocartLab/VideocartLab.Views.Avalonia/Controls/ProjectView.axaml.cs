@@ -37,10 +37,6 @@ public partial class ProjectView : UserControl
         canvas.Children.Add(nodeView);
     }
 
-    //public void AddNode(NodeModelView node)
-    //{
-    //    projectModelView.AddNode(node);
-    //}
 
     private void Canvas_PointerPressed(object? sender, PointerPressedEventArgs e)
     {

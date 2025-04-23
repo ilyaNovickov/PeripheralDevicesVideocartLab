@@ -69,7 +69,7 @@ namespace VideocartLab.ModelVIews
         //}
         public void AddNode(double x, double y)
         {
-            NodeModelView nodeModelView = Factory.Create(x, y, 100, 100, "HH");
+            NodeModelView nodeModelView = Factory.Create(x, y, 100, 100, "Test");
 
             nodeModelView.Clicked += NodeModelView_Clicked;
             nodeModelView.Realesed += NodeModelView_Realesed;

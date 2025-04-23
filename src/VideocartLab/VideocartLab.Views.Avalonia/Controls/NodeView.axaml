@@ -19,9 +19,9 @@
 			   PointerReleased="Panel_PointerReleased">
 			<StackPanel>
 				<TextBlock Text="{Binding Name}"/>
-				<Panel x:Name="panel2">
+				<StackPanel x:Name="innerPanel">
 
-				</Panel>
+				</StackPanel>
 			</StackPanel>
 		</Panel>
 	</Border>
