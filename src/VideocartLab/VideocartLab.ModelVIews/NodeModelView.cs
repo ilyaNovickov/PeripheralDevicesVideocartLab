@@ -3,27 +3,9 @@ using VideocartLab.Models;
 
 namespace VideocartLab.ModelVIews
 {
-    public class NodeModelViewClickedArgs : EventArgs
-    {
-        public NodeModelView Node { get; private set; }
-        public double X { get; private set; }
-        public double Y { get; private set; }
+    
 
-        public NodeModelViewClickedArgs(NodeModelView node, double x, double y)
-        {
-            Node = node;
-            X = x;
-            Y = y;
-        }
-    }
-
-    public class NodeModelViewRealeseArgs : NodeModelViewClickedArgs
-    {
-        public NodeModelViewRealeseArgs(NodeModelView node, double x, double y) : base(node, x, y)
-        {
-
-        }
-    }
+    
 
     public class NodeModelView : ModelViewBase, IPlaceObject
     {
@@ -36,10 +18,13 @@ namespace VideocartLab.ModelVIews
             this.Node = new Node();
         }
 
+        //Нажатие по узлу
         public event EventHandler<NodeModelViewClickedArgs>? Clicked;
 
+        //Отжатие от узла
         public event EventHandler<NodeModelViewRealeseArgs>? Realesed;
 
+        //Модель узла связанная с этим VM
         internal Node Node
         {
             get => model;
@@ -49,6 +34,7 @@ namespace VideocartLab.ModelVIews
             }
         }
 
+        //Имя узла
         public string Name
         {
             get => name;
@@ -59,6 +45,7 @@ namespace VideocartLab.ModelVIews
             }
         }
 
+        #region ModelProperties
         public double X
         {
             get => model.X;
@@ -108,7 +95,9 @@ namespace VideocartLab.ModelVIews
                 OnPropertyChanged();
             }
         }
+        #endregion
 
+        
         public void Click(double x, double y)
         {
             Clicked?.Invoke(this, new NodeModelViewClickedArgs(this, x, y));

@@ -12,11 +12,14 @@ using VideocartLab.Models;
 
 namespace VideocartLab.Views.Avalonia;
 
+//Контрол для узла
 public partial class NodeView : UserControl
 {
+    //Связывание свойств положения узла с холстом
     public static StyledProperty<double> XProperty = Canvas.LeftProperty.AddOwner<NodeView>();
     public static StyledProperty<double> YProperty = Canvas.TopProperty.AddOwner<NodeView>();
 
+    //Свойство внутренного содержания узла
     public static StyledProperty<object?> InnerContentProperty = 
         StyledProperty<object?>.Register<NodeView, object?>(nameof(InnerContent));
 
@@ -35,21 +38,24 @@ public partial class NodeView : UserControl
         BindProperties();
     }
 
+    //Связывание свойств узла и VM
     private void BindProperties()
     {
-
+        //Свойство X
         Binding bindingX = new();
         bindingX.Source = nodeModelView;
         bindingX.Path = nameof(nodeModelView.X);
 
         this.Bind(XProperty, bindingX);
 
+        //Свойство Y
         Binding bindingY = new();
         bindingY.Source = nodeModelView;
         bindingY.Path = nameof(nodeModelView.Y);
 
         this.Bind(YProperty, bindingY);
 
+        //Свойство Content
         Binding bindingContent = new();
         bindingContent.Source = nodeModelView;
         bindingContent.Path = nameof(nodeModelView.Content);
@@ -88,6 +94,10 @@ public partial class NodeView : UserControl
         }
     }
 
+    /*
+     * Сюда width и height
+     */
+
     public object? InnerContent
     {
         get => GetValue(InnerContentProperty);
@@ -100,15 +110,16 @@ public partial class NodeView : UserControl
 
     private void OnInnerContentChanged()
     {
+        //Размещение в узле нужный элемент управления
         if (InnerContent is string str)
         {
             innerPanel.Children.Clear();
             innerPanel.Children.Add(new StringContentView()
             {
                 DataContext = new StringContentModelView(this.NodeModelView)
-                {
-                    Content = str
-                }
+                //{
+                //    Content = str
+                //}
             });
         }
         else if (InnerContent is TestClass test)
@@ -124,6 +135,7 @@ public partial class NodeView : UserControl
         }
     }
 
+    //Обработка нажатия на узел
     private void Panel_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         e.Handled = true;
@@ -135,6 +147,7 @@ public partial class NodeView : UserControl
         //InnerContent = "Hwew";
     }
 
+    //Обработка отжатия от узла
     private void Panel_PointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         e.Handled = true;

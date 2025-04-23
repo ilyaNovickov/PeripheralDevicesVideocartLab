@@ -7,6 +7,7 @@ using VideocartLab.Models;
 
 namespace VideocartLab.ModelVIews
 {
+    //Фабрика для добавления узлов
     public class NodeFactory
     {
         public NodeModelView Create(double x, double y, double width, double height, object? content)
