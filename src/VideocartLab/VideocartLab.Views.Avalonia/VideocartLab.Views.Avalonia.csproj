@@ -19,4 +19,8 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VideocartLab.ModelVIews\VideocartLab.ModelVIews.csproj" />
+  </ItemGroup>
 </Project>

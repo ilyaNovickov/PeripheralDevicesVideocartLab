@@ -5,6 +5,12 @@ VisualStudioVersion = 17.13.35919.96 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.Views.Avalonia", "VideocartLab.Views.Avalonia\VideocartLab.Views.Avalonia.csproj", "{D04F2D70-15BC-4A20-909F-D955537EF924}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.ModelVIews", "VideocartLab.ModelVIews\VideocartLab.ModelVIews.csproj", "{24F5E44D-0F62-4B06-822F-C8DCCCC0C635}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.Models", "VideocartLab.Models\VideocartLab.Models.csproj", "{C3821799-34DF-4F29-AD75-3365C20AAEEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.ExtraAbstractions", "VideocartLab.ExtraAbstractions\VideocartLab.ExtraAbstractions.csproj", "{9BE82ED0-F0D7-4258-B219-A15EE03F0D93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{D04F2D70-15BC-4A20-909F-D955537EF924}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D04F2D70-15BC-4A20-909F-D955537EF924}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D04F2D70-15BC-4A20-909F-D955537EF924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24F5E44D-0F62-4B06-822F-C8DCCCC0C635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F5E44D-0F62-4B06-822F-C8DCCCC0C635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F5E44D-0F62-4B06-822F-C8DCCCC0C635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F5E44D-0F62-4B06-822F-C8DCCCC0C635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3821799-34DF-4F29-AD75-3365C20AAEEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3821799-34DF-4F29-AD75-3365C20AAEEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3821799-34DF-4F29-AD75-3365C20AAEEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3821799-34DF-4F29-AD75-3365C20AAEEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BE82ED0-F0D7-4258-B219-A15EE03F0D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BE82ED0-F0D7-4258-B219-A15EE03F0D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE82ED0-F0D7-4258-B219-A15EE03F0D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BE82ED0-F0D7-4258-B219-A15EE03F0D93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
