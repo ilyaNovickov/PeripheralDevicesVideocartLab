@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VideocartLab.ExtraAbstractions\VideocartLab.ExtraAbstractions.csproj" />
+  </ItemGroup>
+
 </Project>

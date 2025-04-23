@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.Models", "Vide
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.ExtraAbstractions", "VideocartLab.ExtraAbstractions\VideocartLab.ExtraAbstractions.csproj", "{9BE82ED0-F0D7-4258-B219-A15EE03F0D93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.Tests", "VideocartLab.Tests\VideocartLab.Tests.csproj", "{FF5A0B49-3EE8-4DD9-B0BD-3A2D64B90E62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9BE82ED0-F0D7-4258-B219-A15EE03F0D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BE82ED0-F0D7-4258-B219-A15EE03F0D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BE82ED0-F0D7-4258-B219-A15EE03F0D93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF5A0B49-3EE8-4DD9-B0BD-3A2D64B90E62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5A0B49-3EE8-4DD9-B0BD-3A2D64B90E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5A0B49-3EE8-4DD9-B0BD-3A2D64B90E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5A0B49-3EE8-4DD9-B0BD-3A2D64B90E62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
