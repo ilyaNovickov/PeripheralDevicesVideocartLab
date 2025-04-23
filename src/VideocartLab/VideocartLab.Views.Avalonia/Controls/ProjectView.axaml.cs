@@ -18,19 +18,15 @@ public partial class ProjectView : UserControl
         InitializeComponent();
 
         projectModelView = new ProjectModelView();
+        projectModelView.Factory = new NodeFactory();
         this.DataContext = projectModelView;
-
-        factory = new NodeFactory();
 
         projectModelView.NodeModelViewAdded += ProjectModelView_NodeModelViewAdded;
 
         
     }
 
-    public void AddNode(NodeModelView node)
-    {
-        projectModelView.AddNode(node);
-    }
+    
 
     private void ProjectModelView_NodeModelViewAdded(object? sender, NodeModelViewAddedArgs e)
     {
@@ -41,6 +37,11 @@ public partial class ProjectView : UserControl
         canvas.Children.Add(nodeView);
     }
 
+    //public void AddNode(NodeModelView node)
+    //{
+    //    projectModelView.AddNode(node);
+    //}
+
     private void Canvas_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (e.Handled)
@@ -48,10 +49,30 @@ public partial class ProjectView : UserControl
 
         var p = e.GetPosition(canvas);
 
-        //AddNode(new NodeModelView()
-        //{
-        //    X = p.X, Y = p.Y, Height = 100, Width = 100, Content = "HH"
-        //});
-        AddNode(factory.Create(p.X, p.Y, 100, 100, "HH"));
+        projectModelView.OnMousePressed(p.X, p.Y, MouseButtonHelper.GetMouseButton(e.GetCurrentPoint(canvas)));
+
+        //AddNode(factory.Create(p.X, p.Y, 100, 100, "HH"));
+    }
+
+    private void Canvas_PointerMoved(object? sender, PointerEventArgs e)
+    {
+        var p = e.GetPosition(canvas);
+
+        projectModelView.OnMouseMoved(p.X, p.Y);
+    }
+}
+
+public static class MouseButtonHelper
+{
+    public static VideocartLab.ModelVIews.MouseButton GetMouseButton(PointerPoint pointer)
+    {
+        if (pointer.Properties.IsLeftButtonPressed)
+            return VideocartLab.ModelVIews.MouseButton.Left;
+        else if (pointer.Properties.IsRightButtonPressed)
+            return VideocartLab.ModelVIews.MouseButton.Right;
+        else if (pointer.Properties.IsMiddleButtonPressed)
+            return VideocartLab.ModelVIews.MouseButton.Middle;
+        else
+            return VideocartLab.ModelVIews.MouseButton.Undef;
     }
 }

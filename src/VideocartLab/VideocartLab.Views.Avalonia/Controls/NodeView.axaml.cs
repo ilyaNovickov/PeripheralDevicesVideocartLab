@@ -45,10 +45,6 @@ public partial class NodeView : UserControl
         bindingContent.Path = nameof(nodeModelView.Content);
 
         this.Bind(InnerContentProperty, bindingContent);
-
-        Rectangle rectangle = new Rectangle();
-        Canvas.SetTop(rectangle, this.Width / 2);
-        
     }
 
     private NodeModelView NodeModelView
@@ -83,7 +79,16 @@ public partial class NodeView : UserControl
     public object? InnerContent
     {
         get => GetValue(InnerContentProperty);
-        set => SetValue(InnerContentProperty, value);
+        set
+        {
+            SetValue(InnerContentProperty, value);
+            OnInnerContentChanged();
+        }
+    }
+
+    private void OnInnerContentChanged()
+    {
+
     }
 
     private void Panel_PointerPressed(object? sender, PointerPressedEventArgs e)

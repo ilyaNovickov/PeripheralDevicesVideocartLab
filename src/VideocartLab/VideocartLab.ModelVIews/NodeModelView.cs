@@ -62,25 +62,41 @@ namespace VideocartLab.ModelVIews
         public double X
         {
             get => model.X;
-            set => model.X = value;
+            set 
+            { 
+                model.X = value;
+                OnPropertyChanged();
+            }
         }
 
         public double Y
         {
             get => model.Y;
-            set => model.Y = value;
+            set
+            {
+                model.Y = value;
+                OnPropertyChanged();
+            }
         }
 
         public double Width
         {
             get => model.Width;
-            set => model.Width = value;
+            set
+            {
+                model.Width = value;
+                OnPropertyChanged();
+            }
         }
 
         public double Height
         {
             get => model.Height;
-            set => model.Height = value;
+            set
+            {
+                model.Height = value;
+                OnPropertyChanged();
+            }
         }
 
         public object? Content
@@ -89,6 +105,7 @@ namespace VideocartLab.ModelVIews
             set
             {
                 model.Content = value;
+                OnPropertyChanged();
             }
         }
 

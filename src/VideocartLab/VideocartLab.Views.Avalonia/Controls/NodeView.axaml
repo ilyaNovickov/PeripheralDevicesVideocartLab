@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="clr-namespace:VideocartLab.ModelVIews;assembly=VideocartLab.ModelVIews"
-             x:Class="VideocartLab.Views.Avalonia.NodeView">
+             x:Class="VideocartLab.Views.Avalonia.NodeView"
+			 x:DataType="vm:NodeModelView">
 	<Design.DataContext>
 		<vm:NodeModelView/>
 	</Design.DataContext>
@@ -17,7 +18,7 @@
 			   PointerPressed="Panel_PointerPressed"
 			   PointerReleased="Panel_PointerReleased">
 			<StackPanel>
-				<TextBlock Text="Test"/>
+				<TextBlock Text="{Binding Name}"/>
 				<Panel x:Name="panel2">
 
 				</Panel>

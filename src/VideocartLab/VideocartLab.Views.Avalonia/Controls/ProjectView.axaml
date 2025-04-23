@@ -15,7 +15,8 @@
 			<Canvas x:Name="canvas"
 					Height="5000" Width="5000" 
 					Background="White"
-					PointerPressed="Canvas_PointerPressed"/>
+					PointerPressed="Canvas_PointerPressed"
+					PointerMoved="Canvas_PointerMoved"/>
 		</Border>
 	</pnz:ZoomBorder>
 </UserControl>
