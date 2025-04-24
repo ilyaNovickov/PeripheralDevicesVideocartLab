@@ -1,4 +1,5 @@
-﻿using VideocartLab.ExtraAbstractions;
+﻿using System.Collections.ObjectModel;
+using VideocartLab.ExtraAbstractions;
 using VideocartLab.Models;
 
 namespace VideocartLab.ModelVIews
@@ -16,6 +17,8 @@ namespace VideocartLab.ModelVIews
         public NodeModelView()
         {
             this.Node = new Node();
+
+            connections.CollectionChanged += Connections_CollectionChanged;
         }
 
         //Нажатие по узлу
@@ -106,6 +109,53 @@ namespace VideocartLab.ModelVIews
         public void Realese(double x, double y)
         {
             Realesed?.Invoke(this, new NodeModelViewRealeseArgs(this, x, y));
+        }
+
+
+
+        private ObservableCollection<ConnectionModelView> connections = new();
+
+        public ObservableCollection<ConnectionModelView> ConnectionModelViews
+        {
+            get => connections;
+        }
+
+        private void Connections_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                    OnConnectorAdded((ConnectionModelView)e.NewItems![0]!);
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public event EventHandler<ConnectorAddedArgs>? ConnectorAdded;
+
+        private void OnConnectorAdded(ConnectionModelView connector)
+        {
+            this.Node.Connectors.Add(connector.Model);
+            ConnectorAdded?.Invoke(this, new ConnectorAddedArgs(connector));
+        }
+    }
+
+    public class ConnectorAddedArgs : EventArgs
+    {
+        public ConnectionModelView Connector { get; private set; }
+
+        public ConnectorAddedArgs(ConnectionModelView connector)
+        {
+            Connector = connector;
         }
     }
 }

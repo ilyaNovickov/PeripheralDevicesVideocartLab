@@ -9,6 +9,7 @@ using Avalonia.Data.Converters;
 using System;
 using System.Globalization;
 using VideocartLab.Models;
+using System.Collections.ObjectModel;
 
 namespace VideocartLab.Views.Avalonia;
 
@@ -25,6 +26,8 @@ public partial class NodeView : UserControl
 
     private NodeModelView? nodeModelView;
 
+    private ObservableCollection<ConnectionView> connections = new ObservableCollection<ConnectionView>();
+
     public NodeView()
     {
         InitializeComponent();
@@ -33,6 +36,8 @@ public partial class NodeView : UserControl
     public NodeView(NodeModelView nodeModelView) : this()
     {
         this.NodeModelView = nodeModelView;
+        //this.NodeModelView.
+
         DataContext = this.nodeModelView;
 
         BindProperties();
@@ -155,6 +160,12 @@ public partial class NodeView : UserControl
         var p = e.GetPosition(canvas);
 
         this.NodeModelView.Realese(p.X, p.Y);
+    }
+
+    public ObservableCollection<ConnectionView> Connections 
+    {
+        get => connections; 
+        private set => connections = value; 
     }
 }
 

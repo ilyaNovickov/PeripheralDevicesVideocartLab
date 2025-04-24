@@ -5,6 +5,16 @@ using VideocartLab.ExtraAbstractions;
 
 namespace VideocartLab.Models
 {
+    public class ConnectorParentArgs : EventArgs
+    {
+        public Node? Parent { get; private set; }
+
+        public ConnectorParentArgs(Node? parent)
+        {
+            Parent = parent;
+        }
+    }
+
     public class Connector : PlaceObject
     {
         private int maxConnectionCount = -1;
@@ -53,6 +63,10 @@ namespace VideocartLab.Models
             {
                 OnMaxConnectionCountChanged();
             }
+            else if (e.PropertyName == nameof(Parent))
+            {
+                OnParentChanged();
+            }
         }
 
         protected void OnMaxConnectionCountChanged()
@@ -68,6 +82,13 @@ namespace VideocartLab.Models
             list.RemoveRange(MaxConnectionCount - 1, list.Count - MaxConnectionCount);
 
             TargetConnections = new ObservableCollection<Connector?>(list);
+        }
+
+        public event EventHandler<ConnectorParentArgs>? ParentChanged;
+
+        protected void OnParentChanged()
+        {
+            ParentChanged?.Invoke(this, new ConnectorParentArgs(Parent));
         }
     }
 }

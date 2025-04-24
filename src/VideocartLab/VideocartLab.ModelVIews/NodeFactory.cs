@@ -32,11 +32,36 @@ namespace VideocartLab.ModelVIews
     
         private NodeModelView CreateTestNode(double x, double y, double width, double height, TestClass content)
         {
-            return new NodeModelView()
+            var nodeVM = new NodeModelView()
             {
-                X = x, Y = y, Width = width, Height = height,
-                Content = content
+                X = x,
+                Y = y,
+                Width = width,
+                Height = height,
+                Content = content,
             };
+
+            var conn1 = new ConnectionModelView()
+            {
+                Width = 10,
+                Height = 10,
+                X = x - 5,
+                Y = y + height / 2d - 5,
+            };
+            conn1.Model.Parent = nodeVM.Node;
+            nodeVM.ConnectionModelViews.Add(conn1);
+
+            var conn2 = new ConnectionModelView()
+            {
+                Width = 10,
+                Height = 10,
+                X = x + width - 5,
+                Y = y + height / 2d - 5
+            };
+            conn2.Model.Parent = nodeVM.Node;
+            nodeVM.ConnectionModelViews.Add(conn2);
+
+            return nodeVM;
         }
     }
 }

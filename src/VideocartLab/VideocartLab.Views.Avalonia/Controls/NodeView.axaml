@@ -12,9 +12,11 @@
 	<Border BorderBrush="Black"
 			BorderThickness="2">
 		<Panel x:Name="canvas"
-				Background="Red"
+			   Background="Red"
 			   MinHeight="10"
 			   MinWidth="10"
+			   Width="{Binding Width}"
+			   Height="{Binding Height}"
 			   PointerPressed="Panel_PointerPressed"
 			   PointerReleased="Panel_PointerReleased">
 			<StackPanel>

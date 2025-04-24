@@ -31,6 +31,8 @@ public partial class ProjectView : UserControl
         NodeView nodeView = new(nodeModelView);
 
         canvas.Children.Add(nodeView);
+
+        AddConnectorsForNode(nodeModelView);
     }
 
     //обработка нажатия по холсту
@@ -58,6 +60,17 @@ public partial class ProjectView : UserControl
         var p = e.GetPosition(canvas);
 
         projectModelView.OnMouseMoved(p.X, p.Y);
+    }
+
+    private void AddConnectorsForNode(NodeModelView node)
+    {
+        if (node.ConnectionModelViews.Count == 0)
+            return;
+
+        foreach (ConnectionModelView connector in node.ConnectionModelViews)
+        {
+            this.canvas.Children.Add(new ConnectionView(connector));
+        }
     }
 }
 

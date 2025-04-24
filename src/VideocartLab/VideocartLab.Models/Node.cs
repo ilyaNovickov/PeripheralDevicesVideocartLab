@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,20 @@ using VideocartLab.ExtraAbstractions;
 
 namespace VideocartLab.Models
 {
+    public class NodeMovedArgs : EventArgs
+    {
+        public double X { get; private set; }
+        public double Y { get; private set; } 
+        public Node Node { get; private set; }
+
+        public NodeMovedArgs(double x, double y, Node node)
+        {
+            X = x;
+            Y = y;
+            Node = node;
+        }
+    }
+
     public class Node : PlaceObject
     {
         private object? content = null;
@@ -64,6 +79,23 @@ namespace VideocartLab.Models
                 default:
                     break;
             }
+        }
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+
+            if (e.PropertyName == nameof(X) || e.PropertyName == nameof(Y))
+            {
+                OnParentNodeMoved();
+            }
+        }
+
+        public event EventHandler<NodeMovedArgs>? Moved;
+
+        private void OnParentNodeMoved()
+        {
+            Moved?.Invoke(this, new NodeMovedArgs(X, Y, this));
         }
     }
 }
