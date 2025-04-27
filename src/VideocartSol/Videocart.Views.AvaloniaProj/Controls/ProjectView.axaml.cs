@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Videocart.Models;
 using Videocart.ViewModel;
 using Videocart.ViewModel.Extra;
@@ -27,7 +28,8 @@ public partial class ProjectView : UserControl
         {
             if (value == null && projectViewModel is not null)
             {
-                projectViewModel.NodeAddedArgs -= ProjectViewModel_NodeAddedArgs;
+                projectViewModel.NodeAdded -= ProjectViewModel_NodeAddedArgs;
+                projectViewModel.NodeRemoved -= ProjectViewModel_NodeRemoved;
             }   
 
             projectViewModel = value;
@@ -35,7 +37,8 @@ public partial class ProjectView : UserControl
 
             if (projectViewModel is not null)
             {
-                projectViewModel.NodeAddedArgs += ProjectViewModel_NodeAddedArgs;
+                projectViewModel.NodeAdded += ProjectViewModel_NodeAddedArgs;
+                projectViewModel.NodeRemoved += ProjectViewModel_NodeRemoved;
             }
         }
     }
@@ -48,6 +51,15 @@ public partial class ProjectView : UserControl
         };
 
         innerCanvas.Children.Add(nodeView);
+    }
+
+    private void ProjectViewModel_NodeRemoved(object? sender, ViewModel.Events.NodeViewModelRemovedArgs e)
+    {
+        NodeView nodeView = (NodeView)(from element in innerCanvas.Children
+                            where element is NodeView nv && nv.NodeViewModel == e.NodeViewModel
+                            select element).First();
+
+        innerCanvas.Children.Remove(nodeView);
     }
 
     private void InitContextMenu()

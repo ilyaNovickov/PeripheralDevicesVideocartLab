@@ -11,7 +11,7 @@
 	</Design.DataContext>
 	<UserControl.ContextMenu>
 		<ContextMenu>
-			<MenuItem Header="GW"/>
+			<MenuItem Header="Удалить" Click="RemoveMenuItem_Click"/>
 		</ContextMenu>
 	</UserControl.ContextMenu>
 	<Border BorderBrush="Black"

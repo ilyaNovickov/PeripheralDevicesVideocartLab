@@ -133,4 +133,9 @@ public partial class NodeView : UserControl
     {
         NodeViewModel.OnMouseRealese();
     }
+
+    private void RemoveMenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        NodeViewModel.RemoveThisNode();
+    }
 }

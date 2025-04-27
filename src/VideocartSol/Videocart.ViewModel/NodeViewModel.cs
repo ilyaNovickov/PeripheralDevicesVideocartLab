@@ -107,14 +107,17 @@ namespace Videocart.ViewModel
 
         public void OnMousePressed(double x, double y, MouseButton button)
         {
-            if (button == this.ProjectViewModel.ContextMouseButton || button == this.ProjectViewModel.ExtraMouseButton)
-                return;
-            NodeClicked?.Invoke(this, new NodeViewModelClickedArgs(x, y, this));
+            NodeClicked?.Invoke(this, new NodeViewModelClickedArgs(x, y, this, button));
         }
 
         public void OnMouseRealese()
         {
             NodeRealesed?.Invoke(this, new NodeViewModelReleaseArgs(this));
+        }
+
+        public void RemoveThisNode()
+        {
+            this.ProjectViewModel.RemoveNode(this);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Videocart.ViewModel
             project = new Project();
             nodeViewModels.CollectionChanged += NodeViewModels_CollectionChanged;
             project.NodeAdded += Project_NodeAdded;
+            project.NodeRemoved += Project_NodeRemoved;
         }
 
         private void NodeViewModels_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -38,9 +39,10 @@ namespace Videocart.ViewModel
             }
         }
 
-        public event EventHandler<NodeViewModelAddedArgs> NodeAddedArgs;
+        public event EventHandler<NodeViewModelAddedArgs>? NodeAdded;
+        public event EventHandler<NodeViewModelRemovedArgs>? NodeRemoved;
 
-        internal Project Project { get; }
+        internal Project Project => project;
 
         public WorkingMode Mode { get; private set; } = WorkingMode.None;
 
@@ -57,7 +59,12 @@ namespace Videocart.ViewModel
             nodeViewModel.NodeClicked += NodeViewModel_NodeClicked;
             nodeViewModel.NodeRealesed += NodeViewModel_NodeRealesed;
             nodeViewModels.Add(nodeViewModel);
-            NodeAddedArgs?.Invoke(this, new NodeViewModelAddedArgs(nodeViewModel));
+            NodeAdded?.Invoke(this, new NodeViewModelAddedArgs(nodeViewModel));
+        }
+
+        private void Project_NodeRemoved(object? sender, Models.Events.NodeRemovedArgs e)
+        {
+            //NodeRe
         }
 
         private void NodeViewModel_NodeRealesed(object? sender, NodeViewModelReleaseArgs e)
@@ -68,10 +75,15 @@ namespace Videocart.ViewModel
 
         private void NodeViewModel_NodeClicked(object? sender, NodeViewModelClickedArgs e)
         {
+            if (e.Button == ExtraMouseButton)
+                return;
+
             prevPoint = new Point(e.X + e.NodeViewModel.X, e.Y + e.NodeViewModel.Y);
 
-            Mode = WorkingMode.MoveNode;
             SelectedNode = e.NodeViewModel;
+
+            if (e.Button != ContextMouseButton)
+                Mode = WorkingMode.MoveNode;
         }
 
         public void OnMousePressed(double x, double y, MouseButton button)
@@ -113,6 +125,17 @@ namespace Videocart.ViewModel
         {
             Node node = creationNodeFunc(prevPoint.X, prevPoint.Y);
             project.AddNode(node);
+        }
+
+        public void RemoveNode(NodeViewModel nodeViewModel)
+        {
+            project.Nodes.Remove(nodeViewModel.Node);
+
+            nodeViewModel.NodeClicked -= NodeViewModel_NodeClicked;
+            nodeViewModel.NodeRealesed -= NodeViewModel_NodeRealesed;
+            nodeViewModels.Remove(nodeViewModel);
+
+            NodeRemoved?.Invoke(this, new NodeViewModelRemovedArgs(nodeViewModel));
         }
     }
 }

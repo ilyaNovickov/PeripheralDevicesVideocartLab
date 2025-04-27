@@ -23,6 +23,7 @@ namespace Videocart.Models
         }
 
         public event EventHandler<NodeAddedArgs>? NodeAdded;
+        public event EventHandler<NodeRemovedArgs>? NodeRemoved;
 
         private void Nodes_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -35,6 +36,10 @@ namespace Videocart.Models
                     }
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems!.Count == 1)
+                    {
+                        NodeRemoved?.Invoke(this, new NodeRemovedArgs((Node)e.OldItems[0]!));
+                    }
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
                     break;
