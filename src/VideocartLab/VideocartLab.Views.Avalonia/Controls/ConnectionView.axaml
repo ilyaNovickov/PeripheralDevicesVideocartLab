@@ -10,6 +10,7 @@
 		<vm:ConnectionModelView/>
 	</Design.DataContext>
 	<Ellipse Fill="Green"
+			 PointerPressed="Ellipse_PointerPressed"
 			 Width="{Binding Width}"
 			 Height="{Binding Height}">
 		

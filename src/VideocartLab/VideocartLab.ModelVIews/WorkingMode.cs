@@ -9,6 +9,7 @@ namespace VideocartLab.ModelVIews
     public enum WorkingMode
     {
         None, AddNode, RemoveNode,
-        MoveNode
+        MoveNode,
+        AddConnection
     }
 }

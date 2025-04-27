@@ -43,6 +43,11 @@ namespace VideocartLab.ModelVIews
             private set => connector = value;
         }
 
+        public Point Position
+        {
+            get => new Point(X, Y);
+        }
+
         public double X
         {
             get => connector.X;
@@ -50,6 +55,7 @@ namespace VideocartLab.ModelVIews
             {
                 connector.X = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(Position));
             }
         }
 
@@ -60,6 +66,7 @@ namespace VideocartLab.ModelVIews
             {
                 connector.Y = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(Position));
             }
         }
 
@@ -81,6 +88,23 @@ namespace VideocartLab.ModelVIews
                 connector.Height = value;
                 OnPropertyChanged();
             }
+        }
+
+        public event EventHandler<ConnectorViewModelClickedArgs>? Clicked;
+
+        public void OnMousePressed(double x, double y, MouseButton button)
+        {
+            Clicked?.Invoke(this, new ConnectorViewModelClickedArgs(this));
+        }
+    }
+
+    public class ConnectorViewModelClickedArgs : EventArgs
+    {
+        public ConnectionModelView ConnectionModelView { get; private set; }
+
+        public ConnectorViewModelClickedArgs(ConnectionModelView connectionModelView)
+        {
+            ConnectionModelView = connectionModelView;
         }
     }
 }

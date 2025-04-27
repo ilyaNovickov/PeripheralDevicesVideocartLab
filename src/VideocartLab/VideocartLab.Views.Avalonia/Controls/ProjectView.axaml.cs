@@ -1,10 +1,15 @@
-using Avalonia;
+using Av = Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 using VideocartLab.ModelVIews;
 using VideocartLab.Views.Avalonia.Helpers;
+using Avalonia.Controls.Shapes;
+using Avalonia.Media;
+using Avalonia.Data.Converters;
+using System;
+using System.Globalization;
 
 namespace VideocartLab.Views.Avalonia;
 
@@ -21,6 +26,59 @@ public partial class ProjectView : UserControl
         this.DataContext = projectModelView;
 
         projectModelView.NodeModelViewAdded += ProjectModelView_NodeModelViewAdded;
+        projectModelView.ConnectionClicked += ProjectModelView_ConnectionClicked;
+    }
+
+    Line? connectionLine = null;
+
+    private void ProjectModelView_ConnectionClicked(object? sender, ConnectionClickedArgs e)
+    {
+        if (projectModelView.Mode == WorkingMode.AddConnection && e.Result == ConnectionClickedResult.ConnectionStart)
+        {
+            Line line = new Line();
+            line.IsHitTestVisible = false;
+            line.StrokeThickness = 2d;
+            line.Stroke = Brushes.Blue;
+            line.StartPoint = new Av.Point(e.ConnectionModelView.X, e.ConnectionModelView.Y);
+            line.EndPoint = new Av.Point(e.ConnectionModelView.X, e.ConnectionModelView.Y);
+            this.connectionLine = line;
+            this.canvas.Children.Add(line);
+
+            //Свойство X
+            Binding bindingX = new();
+            bindingX.Source = e.ConnectionModelView;
+            bindingX.Path = nameof(e.ConnectionModelView.Position);
+            bindingX.Converter = new foo2();
+            bindingX.Mode = BindingMode.OneWay;
+            bindingX.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+
+            line.Bind(Line.StartPointProperty, bindingX);
+        }
+
+        switch (e.Result)
+        {
+            case ConnectionClickedResult.ConnectionStart:
+                break;
+            case ConnectionClickedResult.ConnectionAdded:
+                //Свойство X
+                Binding bindingX = new();
+                bindingX.Source = e.ConnectionModelView;
+                bindingX.Path = nameof(e.ConnectionModelView.Position);
+                bindingX.Converter = new foo2();
+                bindingX.Mode = BindingMode.OneWay;
+                bindingX.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+
+                connectionLine!.Bind(Line.EndPointProperty, bindingX);
+
+                this.connectionLine = null;
+                break;
+            case ConnectionClickedResult.ConnectionReleased:
+                this.canvas.Children.Remove(connectionLine!);
+                this.connectionLine = null;
+                break;
+            default:
+                break;
+        }
     }
 
     //Обработка добавления узла в проект
@@ -60,6 +118,11 @@ public partial class ProjectView : UserControl
         var p = e.GetPosition(canvas);
 
         projectModelView.OnMouseMoved(p.X, p.Y);
+
+        if (projectModelView.Mode == WorkingMode.AddConnection)
+        {
+            connectionLine!.EndPoint = new Av.Point(p.X, p.Y);
+        }
     }
 
     private void AddConnectorsForNode(NodeModelView node)
@@ -74,3 +137,18 @@ public partial class ProjectView : UserControl
     }
 }
 
+public class foo2 : IValueConverter
+{
+    object? IValueConverter.Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is Point point)
+            return new Av.Point(point.X, point.Y);
+        return null;
+        //throw new NotImplementedException();
+    }
+
+    object? IValueConverter.ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
