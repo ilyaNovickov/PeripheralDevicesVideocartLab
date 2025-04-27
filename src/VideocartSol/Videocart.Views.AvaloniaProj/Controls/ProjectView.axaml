@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:pnz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
+			 xmlns:vm="clr-namespace:Videocart.ViewModel;assembly=Videocart.ViewModel"
+             x:Class="Videocart.Views.AvaloniaProj.ProjectView"
+			 x:DataType="vm:ProjectViewModel">
+	<Design.DataContext>
+		<vm:ProjectViewModel/>
+	</Design.DataContext>
+	<pnz:ZoomBorder>
+		<Border BorderThickness="2"
+				BorderBrush="Black">
+			<Canvas x:Name="innerCanvas"
+					Background="White"
+					Width="1000"
+					Height="1000"
+					PointerPressed="Canvas_PointerPressed">
+				<Canvas.ContextMenu>
+					<ContextMenu x:Name="contextMenu">
+						
+					</ContextMenu>
+				</Canvas.ContextMenu>
+			</Canvas>
+		</Border>
+	</pnz:ZoomBorder>
+</UserControl>

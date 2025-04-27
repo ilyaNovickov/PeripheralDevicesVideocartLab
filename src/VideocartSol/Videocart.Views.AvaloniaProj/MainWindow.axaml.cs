@@ -1,4 +1,6 @@
 using Avalonia.Controls;
+using System.ComponentModel;
+using Videocart.ViewModel;
 
 namespace Videocart.Views.AvaloniaProj
 {
@@ -7,6 +9,8 @@ namespace Videocart.Views.AvaloniaProj
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = new MainWindowsViewModel();
         }
     }
 }
