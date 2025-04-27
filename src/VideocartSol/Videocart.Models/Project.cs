@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Videocart.Models.Events;
 
 namespace Videocart.Models
 {
@@ -21,11 +22,17 @@ namespace Videocart.Models
             nodes.CollectionChanged += Nodes_CollectionChanged;
         }
 
+        public event EventHandler<NodeAddedArgs>? NodeAdded;
+
         private void Nodes_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                    if (e.NewItems!.Count == 1)
+                    {
+                        NodeAdded?.Invoke(this, new NodeAddedArgs((Node)e.NewItems[0]!));
+                    }
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
                     break;
@@ -44,9 +51,8 @@ namespace Videocart.Models
 
         public void AddNode(Node node)
         {
-            nodes.Add(node);
-
             node.Project = this;
+            nodes.Add(node);
         }
 
         public void RemoveNode(Node node)

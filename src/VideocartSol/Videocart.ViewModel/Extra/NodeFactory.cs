@@ -43,7 +43,8 @@ namespace Videocart.ViewModel.Extra
         {
             return new Node()
             {
-                X = x, Y = y, Width = 200, Height = 100, Content = "Hello world",
+                X = x, Y = y, Width = 200, Height = 100, 
+                Content = "Hello world",
                 Name = "String Node"
             };
         }

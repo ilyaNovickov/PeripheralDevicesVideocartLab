@@ -26,8 +26,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\InnerContent\StringContentView.axaml.cs">
+      <DependentUpon>StringContentView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\ProjectView.axaml.cs">
       <DependentUpon>ProjectView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\NodeView.axaml.cs">
+      <DependentUpon>NodeView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

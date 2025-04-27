@@ -3,6 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Videocart.Views.AvaloniaProj.UserControl1">
-  Welcome to Avalonia!
+			 xmlns:vm="clr-namespace:Videocart.ViewModel.InnerContent;assembly=Videocart.ViewModel"
+             x:Class="Videocart.Views.AvaloniaProj.StringContentView"
+			 x:DataType="vm:StringContentViewModel">
+	<Design.DataContext>
+		<vm:StringContentViewModel/>
+	</Design.DataContext>
+  <TextBox Text="{Binding Str}"/>
 </UserControl>

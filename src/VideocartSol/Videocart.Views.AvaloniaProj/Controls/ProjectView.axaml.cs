@@ -5,16 +5,13 @@ using System.Collections.ObjectModel;
 using Videocart.Models;
 using Videocart.ViewModel;
 using Videocart.ViewModel.Extra;
+using Videocart.Views.AvaloniaProj.Helpers;
 
 namespace Videocart.Views.AvaloniaProj;
 
 public partial class ProjectView : UserControl
 {
-    public static readonly StyledProperty<ProjectViewModel?> ProjectViewModelProperty =
-        AvaloniaProperty<ProjectViewModel>.Register<ProjectView, ProjectViewModel?>(nameof(ProjectViewModel));
-
-
-    private ObservableCollection<NodeFactoryAction>? actions = null;
+    private ProjectViewModel? projectViewModel;
 
     public ProjectView()
     {
@@ -25,11 +22,32 @@ public partial class ProjectView : UserControl
 
     public ProjectViewModel? ProjectViewModel
     {
-        get => GetValue(ProjectViewModelProperty);
+        get => projectViewModel;
         set
         {
-            SetValue(ProjectViewModelProperty, value);
+            if (value == null && projectViewModel is not null)
+            {
+                projectViewModel.NodeAddedArgs -= ProjectViewModel_NodeAddedArgs;
+            }   
+
+            projectViewModel = value;
+            DataContext = projectViewModel;
+
+            if (projectViewModel is not null)
+            {
+                projectViewModel.NodeAddedArgs += ProjectViewModel_NodeAddedArgs;
+            }
         }
+    }
+
+    private void ProjectViewModel_NodeAddedArgs(object? sender, ViewModel.Events.NodeViewModelAddedArgs e)
+    {
+        NodeView nodeView = new NodeView()
+        {
+            NodeViewModel = e.NodeViewModel
+        };
+
+        innerCanvas.Children.Add(nodeView);
     }
 
     private void InitContextMenu()
@@ -41,7 +59,7 @@ public partial class ProjectView : UserControl
             menuItem.Header = action.Name;
             menuItem.Click += (sender, e) =>
             {
-                ProjectViewModel.AddNode(action.Func);
+                ProjectViewModel!.AddNode(action.Func);
             };
             contextMenu.Items.Add(menuItem);
         }
@@ -50,6 +68,11 @@ public partial class ProjectView : UserControl
 
     private void Canvas_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
     {
+        if (e.Handled) return;
 
+        var p = e.GetPosition(innerCanvas);
+        MouseButton button = MouseHelper.GetButton(e.GetCurrentPoint(innerCanvas).Properties);
+
+        ProjectViewModel!.OnMousePressed(p.X, p.Y, button);
     }
 }

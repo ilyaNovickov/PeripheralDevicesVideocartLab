@@ -11,5 +11,5 @@
     <Design.DataContext>
 		<vm:MainWindowsViewModel/>
 	</Design.DataContext>
-    <cnt:ProjectView ProjectViewModel="{Binding Project}"/>
+    <cnt:ProjectView x:Name="projectView"/>
 </Window>
