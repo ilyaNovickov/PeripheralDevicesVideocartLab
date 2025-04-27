@@ -17,7 +17,8 @@
 					Background="White"
 					Width="1000"
 					Height="1000"
-					PointerPressed="Canvas_PointerPressed">
+					PointerPressed="Canvas_PointerPressed"
+					PointerMoved="Canvas_PointerMoved">
 				<Canvas.ContextMenu>
 					<ContextMenu x:Name="contextMenu">
 						

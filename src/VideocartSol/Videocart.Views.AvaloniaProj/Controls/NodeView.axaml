@@ -9,9 +9,16 @@
 	<Design.DataContext>
 		<vm:NodeViewModel/>
 	</Design.DataContext>
+	<UserControl.ContextMenu>
+		<ContextMenu>
+			<MenuItem Header="GW"/>
+		</ContextMenu>
+	</UserControl.ContextMenu>
 	<Border BorderBrush="Black"
 			BorderThickness="2"
-			Background="White">
+			Background="White"
+			PointerPressed="Border_PointerPressed"
+			PointerReleased="Border_PointerReleased">
 		<StackPanel>
 			<TextBlock Text="HW"
 					   Foreground="Black"/>

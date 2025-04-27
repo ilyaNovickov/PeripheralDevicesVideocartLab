@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Videocart.Models;
+using Videocart.ViewModel.Events;
+using Videocart.ViewModel.Extra;
 using Videocart.ViewModel.InnerContent;
 
 namespace Videocart.ViewModel
@@ -47,6 +49,9 @@ namespace Videocart.ViewModel
                 };
             }
         }
+
+        public event EventHandler<NodeViewModelClickedArgs>? NodeClicked;
+        public event EventHandler<NodeViewModelReleaseArgs>? NodeRealesed;
 
         internal ProjectViewModel? ProjectViewModel { get; set; }
 
@@ -98,6 +103,18 @@ namespace Videocart.ViewModel
                 content = value;
                 OnPropertyChanged();
             }
+        }
+
+        public void OnMousePressed(double x, double y, MouseButton button)
+        {
+            if (button == this.ProjectViewModel.ContextMouseButton || button == this.ProjectViewModel.ExtraMouseButton)
+                return;
+            NodeClicked?.Invoke(this, new NodeViewModelClickedArgs(x, y, this));
+        }
+
+        public void OnMouseRealese()
+        {
+            NodeRealesed?.Invoke(this, new NodeViewModelReleaseArgs(this));
         }
     }
 }

@@ -48,12 +48,30 @@ namespace Videocart.ViewModel
         public MouseButton ContextMouseButton { get; set; } = MouseButton.Right;
         public MouseButton ExtraMouseButton { get; set; } = MouseButton.Middle;
 
+        public NodeViewModel? SelectedNode { get; private set; }
+
         private void Project_NodeAdded(object? sender, Models.Events.NodeAddedArgs e)
         {
             NodeViewModel nodeViewModel = new NodeViewModel(e.Node);
             nodeViewModel.ProjectViewModel = this;
+            nodeViewModel.NodeClicked += NodeViewModel_NodeClicked;
+            nodeViewModel.NodeRealesed += NodeViewModel_NodeRealesed;
             nodeViewModels.Add(nodeViewModel);
             NodeAddedArgs?.Invoke(this, new NodeViewModelAddedArgs(nodeViewModel));
+        }
+
+        private void NodeViewModel_NodeRealesed(object? sender, NodeViewModelReleaseArgs e)
+        {
+            Mode = WorkingMode.None;
+            SelectedNode = null;
+        }
+
+        private void NodeViewModel_NodeClicked(object? sender, NodeViewModelClickedArgs e)
+        {
+            prevPoint = new Point(e.X + e.NodeViewModel.X, e.Y + e.NodeViewModel.Y);
+
+            Mode = WorkingMode.MoveNode;
+            SelectedNode = e.NodeViewModel;
         }
 
         public void OnMousePressed(double x, double y, MouseButton button)
@@ -74,6 +92,21 @@ namespace Videocart.ViewModel
 
             prevPoint.X = x;
             prevPoint.Y = y;
+        }
+
+        public void OnMouseMoved(double newX, double newY)
+        {
+            if (Mode != WorkingMode.MoveNode)
+                return;
+
+            double dx = newX - prevPoint.X;
+            double dy = newY - prevPoint.Y;
+
+            SelectedNode.X += dx;
+            SelectedNode.Y += dy;
+
+            prevPoint.X = newX;
+            prevPoint.Y = newY;
         }
 
         public void AddNode(Func<double, double, Node> creationNodeFunc)

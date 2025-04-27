@@ -1,9 +1,11 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Videocart.ViewModel;
 using Videocart.ViewModel.InnerContent;
+using Videocart.Views.AvaloniaProj.Helpers;
 
 namespace Videocart.Views.AvaloniaProj;
 
@@ -113,5 +115,22 @@ public partial class NodeView : UserControl
             strV.StringContentViewModel = strVM;
             innerPanel.Children.Add(strV);
         }
+    }
+
+    private void Border_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+    {
+        if (e.Handled)
+            return;
+
+        e.Handled = false;
+
+        var p = e.GetPosition(this);
+        Videocart.ViewModel.Extra.MouseButton button = MouseHelper.GetButton(e.GetCurrentPoint(this).Properties);
+        NodeViewModel.OnMousePressed(p.X, p.Y, button);
+    }
+
+    private void Border_PointerReleased(object? sender, Avalonia.Input.PointerReleasedEventArgs e)
+    {
+        NodeViewModel.OnMouseRealese();
     }
 }

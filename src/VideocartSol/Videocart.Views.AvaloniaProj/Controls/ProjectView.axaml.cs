@@ -75,4 +75,10 @@ public partial class ProjectView : UserControl
 
         ProjectViewModel!.OnMousePressed(p.X, p.Y, button);
     }
+
+    private void Canvas_PointerMoved(object? sender, Avalonia.Input.PointerEventArgs e)
+    {
+        var p = e.GetPosition(innerCanvas);
+        ProjectViewModel!.OnMouseMoved(p.X, p.Y);
+    }
 }
