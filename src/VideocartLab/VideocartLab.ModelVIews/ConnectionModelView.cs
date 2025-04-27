@@ -45,7 +45,7 @@ namespace VideocartLab.ModelVIews
 
         public Point Position
         {
-            get => new Point(X, Y);
+            get => new Point(X + Width / 2d, Y + Height / 2d);
         }
 
         public double X

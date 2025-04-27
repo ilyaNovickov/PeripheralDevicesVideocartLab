@@ -36,6 +36,7 @@ public partial class ProjectView : UserControl
         if (projectModelView.Mode == WorkingMode.AddConnection && e.Result == ConnectionClickedResult.ConnectionStart)
         {
             Line line = new Line();
+            line.ZIndex = 0;
             line.IsHitTestVisible = false;
             line.StrokeThickness = 2d;
             line.Stroke = Brushes.Blue;
@@ -87,6 +88,8 @@ public partial class ProjectView : UserControl
         NodeModelView nodeModelView = e.Node;
 
         NodeView nodeView = new(nodeModelView);
+
+        //nodeView.ZIndex = 1;
 
         canvas.Children.Add(nodeView);
 
