@@ -34,7 +34,7 @@ namespace VideocartLab.ModelVIews
         public void AddNode(double x, double y)
         {
             //NodeModelView nodeModelView = Factory.Create(x, y, 100, 100, "Test");
-            NodeModelView nodeModelView = Factory.Create(x, y, 100, 100, new TestClass()
+            NodeModelView nodeModelView = Factory.Create(x, y, 200, 100, new TestClass()
             {
                 Str = "Hello world", Count = 5
             });
