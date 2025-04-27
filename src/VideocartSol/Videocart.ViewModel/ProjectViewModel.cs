@@ -17,7 +17,7 @@ namespace Videocart.ViewModel
             project = new Project();
             nodeViewModels.CollectionChanged += NodeViewModels_CollectionChanged;
             project.NodeAdded += Project_NodeAdded;
-            project.NodeRemoved += Project_NodeRemoved;
+            //project.NodeRemoved += Project_NodeRemoved;
         }
 
         private void NodeViewModels_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -60,11 +60,6 @@ namespace Videocart.ViewModel
             nodeViewModel.NodeRealesed += NodeViewModel_NodeRealesed;
             nodeViewModels.Add(nodeViewModel);
             NodeAdded?.Invoke(this, new NodeViewModelAddedArgs(nodeViewModel));
-        }
-
-        private void Project_NodeRemoved(object? sender, Models.Events.NodeRemovedArgs e)
-        {
-            //NodeRe
         }
 
         private void NodeViewModel_NodeRealesed(object? sender, NodeViewModelReleaseArgs e)
@@ -124,6 +119,8 @@ namespace Videocart.ViewModel
         public void AddNode(Func<double, double, Node> creationNodeFunc)
         {
             Node node = creationNodeFunc(prevPoint.X, prevPoint.Y);
+            node.X -= node.Width / 2d;
+            node.Y -= node.Height / 2d;
             project.AddNode(node);
         }
 
