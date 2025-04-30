@@ -1,8 +1,11 @@
-﻿namespace VideocartLab.MainModelsProj
+﻿using System.ComponentModel.DataAnnotations;
+using VideocartLab.MainModelsProj;
+
+namespace VideocartLab.ModelViews
 {
-    public class GPU
+    public class GPUContentModelView : ModelViewBase
     {
-        private string? name = null;
+        private string name = "";
         private int cores = 1;
         private int tmu = 1;
         private int rop = 1;
@@ -11,10 +14,14 @@
         /// <summary>
         /// Имя графического процессора GPU
         /// </summary>
-        public string? Name
+        public string Name
         {
             get => name;
-            set => name = value;
+            set 
+            {
+                name = value;
+                OnPropertyChanged();
+            }
         }
 
         /// <summary>
@@ -25,8 +32,10 @@
             get => cores;
             set
             {
-                ValuesValidator.ValidUnnegativeArgument(value);
+                //ValuesValidator.ValidUnnegativeArgument(value);
+
                 cores = value;
+                OnPropertyChanged();
             }
         }
 
@@ -38,8 +47,10 @@
             get => tmu;
             set
             {
-                ValuesValidator.ValidUnnegativeArgument(value);
+                //ValuesValidator.ValidUnnegativeArgument(value);
                 tmu = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(TextureFillRate));
             }
         }
 
@@ -51,8 +62,10 @@
             get => rop;
             set
             {
-                ValuesValidator.ValidUnnegativeArgument(value);
+                //ValuesValidator.ValidUnnegativeArgument(value);
                 rop = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(PixelFillRate));
             }
         }
 
@@ -64,8 +77,11 @@
             get => frequency;
             set
             {
-                ValuesValidator.ValidUnnegativeArgument(value);
+                //ValuesValidator.ValidUnnegativeArgument(value);
                 frequency = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(PixelFillRate));
+                OnPropertyChanged(nameof(TextureFillRate));
             }
         }
 

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.Views.Avalonia
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.MainModelsProj", "VideocartLab.MainModelsProj\VideocartLab.MainModelsProj.csproj", "{ACBB6F00-DD00-4ACC-B325-936D61B0FAE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.ModelViews", "VideocartLab.ModelViews\VideocartLab.ModelViews.csproj", "{D82847B5-29CD-4096-B128-00069790B004}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{ACBB6F00-DD00-4ACC-B325-936D61B0FAE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACBB6F00-DD00-4ACC-B325-936D61B0FAE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACBB6F00-DD00-4ACC-B325-936D61B0FAE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D82847B5-29CD-4096-B128-00069790B004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D82847B5-29CD-4096-B128-00069790B004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D82847B5-29CD-4096-B128-00069790B004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D82847B5-29CD-4096-B128-00069790B004}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

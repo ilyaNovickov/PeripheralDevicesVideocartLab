@@ -6,12 +6,26 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Label="Avalonia">
+    <AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.2.7" />
     <PackageReference Include="Avalonia.Desktop" Version="11.2.7" />
     <PackageReference Include="Avalonia.Diagnostics" Version="11.2.7" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.7" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VideocartLab.ModelViews\VideocartLab.ModelViews.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="GPUContentView.axaml.cs">
+      <DependentUpon>GPUContentView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

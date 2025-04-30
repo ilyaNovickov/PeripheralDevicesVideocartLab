@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VideocartLab.ModelViews\VideocartLab.ModelViews.csproj" />
     <ProjectReference Include="..\VideocartLab.Views.AvaloniaExtraControlsSol\VideocartLab.Views.AvaloniaExtraControlsSol.csproj" />
   </ItemGroup>
 </Project>
