@@ -27,14 +27,12 @@ namespace VideocartLab.ModelViews
         /// <summary>
         /// Кол-во потоковых ядер (CUDA/SM) [шт]
         /// </summary>
-        public int Cores
+        public int? Cores
         {
             get => cores;
             set
             {
-                //ValuesValidator.ValidUnnegativeArgument(value);
-
-                cores = value;
+                cores = value ?? 0;
                 OnPropertyChanged();
             }
         }
@@ -42,13 +40,12 @@ namespace VideocartLab.ModelViews
         /// <summary>
         /// Кол-во текстурных блоков [шт]
         /// </summary>
-        public int TextureMappingUnits
+        public int? TextureMappingUnits
         {
             get => tmu;
             set
             {
-                //ValuesValidator.ValidUnnegativeArgument(value);
-                tmu = value;
+                tmu = value ?? 0;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(TextureFillRate));
             }
@@ -57,13 +54,12 @@ namespace VideocartLab.ModelViews
         /// <summary>
         /// Кол-во блоков растеризации [шт]
         /// </summary>
-        public int RenderOutputPipelines
+        public int? RenderOutputPipelines
         {
             get => rop;
             set
             {
-                //ValuesValidator.ValidUnnegativeArgument(value);
-                rop = value;
+                rop = value ?? 0;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(PixelFillRate));
             }
@@ -72,13 +68,12 @@ namespace VideocartLab.ModelViews
         /// <summary>
         /// Частота GPU [МГц]
         /// </summary>
-        public int Frequency
+        public int? Frequency
         {
             get => frequency;
             set
             {
-                //ValuesValidator.ValidUnnegativeArgument(value);
-                frequency = value;
+                frequency = value ?? 0;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(PixelFillRate));
                 OnPropertyChanged(nameof(TextureFillRate));

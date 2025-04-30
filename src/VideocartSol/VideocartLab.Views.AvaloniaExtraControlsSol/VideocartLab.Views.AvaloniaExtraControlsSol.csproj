@@ -26,6 +26,9 @@
     <Compile Update="GPUContentView.axaml.cs">
       <DependentUpon>GPUContentView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="ScreenInterfaceView.axaml.cs">
+      <DependentUpon>ScreenInterfaceView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

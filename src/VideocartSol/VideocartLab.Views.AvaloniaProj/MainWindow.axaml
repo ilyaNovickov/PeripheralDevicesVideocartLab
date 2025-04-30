@@ -6,7 +6,11 @@
         x:Class="VideocartLab.Views.AvaloniaProj.MainWindow"
 		xmlns:cntr="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol"
         Title="VideocartLab.Views.AvaloniaProj">
-	<Canvas>
-		<cntr:GPUContentView Canvas.Left="100" Canvas.Top="100"/>
-	</Canvas>
+	<ScrollViewer VerticalScrollBarVisibility="Visible"
+				  HorizontalScrollBarVisibility="Visible">
+		<Canvas Width="5000" Height="5000">
+			<cntr:GPUContentView Canvas.Left="100" Canvas.Top="100"/>
+			<cntr:ScreenInterfaceView Canvas.Left="500" Canvas.Top="100"/>
+		</Canvas>
+	</ScrollViewer>
 </Window>
