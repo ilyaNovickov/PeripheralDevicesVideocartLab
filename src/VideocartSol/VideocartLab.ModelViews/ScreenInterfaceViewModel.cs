@@ -19,6 +19,8 @@ namespace VideocartLab.ModelViews
         private int screenWidth = 100;
         private int screenHeight = 100;
 
+        private bool selectedIsIniciator = false;//Необходимо чтобы не происходил сброс выбранного интерфейса
+
         public double? Frequency
         {
             get => frequency;
@@ -75,36 +77,22 @@ namespace VideocartLab.ModelViews
                 BitPerPixel!.Value * 3d * Frequency!.Value / 1024d / 1024d / 1024d;
         }
 
-        private bool selectedIsIniciator = false;
+        
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
 
-            if (e.PropertyName == nameof(RequiredBandwidth) || e.PropertyName == nameof(Bandwidth))
+            if (e.PropertyName == nameof(RequiredBandwidth) || e.PropertyName == nameof(Bandwidth) || e.PropertyName == nameof(SelectedSetting))
                 goto end;
 
             OnPropertyChanged(nameof(RequiredBandwidth));
+            return;
 end:
-            if (selectedIsIniciator && SelectedSetting  != StandartSettings[0])
+            if (!selectedIsIniciator)
             {
-                ScreenConnectionInfo connectionInfo = SelectedSetting!;
-                ScreenInterface info = SelectedSetting!.ScreenInterface!;
-
-                selectedIsIniciator = false;
-
-                this.Bandwidth = info.Bandwidth;
-                this.BitPerPixel = info.BitPerPixel;
-                this.Frequency = info.Frequency;
-                this.ScreenHeight = info.MaxHeight;
-                this.ScreenWidth = info.MaxWidth;
-
-                
+                SelectedSetting = StandartSettings[0];
             }
-            else
-            {
-                //SelectedSetting = StandartSettings[0];
-            }            
         }
 
 
@@ -267,8 +255,23 @@ end:
                 if (setting == value)
                     return;
                 setting = value;
+
                 selectedIsIniciator = true;
+
+                if (setting != StandartSettings[0])
+                {
+                    ScreenInterface info = SelectedSetting!.ScreenInterface!;
+
+                    //selectedIsIniciator = false;
+
+                    this.Bandwidth = info.Bandwidth;
+                    this.BitPerPixel = info.BitPerPixel;
+                    this.Frequency = info.Frequency;
+                    this.ScreenHeight = info.MaxHeight;
+                    this.ScreenWidth = info.MaxWidth;
+                }
                 OnPropertyChanged();
+                selectedIsIniciator = false;
             }
         }
     }
