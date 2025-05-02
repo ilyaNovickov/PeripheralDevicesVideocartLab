@@ -1,0 +1,103 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="clr-namespace:VideocartLab.ModelViews;assembly=VideocartLab.ModelViews"
+             x:Class="VideocartLab.Views.AvaloniaExtraControlsSol.VRAMContentView"
+			 x:DataType="vm:VRAMModelView">
+	<Design.DataContext>
+		<vm:VRAMModelView/>
+	</Design.DataContext>
+	<UserControl.Styles>
+		<Style Selector="TextBlock.name">
+			<Setter Property="TextAlignment" Value="End"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+		<Style Selector="TextBlock.rightItem">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+		<Style Selector="NumericUpDown">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="TextBox.rightItem">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+		<Style Selector="ComboBox">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+	</UserControl.Styles>
+	<ThemeVariantScope RequestedThemeVariant="Light">
+		<Grid ColumnDefinitions="*,*"
+			  RowDefinitions="*,*,*,*,*,*,*,*,*,*,"
+			  Background="White">
+			<TextBlock Classes="name"
+					   Grid.Column="0"
+					   Grid.Row="0"
+					   Text="Тип GDDR"/>
+			<ComboBox Classes="rightItem"
+					  Grid.Column="1"
+					  Grid.Row="0"
+					  />
+			<TextBlock Classes="name"
+					   Grid.Column="0"
+					   Grid.Row="1"
+					   Text="Объём, [МБ]"/>
+			<NumericUpDown Classes="rightItem"
+						   Grid.Column="1"
+						   Grid.Row="1"
+						   Minimum="0"
+						   Value="{Binding Capacity}"/>
+			<TextBlock Classes="name"
+					   Grid.Column="0"
+					   Grid.Row="2"
+					   Text="Ширина шины памяти, [бит]"/>
+			<NumericUpDown Classes="rightItem"
+						   Grid.Column="1"
+						   Grid.Row="2"
+						   Minimum="0"
+						   Increment="1"
+						   ParsingNumberStyle="Integer"
+						   Value="{Binding MemoryBusCapacity}"/>
+			<TextBlock Classes="name"
+					   Grid.Column="0"
+					   Grid.Row="3"
+					   Text="Реальная частота, [МГц]"/>
+			<NumericUpDown Classes="rightItem"
+						   Grid.Column="1"
+						   Grid.Row="3"
+						   Minimum="0"
+						   Value="{Binding RealFrequency}"
+						   Increment="1"/>
+			<TextBlock Classes="name"
+					   Grid.Column="0"
+					   Grid.Row="4"
+					   Text="Эффективная частота"/>
+			<NumericUpDown Classes="rightItem"
+						   Grid.Column="1"
+						   Grid.Row="4"
+						   Minimum="0"
+						   Value="{Binding EffectiveFrequency}"
+						   Increment="1"/>
+			<TextBlock Classes="name"
+					   Grid.Column="0"
+					   Grid.Row="5"
+					   Text="Пропускная способность, [ГБ/с]"/>
+			<TextBlock Classes="rightItem"
+					   Grid.Column="1"
+					   Grid.Row="5"
+					   Text="{Binding MemoryBandwidth}"/>
+		</Grid>
+	</ThemeVariantScope>
+</UserControl>

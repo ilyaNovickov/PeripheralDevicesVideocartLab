@@ -11,6 +11,7 @@
 		<Canvas Width="5000" Height="5000">
 			<cntr:GPUContentView Canvas.Left="100" Canvas.Top="100"/>
 			<cntr:ScreenInterfaceView Canvas.Left="500" Canvas.Top="100"/>
+			<cntr:VRAMContentView Canvas.Left="100" Canvas.Top="1000"/>
 		</Canvas>
 	</ScrollViewer>
 </Window>
