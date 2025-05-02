@@ -84,6 +84,7 @@
 							   Grid.Row="3"
 							   Classes="rightItem"
 							   Value="{Binding ScreenWidth}"
+							   ParsingNumberStyle="Integer"
 							   Increment="1"
 							   Minimum="0"/>
 				<TextBlock Grid.Column="0"
@@ -94,12 +95,13 @@
 							   Grid.Row="4"
 							   Classes="rightItem"
 							   Value="{Binding ScreenHeight}"
+							   ParsingNumberStyle="Integer"
 							   Increment="1"
 							   Minimum="0"/>
 				<TextBlock Grid.Column="0"
 						   Grid.Row="5"
 						   Classes="name"
-						   Text="Требуемая пропусаная способность"/>
+						   Text="Требуемая пропусаная способность, [Гб/с]"/>
 				<TextBlock Grid.Column="1"
 						   Grid.Row="5"
 						   Classes="rightItem"
