@@ -10,10 +10,10 @@ namespace VideocartLab.MainModelsProj.ConnectionInterface
     public class AGP : ConnectionInterface
     {
         #region StandartPorts
-        public static AGP AGP1x1 => new AGP(66d, 64, 1);
-        public static AGP AGP1x2 => new AGP(66d, 64, 2);
-        public static AGP AGP2 => new AGP(66d, 64, 4);
-        public static AGP AGP3 => new AGP(66d, 64, 8);
+        public static AGP AGP1x1 => new AGP(66d, 32, 1);
+        public static AGP AGP1x2 => new AGP(66d, 32, 2);
+        public static AGP AGP2 => new AGP(66d, 32, 4);
+        public static AGP AGP3 => new AGP(66d, 32, 8);
         #endregion
 
         private double frequency = 66;
@@ -39,6 +39,7 @@ namespace VideocartLab.MainModelsProj.ConnectionInterface
         {
             Frequency = frequency;
             MemoryBusCapacity = memoryBusCapacity;
+            BitPerClock = bitPerClock;
         }
 
         /// <summary>
