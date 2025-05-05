@@ -3,16 +3,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:pnz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
         x:Class="VideocartLab.Views.AvaloniaProj.MainWindow"
 		xmlns:cntr="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol"
         Title="VideocartLab.Views.AvaloniaProj">
-	<ScrollViewer VerticalScrollBarVisibility="Visible"
-				  HorizontalScrollBarVisibility="Visible">
-		<Canvas Width="5000" Height="5000">
-			<cntr:GPUContentView Canvas.Left="100" Canvas.Top="100"/>
-			<cntr:ScreenInterfaceView Canvas.Left="500" Canvas.Top="100"/>
-			<cntr:VRAMContentView Canvas.Left="100" Canvas.Top="1000"/>
-			<cntr:ConnectionInterfaceView Canvas.Left="500" Canvas.Top="1000"/>
-		</Canvas>
-	</ScrollViewer>
+	<DockPanel LastChildFill="True">
+		<Menu DockPanel.Dock="Top">
+			
+		</Menu>
+		
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.15*" MinWidth="5"/>
+				<ColumnDefinition Width="5"/>
+				<ColumnDefinition Width="*" MinWidth="5"/>
+			</Grid.ColumnDefinitions>
+			<GridSplitter Grid.Column="1" Background="Gray" ResizeDirection="Columns"/>
+			<Grid Grid.Column="2">
+				<Grid.RowDefinitions>
+					<RowDefinition MinHeight="5"/>
+					<RowDefinition Height="5"/>
+					<RowDefinition MinHeight="5"/>
+				</Grid.RowDefinitions>
+				<pnz:ZoomBorder Grid.Row="0"
+								ClipToBounds="True">
+					<Canvas Width="5000" Height="5000" Background="White">
+						<cntr:GPUContentView Canvas.Left="100" Canvas.Top="100"/>
+						<cntr:ScreenInterfaceView Canvas.Left="500" Canvas.Top="100"/>
+						<cntr:VRAMContentView Canvas.Left="100" Canvas.Top="1000"/>
+						<cntr:ConnectionInterfaceView Canvas.Left="500" Canvas.Top="1000"/>
+					</Canvas>
+				</pnz:ZoomBorder>
+				<GridSplitter Grid.Row="1" Background="Gray" ResizeDirection="Rows"/>
+				<Panel Grid.Row="2" ClipToBounds="True">
+					<TextBox/>
+				</Panel>
+			</Grid>
+		</Grid>
+	</DockPanel>
 </Window>
