@@ -40,7 +40,8 @@
 					   Text="Стандратные интерфейсы"/>
 			<ComboBox ItemsSource="{Binding StandartSettings}"
 					  SelectedItem="{Binding SelectedSetting}"
-					  DisplayMemberBinding="{Binding Name}">
+					  DisplayMemberBinding="{Binding Name}"
+					  Margin="5,5,5,5">
 
 			</ComboBox>
 			<Grid ColumnDefinitions="*,*"
