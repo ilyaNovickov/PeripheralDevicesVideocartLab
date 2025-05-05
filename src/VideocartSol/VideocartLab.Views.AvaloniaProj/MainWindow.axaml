@@ -12,6 +12,7 @@
 			<cntr:GPUContentView Canvas.Left="100" Canvas.Top="100"/>
 			<cntr:ScreenInterfaceView Canvas.Left="500" Canvas.Top="100"/>
 			<cntr:VRAMContentView Canvas.Left="100" Canvas.Top="1000"/>
+			<cntr:ConnectionInterfaceView Canvas.Left="500" Canvas.Top="1000"/>
 		</Canvas>
 	</ScrollViewer>
 </Window>

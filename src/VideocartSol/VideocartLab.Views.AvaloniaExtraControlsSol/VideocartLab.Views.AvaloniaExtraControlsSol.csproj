@@ -29,6 +29,9 @@
     <Compile Update="ScreenInterfaceView.axaml.cs">
       <DependentUpon>ScreenInterfaceView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="ConnectionInterfaceView.axaml.cs">
+      <DependentUpon>ConnectionInterfaceView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="VRAMContentView.axaml.cs">
       <DependentUpon>VRAMContentView.axaml</DependentUpon>
     </Compile>
