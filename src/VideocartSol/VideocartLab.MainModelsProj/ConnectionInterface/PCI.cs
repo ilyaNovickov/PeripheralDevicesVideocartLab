@@ -52,7 +52,7 @@ namespace VideocartLab.MainModelsProj.ConnectionInterface
         /// <summary>
         /// Частота [МГц]
         /// </summary>
-        public double Frequency
+        public override double Frequency
         {
             get => frequency;
             set

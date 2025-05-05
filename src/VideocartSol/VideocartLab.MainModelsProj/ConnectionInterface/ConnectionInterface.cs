@@ -18,5 +18,7 @@ namespace VideocartLab.MainModelsProj.ConnectionInterface
         {
             get;
         }
+
+        public abstract double Frequency { get; set; }
     }
 }
