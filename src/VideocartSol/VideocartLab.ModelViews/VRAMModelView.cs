@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using VideocartLab.MainModelsProj.GPUMemory;
 using VideocartLab.MainModelsProj;
+using System.Collections.ObjectModel;
 
 namespace VideocartLab.ModelViews
 {
     public class VRAMModelView : ModelViewBase
     {
-        private GDDRType type = new GDDRType(GDDRTypes.GDDR);
+        //private GDDRType type = new GDDRType(GDDRTypes.GDDR);
         private int capacity = 1024;
         private int memoryBusCapacitiy = 8;
         private double realFrequency = 1000;
@@ -18,15 +19,15 @@ namespace VideocartLab.ModelViews
         /// <summary>
         /// Тип памяти GDDR
         /// </summary>
-        public GDDRType Type
-        {
-            get => type;
-            set
-            {
-                ValuesValidator.ValidUnnullObject(value);
-                type = value;
-            }
-        }
+        //public GDDRType Type
+        //{
+        //    get => type;
+        //    set
+        //    {
+        //        ValuesValidator.ValidUnnullObject(value);
+        //        type = value;
+        //    }
+        //}
 
         /// <summary>
         /// Объём памяти [МБ]
@@ -89,14 +90,67 @@ namespace VideocartLab.ModelViews
         /// </summary>
         public double? EffectiveFrequency
         {
-            get => realFrequency * type.EffectiveRatio;
+            get => realFrequency * (SelectedGDDR?.Type.EffectiveRatio);
             set
             {
-                realFrequency = type.RealRatio * (value ?? 0d);
+                realFrequency = (SelectedGDDR?.Type.RealRatio * (value ?? 0d))!.Value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(RealFrequency));
                 OnPropertyChanged(nameof(MemoryBandwidth));
             }
+        }
+
+        ObservableCollection<GDDRTypeInfo> gddrInfos = new();
+        private GDDRTypeInfo? selectedType = null;
+
+        public VRAMModelView()
+        {
+            InitList();
+        }
+
+        private void InitList()
+        {
+            #region addGDDRTypes
+            gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR, "GDDR"));
+            gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR2, "GDDR2"));
+            gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR3, "GDDR3"));
+            gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR4, "GDDR4"));
+            gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR5, "GDDR5"));
+            gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR5X, "GDDR5X"));
+            gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR6, "GDDR6"));
+            gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR6X, "GDDR6X"));
+            #endregion
+
+            SelectedGDDR = gddrInfos[0];
+        }
+
+        public ObservableCollection<GDDRTypeInfo> GDDRTypes
+        {
+            get => gddrInfos;
+        }
+
+        public GDDRTypeInfo? SelectedGDDR
+        {
+            get => selectedType;
+            set
+            {
+                selectedType = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(EffectiveFrequency));
+                OnPropertyChanged(nameof(MemoryBandwidth));
+            }
+        }
+    }
+
+    public class GDDRTypeInfo
+    {
+        internal GDDRType Type { get; private set; }
+        public string Name { get; private set; }
+
+        internal GDDRTypeInfo(GDDRType type, string? name) 
+        {
+            Type = type;
+            Name = name ?? "";
         }
     }
 }

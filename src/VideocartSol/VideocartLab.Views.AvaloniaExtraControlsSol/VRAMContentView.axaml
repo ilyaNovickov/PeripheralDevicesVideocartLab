@@ -49,7 +49,9 @@
 			<ComboBox Classes="rightItem"
 					  Grid.Column="1"
 					  Grid.Row="0"
-					  />
+					  ItemsSource="{Binding GDDRTypes}"
+					  SelectedItem="{Binding SelectedGDDR}"
+					  DisplayMemberBinding="{Binding Name}"/>
 			<TextBlock Classes="name"
 					   Grid.Column="0"
 					   Grid.Row="1"
