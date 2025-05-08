@@ -23,7 +23,8 @@
 				<ColumnDefinition Width="5"/>
 				<ColumnDefinition Width="*" MinWidth="5"/>
 			</Grid.ColumnDefinitions>
-			<cntr:NodeListView NodeListModelView="{Binding NodeListModelView}"/>
+			<cntr:NodeListView x:Name="nodeListView"
+							   DataContext="{Binding NodeList}"/>
 			<GridSplitter Grid.Column="1" Background="Gray" ResizeDirection="Columns"/>
 			<Grid Grid.Column="2">
 				<Grid.RowDefinitions>
@@ -34,7 +35,8 @@
 				<pnz:ZoomBorder Grid.Row="0"
 								ClipToBounds="True"
 								Background="DarkGray">
-					<cntr:ProjectView ProjectViewModel="{Binding ProjectModelView}" 
+					<cntr:ProjectView x:Name="projectView"
+									  DataContext="{Binding Project}"
 									  Width="1000"
 									  Height="1000"/>
 					<!--

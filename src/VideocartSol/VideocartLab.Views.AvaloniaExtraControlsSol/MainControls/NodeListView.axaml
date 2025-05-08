@@ -6,8 +6,34 @@
 			 xmlns:vm="clr-namespace:VideocartLab.ModelViews;assembly=VideocartLab.ModelViews"
              x:Class="VideocartLab.Views.AvaloniaExtraControlsSol.NodeListView"
 			 x:DataType="vm:NodeListModelView">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.ThemeDictionaries>
+				<ResourceDictionary x:Key="Light">
+					<SolidColorBrush x:Key="borderBrush" Color="Black"/>
+				</ResourceDictionary>
+				<ResourceDictionary x:Key="Dark">
+					<SolidColorBrush x:Key="borderBrush" Color="White"/>
+				</ResourceDictionary>
+			</ResourceDictionary.ThemeDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
 	<Design.DataContext>
 		<vm:NodeListModelView/>
 	</Design.DataContext>
-	
+	<ListBox ItemsSource="{Binding Strs}"
+			 SelectionMode="Toggle" 
+			 ScrollViewer.AllowAutoHide="False">
+		<ListBox.ItemTemplate>
+			<DataTemplate>
+				<Border Margin="2,2,2,2"
+						BorderThickness="2"
+						BorderBrush="{DynamicResource borderBrush}">
+					<TextBlock Text="foo"
+							   VerticalAlignment="Center"
+							   HorizontalAlignment="Center"/>
+				</Border>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+	</ListBox>
 </UserControl>

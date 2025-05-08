@@ -7,21 +7,20 @@ namespace VideocartLab.Views.AvaloniaExtraControlsSol;
 
 public partial class NodeListView : UserControl
 {
-    public static readonly StyledProperty<NodeListModelView?> NodeListModelViewProperty =
-        StyledProperty<NodeListModelView?>.Register<ProjectView, NodeListModelView?>(nameof(NodeListModelView));
+    public static readonly StyledProperty<NodeListModelView?> NodeListVMProperty =
+        StyledProperty<NodeListModelView?>.Register<ProjectView, NodeListModelView?>(nameof(NodeListVM));
 
     public NodeListView()
     {
         InitializeComponent();
     }
 
-    public NodeListModelView? NodeListModelView
+    public NodeListModelView? NodeListVM
     {
-        get => GetValue(NodeListModelViewProperty);
+        get => GetValue(NodeListVMProperty);
         set
         {
-            SetValue(NodeListModelViewProperty, value);
-            DataContext = value;
+            SetValue(NodeListVMProperty, value);
         }
     }
 }

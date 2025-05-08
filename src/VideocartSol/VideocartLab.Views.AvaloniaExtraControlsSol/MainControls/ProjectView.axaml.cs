@@ -7,21 +7,20 @@ namespace VideocartLab.Views.AvaloniaExtraControlsSol;
 
 public partial class ProjectView : UserControl
 {
-    public static readonly StyledProperty<ProjectModelView?> ProjectViewModelProperty =
-        StyledProperty<ProjectModelView?>.Register<ProjectView, ProjectModelView?>(nameof(ProjectViewModel));
+    public static readonly StyledProperty<ProjectModelView?> ProjectVMProperty =
+        StyledProperty<ProjectModelView?>.Register<ProjectView, ProjectModelView?>(nameof(ProjectVM));
 
     public ProjectView()
     {
         InitializeComponent();
     }
 
-    public ProjectModelView? ProjectViewModel
+    public ProjectModelView? ProjectVM
     {
-        get => GetValue(ProjectViewModelProperty);
+        get => GetValue(ProjectVMProperty);
         set
         {
-            SetValue(ProjectViewModelProperty, value);
-            DataContext = value;
+            SetValue(ProjectVMProperty, value);
         }
     }
 

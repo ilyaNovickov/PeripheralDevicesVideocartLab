@@ -20,7 +20,10 @@ namespace VideocartLab.Views.AvaloniaProj
 
             DataContext = mainVM;
 
-            this.RequestedThemeVariant = ThemeVariant.Light;
+            projectView.ProjectVM = mainVM.Project;
+            nodeListView.NodeListVM = mainVM.NodeList;
+
+            this.RequestedThemeVariant = ThemeVariant.Dark;
         }
     }
 }

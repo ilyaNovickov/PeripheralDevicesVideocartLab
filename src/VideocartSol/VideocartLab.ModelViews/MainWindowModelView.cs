@@ -17,7 +17,7 @@ namespace VideocartLab.ModelViews
             nodeListVM = new NodeListModelView();
         }
 
-        public ProjectModelView? ProjectModelView
+        public ProjectModelView? Project
         {
             get => projectVM;
             set
@@ -27,7 +27,7 @@ namespace VideocartLab.ModelViews
             }
         }
 
-        public NodeListModelView? NodeListModelView
+        public NodeListModelView? NodeList
         {
             get => nodeListVM;
             set
