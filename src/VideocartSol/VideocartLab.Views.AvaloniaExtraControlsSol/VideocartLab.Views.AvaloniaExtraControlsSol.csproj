@@ -24,19 +24,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="GPUContentView.axaml.cs">
+    <Compile Update="NodeContent\GPUContentView.axaml.cs">
       <DependentUpon>GPUContentView.axaml</DependentUpon>
     </Compile>
     <Compile Update="MainControls\ProjectView.axaml.cs">
       <DependentUpon>ProjectView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="ScreenInterfaceView.axaml.cs">
+    <Compile Update="NodeContent\ScreenInterfaceView.axaml.cs">
       <DependentUpon>ScreenInterfaceView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="ConnectionInterfaceView.axaml.cs">
+    <Compile Update="NodeContent\ConnectionInterfaceView.axaml.cs">
       <DependentUpon>ConnectionInterfaceView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="VRAMContentView.axaml.cs">
+    <Compile Update="NodeContent\VRAMContentView.axaml.cs">
       <DependentUpon>VRAMContentView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
