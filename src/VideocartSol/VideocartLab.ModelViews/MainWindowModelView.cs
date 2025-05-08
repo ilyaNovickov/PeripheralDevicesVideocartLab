@@ -9,10 +9,12 @@ namespace VideocartLab.ModelViews
     public class MainWindowModelView : ModelViewBase
     {
         private ProjectModelView? projectVM;
+        private NodeListModelView? nodeListVM;
 
         public MainWindowModelView()
         {
             projectVM = new ProjectModelView();
+            nodeListVM = new NodeListModelView();
         }
 
         public ProjectModelView? ProjectModelView
@@ -21,6 +23,16 @@ namespace VideocartLab.ModelViews
             set
             {
                 projectVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public NodeListModelView? NodeListModelView
+        {
+            get => nodeListVM;
+            set
+            {
+                nodeListVM = value;
                 OnPropertyChanged();
             }
         }

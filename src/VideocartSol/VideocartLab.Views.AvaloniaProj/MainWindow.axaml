@@ -23,6 +23,7 @@
 				<ColumnDefinition Width="5"/>
 				<ColumnDefinition Width="*" MinWidth="5"/>
 			</Grid.ColumnDefinitions>
+			<cntr:NodeListView NodeListModelView="{Binding NodeListModelView}"/>
 			<GridSplitter Grid.Column="1" Background="Gray" ResizeDirection="Columns"/>
 			<Grid Grid.Column="2">
 				<Grid.RowDefinitions>
