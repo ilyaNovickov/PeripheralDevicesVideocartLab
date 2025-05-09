@@ -3,15 +3,40 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:vm="clr-namespace:VideocartLab.ModelViews;assembly=VideocartLab.ModelViews"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" 
              x:Class="VideocartLab.Views.AvaloniaExtraControlsSol.NodeView"
-			 x:DataType="vm:NodeModelView">
+			 x:DataType="vm:NodeModelView"
+			 xmlns:cntr="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol">
 	<Design.DataContext>
 		<vm:NodeModelView/>
 	</Design.DataContext>
 	<ThemeVariantScope RequestedThemeVariant="Light">
-		<Border BorderThickness="2" BorderBrush="Black">
-			<TextBlock Text="{Binding Name}"/>
+		<Border BorderThickness="2" BorderBrush="Black" CornerRadius="4">
+			<StackPanel>
+				<TextBlock Text="{Binding Name}"
+						   FontSize="26"
+						   VerticalAlignment="Center"
+						   HorizontalAlignment="Left"
+						   Margin="5,5,5,5"
+						   TextAlignment="Center"/>
+				<Border Margin="5,5,5,5"
+						BorderBrush="DarkGray"
+						BorderThickness="1"
+						CornerRadius="3">
+					<ScrollViewer VerticalScrollBarVisibility="Auto"
+								  HorizontalScrollBarVisibility="Auto">
+						<ContentControl Content="{Binding InnerContent}"
+										HorizontalAlignment="Center"
+										VerticalAlignment="Center">
+							<ContentControl.DataTemplates>
+								<DataTemplate DataType="vm:GPUContentModelView">
+									<cntr:GPUContentView/>
+								</DataTemplate>
+							</ContentControl.DataTemplates>
+						</ContentControl>
+					</ScrollViewer>
+				</Border>
+			</StackPanel>
 		</Border>
 	</ThemeVariantScope>
 </UserControl>

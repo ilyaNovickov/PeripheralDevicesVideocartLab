@@ -15,7 +15,8 @@
 		<Canvas x:Name="mainCanvas"
 				Background="White">
 			<cntr:NodeView X="100" Y="100" 
-						   Width="100" Height="100"/>
+						   Width="310"
+						   Height="330"/>
 		</Canvas>
 	</Border>
 </UserControl>

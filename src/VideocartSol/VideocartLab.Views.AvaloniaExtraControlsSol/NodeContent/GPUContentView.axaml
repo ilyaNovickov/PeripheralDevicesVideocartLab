@@ -55,7 +55,8 @@
 						   Value="{Binding Cores}"
 						   ParsingNumberStyle="Integer"
 						   Increment="1"
-						   Minimum="0"/>
+						   Minimum="0"
+						   Maximum="100000"/>
 			<TextBlock Grid.Column="0"
 					   Grid.Row="2"
 					   Classes="name"
@@ -66,7 +67,8 @@
 						   Value="{Binding TextureMappingUnits}"
 						   ParsingNumberStyle="Integer"
 						   Increment="1"
-						   Minimum="0"/>
+						   Minimum="0"
+						   Maximum="10000"/>
 			<TextBlock Grid.Column="0"
 					   Grid.Row="3"
 					   Classes="name"
@@ -77,7 +79,8 @@
 						   Value="{Binding RenderOutputPipelines}"
 						   ParsingNumberStyle="Integer"
 						   Increment="1"
-						   Minimum="0"/>
+						   Minimum="0"
+						   Maximum="10000"/>
 			<TextBlock Grid.Column="0"
 					   Grid.Row="4"
 					   Classes="name"
@@ -87,7 +90,8 @@
 						   Classes="rightItem"
 						   Value="{Binding Frequency}"
 						   Increment="1"
-						   Minimum="0"/>
+						   Minimum="0"
+						   Maximum="10000"/>
 			<TextBlock Grid.Column="0"
 					   Grid.Row="5"
 					   Classes="name"

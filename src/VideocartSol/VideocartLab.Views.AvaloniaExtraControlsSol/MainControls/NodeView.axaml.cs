@@ -19,7 +19,7 @@ public partial class NodeView : UserControl
 
         DataContext = new NodeModelView()
         {
-            Name = "FOOO1"
+            Name = "FOOO1", InnerContent = new GPUContentModelView()
         };
     }
 
