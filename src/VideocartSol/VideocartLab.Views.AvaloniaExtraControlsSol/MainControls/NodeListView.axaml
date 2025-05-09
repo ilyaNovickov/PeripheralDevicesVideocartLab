@@ -21,7 +21,8 @@
 	<Design.DataContext>
 		<vm:NodeListModelView/>
 	</Design.DataContext>
-	<ListBox ItemsSource="{Binding Strs}"
+	<ListBox ItemsSource="{Binding AvaibleNodes}"
+			 SelectedItem="{Binding SelectedItem}"
 			 SelectionMode="Toggle" 
 			 ScrollViewer.AllowAutoHide="False">
 		<ListBox.ItemTemplate>
@@ -29,7 +30,7 @@
 				<Border Margin="2,2,2,2"
 						BorderThickness="2"
 						BorderBrush="{DynamicResource borderBrush}">
-					<TextBlock Text="foo"
+					<TextBlock Text="{Binding Name}"
 							   VerticalAlignment="Center"
 							   HorizontalAlignment="Center"/>
 				</Border>
