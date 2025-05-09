@@ -27,6 +27,9 @@
     <Compile Update="MainControls\NodeListView.axaml.cs">
       <DependentUpon>NodeListView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="MainControls\NodeView.axaml.cs">
+      <DependentUpon>NodeView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="NodeContent\GPUContentView.axaml.cs">
       <DependentUpon>GPUContentView.axaml</DependentUpon>
     </Compile>

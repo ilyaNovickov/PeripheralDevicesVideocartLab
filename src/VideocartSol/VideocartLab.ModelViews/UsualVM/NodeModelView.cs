@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VideocartLab.ModelViews.UsualVM
+namespace VideocartLab.ModelViews
 {
     public class NodeModelView : ModelViewBase
     {

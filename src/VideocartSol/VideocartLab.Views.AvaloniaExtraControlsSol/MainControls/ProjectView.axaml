@@ -5,13 +5,17 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="clr-namespace:VideocartLab.ModelViews;assembly=VideocartLab.ModelViews"
              x:Class="VideocartLab.Views.AvaloniaExtraControlsSol.ProjectView"
-			 x:DataType="vm:ProjectModelView">
+			 x:DataType="vm:ProjectModelView"
+			 xmlns:cntr="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol">
 	<Design.DataContext>
 		<vm:ProjectModelView/>
 	</Design.DataContext>
 	<Border BorderThickness="4"
 			BorderBrush="Black">
 		<Canvas x:Name="mainCanvas"
-				Background="White"/>
+				Background="White">
+			<cntr:NodeView X="100" Y="100" 
+						   Width="100" Height="100"/>
+		</Canvas>
 	</Border>
 </UserControl>

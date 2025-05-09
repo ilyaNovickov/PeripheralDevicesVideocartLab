@@ -11,20 +11,22 @@ namespace VideocartLab.ModelViews
     {
         private ObservableCollection<NodeListItemModelView> items = new();
         private NodeListItemModelView? selectedItem = null;
+        private NodeFactoryService factoryService;
 
-        public NodeListModelView() 
+        public NodeListModelView(NodeFactoryService factoryService) 
         {
-            items = new ObservableCollection<NodeListItemModelView>()
+            this.factoryService = factoryService;
+
+            items = new ObservableCollection<NodeListItemModelView>();
+
+            foreach (KeyValuePair<Type, NodeInfo> pair in this.factoryService.NodeInfosDict)
             {
-                new NodeListItemModelView()
+                items.Add(new NodeListItemModelView()
                 {
-                    Name = "foo1"
-                },
-                new NodeListItemModelView()
-                {
-                    Name = "foo2"
-                }
-            };
+                    Name = pair.Value.Name ?? "undef name",
+                    NodeType = pair.Key
+                });
+            }
         }
 
         public ObservableCollection<NodeListItemModelView> AvaibleNodes { get => items; }
@@ -58,6 +60,9 @@ namespace VideocartLab.ModelViews
             }
         }
 
+        /// <summary>
+        /// Тип внутренного ViewModel
+        /// </summary>
         internal Type? NodeType
         {
             get => node;

@@ -10,11 +10,14 @@ namespace VideocartLab.ModelViews
     {
         private ProjectModelView? projectVM;
         private NodeListModelView? nodeListVM;
+        private NodeFactoryService factoryService;
 
         public MainWindowModelView()
         {
+            factoryService = new NodeFactoryService();
+
             projectVM = new ProjectModelView();
-            nodeListVM = new NodeListModelView();
+            nodeListVM = new NodeListModelView(factoryService);
         }
 
         public ProjectModelView? Project
