@@ -16,8 +16,18 @@ namespace VideocartLab.ModelViews
         {
             factoryService = new NodeFactoryService();
 
-            projectVM = new ProjectModelView();
+            projectVM = new ProjectModelView(factoryService);
             nodeListVM = new NodeListModelView(factoryService);
+
+            nodeListVM.SelectedItemChanged += NodeListVM_SelectedItemChanged;
+        }
+
+        private void NodeListVM_SelectedItemChanged(object? sender, SelectedNodeItemChangedArgs e)
+        {
+            if (e.NewItem == null)
+                projectVM!.CandidateToAdd = null;
+            else
+                projectVM!.CandidateToAdd = e.NewItem.NodeType;
         }
 
         public ProjectModelView? Project

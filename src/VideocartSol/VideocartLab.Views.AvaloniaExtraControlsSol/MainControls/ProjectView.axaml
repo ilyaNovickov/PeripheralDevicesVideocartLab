@@ -13,10 +13,11 @@
 	<Border BorderThickness="4"
 			BorderBrush="Black">
 		<Canvas x:Name="mainCanvas"
-				Background="White">
-			<cntr:NodeView X="100" Y="100" 
-						   Width="310"
-						   Height="330"/>
+				Background="White"
+				PointerPressed="Canvas_PointerPressed">
+			<!--<cntr:NodeView X="100" Y="100" 
+						   Width="400"
+						   Height="300"/>-->
 		</Canvas>
 	</Border>
 </UserControl>

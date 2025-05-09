@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 using VideocartLab.ModelViews;
 
@@ -19,7 +20,7 @@ public partial class NodeView : UserControl
 
         DataContext = new NodeModelView()
         {
-            Name = "FOOO1", InnerContent = new GPUContentModelView()
+            InnerContent = new VRAMModelView()
         };
     }
 
@@ -29,7 +30,47 @@ public partial class NodeView : UserControl
         set
         {
             SetValue(NodeVMProperty, value);
+            BindProperties();
         }
+    }
+
+    private void BindProperties()
+    {
+        if (NodeVM == null)
+            return;
+        
+        Binding xbing = new Binding();
+        xbing.Source = NodeVM;
+        xbing.Path = nameof(NodeVM.X);
+        this.Bind(XProperty, xbing);
+
+        Binding ybing = new Binding();
+        ybing.Source = NodeVM;
+        ybing.Path = nameof(NodeVM.Y);
+        this.Bind(YProperty, ybing);
+
+        Binding widthBing = new Binding();
+        widthBing.Source = NodeVM;
+        widthBing.Path = nameof(NodeVM.Width);
+        this.Bind(WidthProperty, widthBing);
+
+        Binding heightBing = new Binding();
+        heightBing.Source = NodeVM;
+        heightBing.Path = nameof(NodeVM.Height);
+        this.Bind(HeightProperty, heightBing);
+
+        Binding contentBing = new Binding();
+        contentBing.Source = NodeVM;
+        contentBing.Path = nameof(NodeVM.InnerContent);
+        //this.Bind(XProperty, contentBing);
+        contentControl.Bind(ContentControl.ContentProperty, contentBing);
+
+        Binding textBing = new Binding();
+        textBing.Source = NodeVM;
+        textBing.Path = nameof(NodeVM.Name);
+        //this.Bind(XProperty, contentBing);
+        textBlock.Bind(TextBlock.TextProperty, textBing);
+
     }
 
     public double X

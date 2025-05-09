@@ -24,5 +24,18 @@ public partial class ProjectView : UserControl
         }
     }
 
+    private void Canvas_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+    {
+        if (e.Handled) return;
 
+        var node = ProjectVM.AddNode();
+
+        if (node == null) return;
+
+        NodeView view = new NodeView();
+        view.DataContext = node;
+        view.NodeVM = node;
+
+        mainCanvas.Children.Add(view);
+    }
 }

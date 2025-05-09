@@ -21,16 +21,16 @@ namespace VideocartLab.ModelViews
 
             nodeInnerContentDict.Add(typeof(VRAMModelView), new NodeInfo()
             {
-                Width = 500,
-                Height = 500,
+                Width = 420,
+                Height = 300,
                 Name = "VRAM",
                 GetVMFunc = () => new VRAMModelView()
             });
 
             nodeInnerContentDict.Add(typeof(GPUContentModelView), new NodeInfo()
             {
-                Width = 500,
-                Height = 500,
+                Width = 310,
+                Height = 330,
                 Name = "GPU",
                 GetVMFunc = () => new GPUContentModelView()
             });

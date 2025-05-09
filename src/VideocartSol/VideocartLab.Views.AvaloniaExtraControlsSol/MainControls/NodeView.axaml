@@ -11,9 +11,11 @@
 		<vm:NodeModelView/>
 	</Design.DataContext>
 	<ThemeVariantScope RequestedThemeVariant="Light">
-		<Border BorderThickness="2" BorderBrush="Black" CornerRadius="4">
+		<Border BorderThickness="2" BorderBrush="Black" CornerRadius="4"
+				Background="White">
 			<StackPanel>
-				<TextBlock Text="{Binding Name}"
+				<TextBlock x:Name="textBlock"
+						   Text="{Binding Name}"
 						   FontSize="26"
 						   VerticalAlignment="Center"
 						   HorizontalAlignment="Left"
@@ -25,12 +27,16 @@
 						CornerRadius="3">
 					<ScrollViewer VerticalScrollBarVisibility="Auto"
 								  HorizontalScrollBarVisibility="Auto">
-						<ContentControl Content="{Binding InnerContent}"
+						<ContentControl x:Name="contentControl"
+										Content="{Binding InnerContent}"
 										HorizontalAlignment="Center"
 										VerticalAlignment="Center">
 							<ContentControl.DataTemplates>
 								<DataTemplate DataType="vm:GPUContentModelView">
 									<cntr:GPUContentView/>
+								</DataTemplate>
+								<DataTemplate DataType="vm:VRAMModelView">
+									<cntr:VRAMContentView/>
 								</DataTemplate>
 							</ContentControl.DataTemplates>
 						</ContentControl>
