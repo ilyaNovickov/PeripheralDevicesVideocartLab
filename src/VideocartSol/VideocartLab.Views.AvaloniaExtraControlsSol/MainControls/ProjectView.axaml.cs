@@ -20,22 +20,58 @@ public partial class ProjectView : UserControl
         get => GetValue(ProjectVMProperty);
         set
         {
+            if (ProjectVM != null)
+            {
+                ProjectVM.NodeAdded -= Project_NodeAdded;
+            }
+
             SetValue(ProjectVMProperty, value);
+
+            if (value == null)
+                return;
+
+            value.NodeAdded += Project_NodeAdded;
         }
+    }
+
+    private void Project_NodeAdded(object? sender, NodeAddedArgs e)
+    {
+        var node = e.AddedNode;
+
+        NodeView nodeView = new NodeView()
+        {
+            DataContext = node,
+            NodeVM = node
+        };
+
+        mainCanvas.Children.Add(nodeView);
     }
 
     private void Canvas_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
     {
         if (e.Handled) return;
 
-        var node = ProjectVM.AddNode();
+        var properties = e.GetCurrentPoint(mainCanvas).Properties;
 
-        if (node == null) return;
+        if (!properties.IsLeftButtonPressed)
+            return;
 
-        NodeView view = new NodeView();
-        view.DataContext = node;
-        view.NodeVM = node;
+        var p = e.GetPosition(mainCanvas);
 
-        mainCanvas.Children.Add(view);
+        ProjectVM.OnPointerPressed(p.X, p.Y);
+    }
+
+    private void Canvas_PointerMoved(object? sender, Avalonia.Input.PointerEventArgs e)
+    {
+        if (e.Handled) return;
+
+
+    }
+
+    private void Canvas_PointerReleased(object? sender, Avalonia.Input.PointerReleasedEventArgs e)
+    {
+        if (e.Handled) return;
+
+
     }
 }

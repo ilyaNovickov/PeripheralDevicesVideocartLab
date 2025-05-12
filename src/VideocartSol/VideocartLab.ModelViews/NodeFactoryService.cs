@@ -49,8 +49,8 @@ namespace VideocartLab.ModelViews
                 Width = info.Width,
                 Height = info.Height,
                 Name = info.Name,
-                X = x,
-                Y = y
+                X = x - info.Width / 2d,
+                Y = y - info.Height / 2d
             };
 
             return node;

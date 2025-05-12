@@ -37,8 +37,8 @@
 								Background="DarkGray">
 					<cntr:ProjectView x:Name="projectView"
 									  DataContext="{Binding Project}"
-									  Width="1000"
-									  Height="1000"/>
+									  Width="5000"
+									  Height="5000"/>
 					<!--
 					<Canvas Width="5000" Height="5000" Background="White">
 						<cntr:GPUContentView Canvas.Left="100" Canvas.Top="100"/>
