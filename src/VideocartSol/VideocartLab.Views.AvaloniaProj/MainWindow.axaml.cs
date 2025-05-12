@@ -23,7 +23,19 @@ namespace VideocartLab.Views.AvaloniaProj
             projectView.ProjectVM = mainVM.Project;
             nodeListView.NodeListVM = mainVM.NodeList;
 
-            this.RequestedThemeVariant = ThemeVariant.Dark;
+        }
+
+        private void ComboBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
+        {
+            switch ((string)((ComboBoxItem)e.AddedItems[0]!).Content!)
+            {
+                case "Light":
+                    this.RequestedThemeVariant = ThemeVariant.Light;
+                    break;
+                case "Dark":
+                    this.RequestedThemeVariant = ThemeVariant.Dark;
+                    break;
+            }
         }
     }
 }

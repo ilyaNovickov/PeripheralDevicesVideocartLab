@@ -8,15 +8,42 @@
         x:Class="VideocartLab.Views.AvaloniaProj.MainWindow"
 		xmlns:cntr="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol"
         Title="VideocartLab.Views.AvaloniaProj"
-		x:DataType="vm:MainWindowModelView">
+		x:DataType="vm:MainWindowModelView"
+		MinWidth="300"
+		MinHeight="300">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.ThemeDictionaries>
+				<ResourceDictionary x:Key="Light">
+					<SolidColorBrush x:Key="borderBrush" Color="Black"/>
+				</ResourceDictionary>
+				<ResourceDictionary x:Key="Dark">
+					<SolidColorBrush x:Key="borderBrush" Color="White"/>
+				</ResourceDictionary>
+			</ResourceDictionary.ThemeDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
 	<Design.DataContext>
 		<vm:MainWindowModelView/>
 	</Design.DataContext>
 	<DockPanel LastChildFill="True">
-		<Menu DockPanel.Dock="Top">
-			
+		<Menu DockPanel.Dock="Top" Margin="5,3,5,3">
+			<Label Content="Тема"/>
+			<ComboBox SelectedIndex="0"
+					  SelectionChanged="ComboBox_SelectionChanged">
+				<ComboBoxItem Content="Light"/>
+				<ComboBoxItem Content="Dark"/>
+			</ComboBox>
 		</Menu>
-		
+		<Border DockPanel.Dock="Top"
+				CornerRadius="2"
+				BorderThickness="2"
+				BorderBrush="{DynamicResource borderBrush}"
+				Margin="5,5,5,5">
+			<Menu >
+
+			</Menu>
+		</Border>
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="0.15*" MinWidth="5"/>
