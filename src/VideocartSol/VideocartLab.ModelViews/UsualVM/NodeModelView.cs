@@ -72,5 +72,22 @@ namespace VideocartLab.ModelViews
             }
         }
         #endregion
+
+        public event EventHandler<NodePressedArgs>? NodePressed;
+
+        public void Clicked()
+        {
+            NodePressed?.Invoke(this, new NodePressedArgs(this));
+        }
+    }
+
+    public class NodePressedArgs : EventArgs
+    {
+        public NodeModelView Node { get; private set; }
+
+        public NodePressedArgs(NodeModelView node)
+        {
+            Node = node;
+        }
     }
 }

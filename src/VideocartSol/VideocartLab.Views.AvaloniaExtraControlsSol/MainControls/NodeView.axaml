@@ -6,7 +6,8 @@
              mc:Ignorable="d" 
              x:Class="VideocartLab.Views.AvaloniaExtraControlsSol.NodeView"
 			 x:DataType="vm:NodeModelView"
-			 xmlns:cntr="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol">
+			 xmlns:cntr="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol"
+			 PointerPressed="UserControl_PointerPressed">
 	<Design.DataContext>
 		<vm:NodeModelView/>
 	</Design.DataContext>

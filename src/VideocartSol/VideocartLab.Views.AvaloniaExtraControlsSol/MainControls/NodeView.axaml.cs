@@ -84,4 +84,9 @@ public partial class NodeView : UserControl
         get => GetValue(YProperty);
         set => SetValue(YProperty, value);
     }
+
+    private void UserControl_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+    {
+        NodeVM.Clicked();
+    }
 }

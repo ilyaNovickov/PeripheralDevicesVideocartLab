@@ -65,13 +65,15 @@ public partial class ProjectView : UserControl
     {
         if (e.Handled) return;
 
+        var p = e.GetPosition(mainCanvas);
 
+        ProjectVM.OnPointerMoved(p.X, p.Y);
     }
 
     private void Canvas_PointerReleased(object? sender, Avalonia.Input.PointerReleasedEventArgs e)
     {
         if (e.Handled) return;
 
-
+        ProjectVM.OnPointerReleased();
     }
 }

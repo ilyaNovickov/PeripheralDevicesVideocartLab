@@ -12,7 +12,7 @@ namespace VideocartLab.ModelViews
         {
             ProjectModelView Parent { get; }
             void OnPointerPressed();
-            void OnPointerMoved();
+            void OnPointerMoved(double dx, double dy);
             void OnPointerReleased();
         }
     }

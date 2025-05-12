@@ -3,32 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.XPath;
 
 namespace VideocartLab.ModelViews
 {
     public partial class ProjectModelView
     {
-        private class IdleMode : IModeBase
+        private class MovingNodeMode : IModeBase
         {
-            public IdleMode(ProjectModelView parent) 
+            public MovingNodeMode(ProjectModelView parent)
             {
                 Parent = parent;
             }
+
             public ProjectModelView Parent { get; private set; }
+
+            private bool moving = false;
 
             public void OnPointerPressed()
             {
-
+                moving = true;
             }
+
             public void OnPointerMoved(double dx, double dy)
             {
+                if (Parent.SelectedNode == null || !moving)
+                    return;
 
+                Parent.SelectedNode.X += dx;
+                Parent.SelectedNode.Y += dy;
             }
+
             public void OnPointerReleased()
             {
-
+                moving = false;
             }
         }
-    } 
+    }
 }

@@ -17,12 +17,15 @@ namespace VideocartLab.ModelViews
 
         private Point prevPoint = new Point();
 
+        private NodeModelView? selectedNode = null;
+
         private Type? candidatToAdd = null;
         private NodeFactoryService factoryService;
         private IModeBase mode;
 
         private IModeBase idle;
         private IModeBase addNode;
+        private IModeBase move;
 
 
         private ObservableCollection<NodeModelView> nodes = new();
@@ -39,6 +42,7 @@ namespace VideocartLab.ModelViews
 
             idle = new IdleMode(this);
             addNode = new AddingNodeMode(this);
+            move = new MovingNodeMode(this);
 
             mode = idle;
 
@@ -50,7 +54,7 @@ namespace VideocartLab.ModelViews
             switch (e.Action)
             {
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-                    NodeAdded?.Invoke(this, new NodeAddedArgs((NodeModelView)e.NewItems![0]!));
+                    OnNodeAdded(new NodeAddedArgs((NodeModelView)e.NewItems![0]!));
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
                     break;
@@ -63,6 +67,16 @@ namespace VideocartLab.ModelViews
                 default:
                     break;
             }
+        }
+
+        private void OnNodeAdded(NodeAddedArgs e)
+        {
+            e.AddedNode.NodePressed += (sender, args) => {
+                if (Mode != idle)
+                    return;
+                this.SelectedNode = args.Node;
+            };
+            NodeAdded?.Invoke(this, e);
         }
 
         public event EventHandler<NodeAddedArgs>? NodeAdded;
@@ -85,6 +99,20 @@ namespace VideocartLab.ModelViews
             }
         }
 
+        public NodeModelView? SelectedNode
+        {
+            get => selectedNode;
+            set
+            {
+                selectedNode = value;
+
+                if (value != null)
+                    Mode = move;
+                else
+                    Mode = idle;
+            }
+        }
+
         private IModeBase Mode
         {
             get => mode;
@@ -103,6 +131,22 @@ namespace VideocartLab.ModelViews
             prevPoint.Y = y;
 
             Mode.OnPointerPressed();
+        }
+
+        public void OnPointerMoved(double newX, double newY)
+        {
+            double dx = newX - prevPoint.X;
+            double dy = newY - prevPoint.Y;
+
+            Mode.OnPointerMoved(dx, dy);
+
+            prevPoint.X = newX;
+            prevPoint.Y = newY;
+        }
+
+        public void OnPointerReleased()
+        {
+            Mode.OnPointerReleased();
         }
 
         public NodeModelView? AddNode()

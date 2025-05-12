@@ -24,7 +24,7 @@ namespace VideocartLab.ModelViews
                 Parent.Nodes.Add(node!);
             }
 
-            public void OnPointerMoved()
+            public void OnPointerMoved(double dx, double dy)
             {
 
             }
