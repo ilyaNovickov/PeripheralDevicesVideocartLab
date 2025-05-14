@@ -27,6 +27,7 @@
 		<vm:MainWindowModelView/>
 	</Design.DataContext>
 	<DockPanel LastChildFill="True">
+		<!--UpperMenu-->
 		<Menu DockPanel.Dock="Top" Margin="5,3,5,3">
 			<Label Content="Тема"/>
 			<ComboBox SelectedIndex="0"
@@ -40,6 +41,7 @@
 				BorderThickness="2"
 				BorderBrush="{DynamicResource borderBrush}"
 				Margin="5,5,5,5">
+			<!--InnerMenu-->
 			<Menu >
 
 			</Menu>
@@ -50,9 +52,14 @@
 				<ColumnDefinition Width="5"/>
 				<ColumnDefinition Width="*" MinWidth="5"/>
 			</Grid.ColumnDefinitions>
-			<cntr:NodeListView x:Name="nodeListView" 
-							   Margin="3,3,3,3"
-							   DataContext="{Binding NodeList}"/>
+			<!--NodeList-->
+			<Border BorderThickness="1"
+					BorderBrush="{DynamicResource borderBrush}"
+					Margin="3,3,3,3">
+				<cntr:NodeListView x:Name="nodeListView"
+								   DataContext="{Binding NodeList}"/>
+			</Border>
+			
 			<GridSplitter Grid.Column="1" Background="Gray" ResizeDirection="Columns"/>
 			<Grid Grid.Column="2">
 				<Grid.RowDefinitions>
@@ -60,29 +67,35 @@
 					<RowDefinition Height="5"/>
 					<RowDefinition MinHeight="5"/>
 				</Grid.RowDefinitions>
-				<pnz:ZoomBorder Grid.Row="0" 
-								Margin="3,3,3,3"
-								ClipToBounds="True"
-								Background="DarkGray">
-					<cntr:ProjectView x:Name="projectView"
-									  DataContext="{Binding Project}"
-									  Width="5000"
-									  Height="5000"/>
-					<!--
-					<Canvas Width="5000" Height="5000" Background="White">
-						<cntr:GPUContentView Canvas.Left="100" Canvas.Top="100"/>
-						<cntr:ScreenInterfaceView Canvas.Left="500" Canvas.Top="100"/>
-						<cntr:VRAMContentView Canvas.Left="100" Canvas.Top="1000"/>
-						<cntr:ConnectionInterfaceView Canvas.Left="500" Canvas.Top="1000"/>
-					</Canvas>
-					-->
-				</pnz:ZoomBorder>
+				<!--Canvas-->
+				<Border BorderThickness="1"
+						BorderBrush="{DynamicResource borderBrush}"
+						Margin="3,3,3,3">
+					<pnz:ZoomBorder Grid.Row="0"
+									ClipToBounds="True"
+									Background="DarkGray">
+						<cntr:ProjectView x:Name="projectView"
+										  DataContext="{Binding Project}"
+										  Width="5000"
+										  Height="5000"/>
+					</pnz:ZoomBorder>
+				</Border>
 				<GridSplitter Grid.Row="1" Background="Gray" ResizeDirection="Rows"/>
-				<Panel Grid.Row="2" 
-					   ClipToBounds="True"
-					   Margin="3,3,3,3">
-					<TextBox/>
-				</Panel>
+				<!--TextBlock-->
+				<DockPanel Grid.Row="2" 
+					       ClipToBounds="True"
+					       Margin="3,3,3,3"
+						   LastChildFill="True">
+					<Menu DockPanel.Dock="Top" 
+						  BorderBrush="{DynamicResource borderBrush}"
+						  BorderThickness="1"
+						  CornerRadius="2"
+						  Margin="2,2,2,2">
+						
+					</Menu>
+					<TextBox AcceptsReturn="True"/>
+				</DockPanel>
+				
 			</Grid>
 		</Grid>
 	</DockPanel>
