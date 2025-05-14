@@ -50,7 +50,8 @@
 				<ColumnDefinition Width="5"/>
 				<ColumnDefinition Width="*" MinWidth="5"/>
 			</Grid.ColumnDefinitions>
-			<cntr:NodeListView x:Name="nodeListView"
+			<cntr:NodeListView x:Name="nodeListView" 
+							   Margin="3,3,3,3"
 							   DataContext="{Binding NodeList}"/>
 			<GridSplitter Grid.Column="1" Background="Gray" ResizeDirection="Columns"/>
 			<Grid Grid.Column="2">
@@ -59,7 +60,8 @@
 					<RowDefinition Height="5"/>
 					<RowDefinition MinHeight="5"/>
 				</Grid.RowDefinitions>
-				<pnz:ZoomBorder Grid.Row="0"
+				<pnz:ZoomBorder Grid.Row="0" 
+								Margin="3,3,3,3"
 								ClipToBounds="True"
 								Background="DarkGray">
 					<cntr:ProjectView x:Name="projectView"
@@ -76,7 +78,9 @@
 					-->
 				</pnz:ZoomBorder>
 				<GridSplitter Grid.Row="1" Background="Gray" ResizeDirection="Rows"/>
-				<Panel Grid.Row="2" ClipToBounds="True">
+				<Panel Grid.Row="2" 
+					   ClipToBounds="True"
+					   Margin="3,3,3,3">
 					<TextBox/>
 				</Panel>
 			</Grid>
