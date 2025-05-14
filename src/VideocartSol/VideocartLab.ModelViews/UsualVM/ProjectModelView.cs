@@ -23,9 +23,9 @@ namespace VideocartLab.ModelViews
         private NodeFactoryService factoryService;
         private IModeBase mode;
 
-        private IModeBase idle;
-        private IModeBase addNode;
-        private IModeBase move;
+        private IdleMode idle;
+        private AddingNodeMode addNode;
+        private MovingNodeMode move;
 
 
         private ObservableCollection<NodeModelView> nodes = new();
@@ -71,12 +71,31 @@ namespace VideocartLab.ModelViews
 
         private void OnNodeAdded(NodeAddedArgs e)
         {
-            e.AddedNode.NodePressed += (sender, args) => {
-                if (Mode != idle)
-                    return;
-                this.SelectedNode = args.Node;
-            };
+            e.AddedNode.NodePressed += OnNodePressed;
+
             NodeAdded?.Invoke(this, e);
+        }
+
+        private void OnNodePressed(object? sender, NodePressedArgs args)
+        {
+            if (Mode == move && args.Node == this.SelectedNode)
+            {
+                move.StartMove();
+                return;
+            }
+
+            if (Mode != idle && args.Node == this.SelectedNode)
+                return;
+
+            this.SelectedNode = args.Node;
+
+            if (args.Node != null)
+            {
+                Mode = move;
+                move.StartMove();
+            }
+            else
+                Mode = idle;
         }
 
         public event EventHandler<NodeAddedArgs>? NodeAdded;
@@ -105,11 +124,6 @@ namespace VideocartLab.ModelViews
             set
             {
                 selectedNode = value;
-
-                if (value != null)
-                    Mode = move;
-                else
-                    Mode = idle;
             }
         }
 

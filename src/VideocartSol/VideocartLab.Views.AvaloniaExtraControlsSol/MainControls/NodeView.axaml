@@ -7,7 +7,8 @@
              x:Class="VideocartLab.Views.AvaloniaExtraControlsSol.NodeView"
 			 x:DataType="vm:NodeModelView"
 			 xmlns:cntr="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol"
-			 PointerPressed="UserControl_PointerPressed">
+			 PointerPressed="UserControl_PointerPressed"
+			 >
 	<Design.DataContext>
 		<vm:NodeModelView/>
 	</Design.DataContext>
@@ -38,6 +39,9 @@
 								</DataTemplate>
 								<DataTemplate DataType="vm:VRAMModelView">
 									<cntr:VRAMContentView/>
+								</DataTemplate>
+								<DataTemplate DataType="vm:ScreenInterfaceViewModel">
+									<cntr:ScreenInterfaceView/>
 								</DataTemplate>
 							</ContentControl.DataTemplates>
 						</ContentControl>

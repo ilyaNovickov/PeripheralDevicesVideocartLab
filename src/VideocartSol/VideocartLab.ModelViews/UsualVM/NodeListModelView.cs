@@ -13,7 +13,8 @@ namespace VideocartLab.ModelViews
         private NodeListItemModelView? selectedItem = null;
         private NodeFactoryService factoryService;
 
-        public NodeListModelView(NodeFactoryService factoryService) 
+
+        public NodeListModelView(NodeFactoryService factoryService)
         {
             this.factoryService = factoryService;
 

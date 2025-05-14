@@ -11,6 +11,6 @@ public partial class GPUContentView : UserControl
     {
         InitializeComponent();
 
-        DataContext = new GPUContentModelView();
+        //DataContext = new GPUContentModelView();
     }
 }

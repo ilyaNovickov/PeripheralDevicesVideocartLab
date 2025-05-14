@@ -87,6 +87,8 @@ public partial class NodeView : UserControl
 
     private void UserControl_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
     {
+        if (e.Handled) return;
+
         NodeVM.Clicked();
     }
 }

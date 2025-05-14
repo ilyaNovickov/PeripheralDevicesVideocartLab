@@ -34,6 +34,14 @@ namespace VideocartLab.ModelViews
                 Name = "GPU",
                 GetVMFunc = () => new GPUContentModelView()
             });
+
+            nodeInnerContentDict.Add(typeof(ScreenInterfaceViewModel), new NodeInfo()
+            {
+                Width = 500,
+                Height = 500,
+                Name = "Порт подключения экрана",
+                GetVMFunc = () => new ScreenInterfaceViewModel()
+            });
         }
 
         internal Dictionary<Type, NodeInfo> NodeInfosDict => nodeInnerContentDict;

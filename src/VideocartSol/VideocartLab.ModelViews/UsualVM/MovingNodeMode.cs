@@ -21,7 +21,7 @@ namespace VideocartLab.ModelViews
 
             public void OnPointerPressed()
             {
-                moving = true;
+                //StartMove();
             }
 
             public void OnPointerMoved(double dx, double dy)
@@ -36,6 +36,11 @@ namespace VideocartLab.ModelViews
             public void OnPointerReleased()
             {
                 moving = false;
+            }
+
+            public void StartMove()
+            {
+                moving = true;
             }
         }
     }

@@ -11,6 +11,6 @@ public partial class ConnectionInterfaceView : UserControl
     {
         InitializeComponent();
 
-        DataContext = new ConnectionInterfaceModelView();
+        //DataContext = new ConnectionInterfaceModelView();
     }
 }

@@ -38,10 +38,12 @@
 			<TextBlock Classes="name"
 					   TextAlignment="Left"
 					   Text="Стандратные интерфейсы"/>
+
 			<ComboBox ItemsSource="{Binding StandartSettings}"
 					  SelectedItem="{Binding SelectedSetting}"
 					  DisplayMemberBinding="{Binding Name}"
-					  Margin="5,5,5,5">
+					  Margin="5,5,5,5"
+					  PointerPressed="ComboBox_PointerPressed_2">
 
 			</ComboBox>
 			<Grid ColumnDefinitions="*,*"

@@ -11,6 +11,11 @@ public partial class ScreenInterfaceView : UserControl
     {
         InitializeComponent();
 
-        DataContext = new ScreenInterfaceViewModel();
+        //DataContext = new ScreenInterfaceViewModel();
+    }
+
+    private void ComboBox_PointerPressed_2(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+    {
+        e.Handled = true;
     }
 }
