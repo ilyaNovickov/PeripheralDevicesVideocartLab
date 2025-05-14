@@ -18,10 +18,23 @@ public partial class NodeView : UserControl
     {
         InitializeComponent();
 
-        DataContext = new NodeModelView()
+        var vm = new NodeModelView()
         {
-            InnerContent = new VRAMModelView()
+            Name = "Test",
+            InnerContent = new VRAMModelView(),
         };
+
+        vm.Connections.Add(new ConnectionModelView()
+        {
+            Id = "1",
+            Type = ConnectionType.Duplex
+        });
+        vm.Connections.Add(new ConnectionModelView()
+        {
+            Id = "2",
+            Type = ConnectionType.Getting
+        });
+        DataContext = vm;
     }
 
     public NodeModelView? NodeVM
@@ -90,5 +103,10 @@ public partial class NodeView : UserControl
         if (e.Handled) return;
 
         NodeVM.Clicked();
+    }
+
+    private void ComboBox_PointerPressed_1(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+    {
+        e.Handled = true;
     }
 }

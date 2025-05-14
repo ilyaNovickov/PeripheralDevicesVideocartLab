@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,7 @@ namespace VideocartLab.ModelViews
 {
     public class NodeModelView : ModelViewBase
     {
+        #region Properties
         private double x;
         private double y;
         private double width;
@@ -15,7 +18,6 @@ namespace VideocartLab.ModelViews
         private ModelViewBase? innerContent = null;
         private string? name = null;
 
-        #region Properties
         public double X
         {
             get => x;
@@ -79,6 +81,12 @@ namespace VideocartLab.ModelViews
         {
             NodePressed?.Invoke(this, new NodePressedArgs(this));
         }
+
+
+
+        private ObservableCollection<ConnectionModelView> connections = new();
+
+        public ObservableCollection<ConnectionModelView> Connections => connections;
     }
 
     public class NodePressedArgs : EventArgs
@@ -89,5 +97,47 @@ namespace VideocartLab.ModelViews
         {
             Node = node;
         }
+    }
+
+    public enum ConnectionType
+    {
+        Undef, 
+        Getting,
+        Sending,
+        Duplex
+    }
+
+    public class ConnectionModelView : ModelViewBase
+    {
+        private ConnectionType type = ConnectionType.Undef;
+        private string? id = "";
+
+        public ConnectionType Type
+        {
+            get => type;
+            set
+            {
+                type = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string? Id
+        {
+            get => id;
+            set
+            {
+                id = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ImmutableArray<ConnectionType> AvaibleConnectionTypes { get; } = (new List<ConnectionType>() 
+        { 
+            ConnectionType.Undef,
+            ConnectionType.Getting,
+            ConnectionType.Sending,
+            ConnectionType.Duplex
+        }).ToImmutableArray<ConnectionType>();
     }
 }
