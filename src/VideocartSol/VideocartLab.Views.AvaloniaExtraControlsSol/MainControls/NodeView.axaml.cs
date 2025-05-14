@@ -65,23 +65,23 @@ public partial class NodeView : UserControl
         Binding widthBing = new Binding();
         widthBing.Source = NodeVM;
         widthBing.Path = nameof(NodeVM.Width);
-        this.Bind(WidthProperty, widthBing);
+        //this.Bind(WidthProperty, widthBing);
+        mainContentPanel.Bind(StackPanel.WidthProperty, widthBing);
 
         Binding heightBing = new Binding();
         heightBing.Source = NodeVM;
         heightBing.Path = nameof(NodeVM.Height);
-        this.Bind(HeightProperty, heightBing);
+        //this.Bind(HeightProperty, heightBing);
+        mainContentPanel.Bind(StackPanel.HeightProperty, heightBing);
 
         Binding contentBing = new Binding();
         contentBing.Source = NodeVM;
         contentBing.Path = nameof(NodeVM.InnerContent);
-        //this.Bind(XProperty, contentBing);
         contentControl.Bind(ContentControl.ContentProperty, contentBing);
 
         Binding textBing = new Binding();
         textBing.Source = NodeVM;
         textBing.Path = nameof(NodeVM.Name);
-        //this.Bind(XProperty, contentBing);
         textBlock.Bind(TextBlock.TextProperty, textBing);
 
     }

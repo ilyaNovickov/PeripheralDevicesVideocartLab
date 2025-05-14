@@ -21,8 +21,8 @@ namespace VideocartLab.ModelViews
 
             nodeInnerContentDict.Add(typeof(VRAMModelView), new NodeInfo()
             {
-                Width = 420 * 2d,
-                Height = 300 * 2d,
+                Width = 420,
+                Height = 300,
                 Name = "VRAM",
                 GetVMFunc = () => new VRAMModelView(),
                 Connections = new ConnectionsInfos[2]
@@ -30,8 +30,8 @@ namespace VideocartLab.ModelViews
 
             nodeInnerContentDict.Add(typeof(GPUContentModelView), new NodeInfo()
             {
-                Width = 310 * 2d,
-                Height = 330 * 2d,
+                Width = 310,
+                Height = 330,
                 Name = "GPU",
                 GetVMFunc = () => new GPUContentModelView(),
                 Connections = new ConnectionsInfos[2]
@@ -39,8 +39,8 @@ namespace VideocartLab.ModelViews
 
             nodeInnerContentDict.Add(typeof(ScreenInterfaceViewModel), new NodeInfo()
             {
-                Width = 500,
-                Height = 500,
+                Width = 530,
+                Height = 380,
                 Name = "Порт подключения экрана",
                 GetVMFunc = () => new ScreenInterfaceViewModel(),
                 Connections = new ConnectionsInfos[1]

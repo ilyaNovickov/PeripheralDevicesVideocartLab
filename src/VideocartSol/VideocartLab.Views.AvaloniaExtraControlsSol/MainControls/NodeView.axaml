@@ -13,11 +13,13 @@
 		<vm:NodeModelView/>
 	</Design.DataContext>
 	<ThemeVariantScope RequestedThemeVariant="Light">
-		<Border BorderThickness="2" BorderBrush="Black" CornerRadius="4"
+		<Border BorderThickness="2" 
+				BorderBrush="Black" 
+				CornerRadius="4"
 				Background="White">
 			<StackPanel Orientation="Horizontal">
 				<!--Main Content-->
-				<StackPanel>
+				<StackPanel x:Name="mainContentPanel">
 					<TextBlock x:Name="textBlock"
 							   Text="{Binding Name}"
 							   FontSize="26"

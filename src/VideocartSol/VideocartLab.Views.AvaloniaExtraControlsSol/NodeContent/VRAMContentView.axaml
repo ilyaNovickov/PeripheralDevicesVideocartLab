@@ -51,7 +51,8 @@
 					  Grid.Row="0"
 					  ItemsSource="{Binding GDDRTypes}"
 					  SelectedItem="{Binding SelectedGDDR}"
-					  DisplayMemberBinding="{Binding Name}"/>
+					  DisplayMemberBinding="{Binding Name}"
+					  PointerPressed="ComboBox_PointerPressed"/>
 			<TextBlock Classes="name"
 					   Grid.Column="0"
 					   Grid.Row="1"

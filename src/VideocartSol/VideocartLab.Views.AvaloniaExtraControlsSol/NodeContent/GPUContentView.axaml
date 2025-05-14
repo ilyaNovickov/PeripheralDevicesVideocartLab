@@ -44,7 +44,12 @@
 			<TextBox Grid.Column="1"
 					 Grid.Row="0"
 					 Classes="rightItem"
-					 Text="{Binding Name}"/>
+					 Text="{Binding Name}"
+					 MinWidth="100"
+					 MaxWidth="100"
+					 MinHeight="50"
+					 MaxHeight="50"
+					 ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
 			<TextBlock Grid.Column="0"
 					   Grid.Row="1"
 					   Classes="name"

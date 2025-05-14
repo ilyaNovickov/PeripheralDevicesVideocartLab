@@ -11,6 +11,11 @@ public partial class VRAMContentView : UserControl
     {
         InitializeComponent();
 
-        DataContext = new VRAMModelView();
+        //DataContext = new VRAMModelView();
+    }
+
+    private void ComboBox_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+    {
+        e.Handled = true;
     }
 }
