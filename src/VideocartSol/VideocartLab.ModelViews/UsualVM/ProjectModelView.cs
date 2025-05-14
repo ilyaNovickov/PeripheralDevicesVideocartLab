@@ -78,6 +78,9 @@ namespace VideocartLab.ModelViews
 
         private void OnNodePressed(object? sender, NodePressedArgs args)
         {
+            if (Mode == addNode)
+                return;
+
             if (Mode == move && args.Node == this.SelectedNode)
             {
                 move.StartMove();
