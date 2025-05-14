@@ -93,7 +93,8 @@
 						  Margin="2,2,2,2">
 						
 					</Menu>
-					<TextBox AcceptsReturn="True"/>
+					<TextBox x:Name="textBox"
+							 AcceptsReturn="True"/>
 				</DockPanel>
 				
 			</Grid>
