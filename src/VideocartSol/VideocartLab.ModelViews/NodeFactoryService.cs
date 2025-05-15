@@ -46,6 +46,15 @@ namespace VideocartLab.ModelViews
                 GetVMFunc = () => new ScreenInterfaceViewModel(),
                 Connections = new ConnectionsInfos[1]
             });
+
+            nodeInnerContentDict.Add(typeof(ConnectionInterfaceModelView), new NodeInfo()
+            {
+                Name = "Интерфейс подключени устройства",
+                Width = 500,
+                Height = 250,
+                GetVMFunc = () => new ConnectionInterfaceModelView(),
+                Connections = new ConnectionsInfos[1]
+            });
         }
 
         internal Dictionary<Type, NodeInfo> NodeInfosDict => nodeInnerContentDict;

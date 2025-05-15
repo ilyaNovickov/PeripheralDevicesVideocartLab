@@ -47,6 +47,9 @@
 									<DataTemplate DataType="vm:ScreenInterfaceViewModel">
 										<cntr:ScreenInterfaceView/>
 									</DataTemplate>
+									<DataTemplate DataType="vm:ConnectionInterfaceModelView">
+										<cntr:ConnectionInterfaceView/>
+									</DataTemplate>
 								</ContentControl.DataTemplates>
 							</ContentControl>
 						</ScrollViewer>

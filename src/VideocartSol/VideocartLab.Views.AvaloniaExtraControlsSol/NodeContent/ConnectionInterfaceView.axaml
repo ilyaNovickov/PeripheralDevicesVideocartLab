@@ -48,7 +48,8 @@
 			<ComboBox Margin="5,5,5,5"
 					  ItemsSource="{Binding ConnectionInfos}"
 					  SelectedItem="{Binding SelectedInterface}"
-					  DisplayMemberBinding="{Binding Name}"/>
+					  DisplayMemberBinding="{Binding Name}"
+					  PointerPressed="ComboBox_PointerPressed"/>
 			<ContentControl Content="{Binding SelectedInterface.VM}">
 				<ContentControl.DataTemplates>
 					<DataTemplate DataType="vm:AGPViewModel">
