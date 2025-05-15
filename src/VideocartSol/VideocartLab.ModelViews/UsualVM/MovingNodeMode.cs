@@ -22,6 +22,7 @@ namespace VideocartLab.ModelViews
             public void OnPointerPressed()
             {
                 //StartMove();
+                this.Parent.SelectedNode = null;
             }
 
             public void OnPointerMoved(double dx, double dy)

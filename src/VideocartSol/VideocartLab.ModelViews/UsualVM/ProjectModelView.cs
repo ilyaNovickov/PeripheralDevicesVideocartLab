@@ -106,10 +106,14 @@ namespace VideocartLab.ModelViews
             if (Mode == addNode)
                 return;
 
-            if (Mode == move && args.Node == this.SelectedNode)
+            //if (Mode == move && args.Node == this.SelectedNode)
+            if (Mode == move)
             {
-                move.StartMove();
-                return;
+                if (args.Node == this.SelectedNode)
+                {
+                    move.StartMove();
+                    return;
+                }
             }
 
             if (Mode != idle && args.Node == this.SelectedNode)

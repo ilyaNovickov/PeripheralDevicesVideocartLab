@@ -108,6 +108,7 @@ public partial class NodeView : UserControl
             return;
 
         NodeVM.Clicked();
+        e.Handled = true;
     }
 
     private void ComboBox_PointerPressed_1(object? sender, Avalonia.Input.PointerPressedEventArgs e)
