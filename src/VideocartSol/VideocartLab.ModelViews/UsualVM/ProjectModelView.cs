@@ -26,6 +26,7 @@ namespace VideocartLab.ModelViews
         private IdleMode idle;
         private AddingNodeMode addNode;
         private MovingNodeMode move;
+        private RemoveNodeMode remove;
 
 
         private ObservableCollection<NodeModelView> nodes = new();
@@ -45,6 +46,7 @@ namespace VideocartLab.ModelViews
             idle = new IdleMode(this);
             addNode = new AddingNodeMode(this);
             move = new MovingNodeMode(this);
+            remove = new RemoveNodeMode(this);
 
             mode = idle;
 
@@ -95,6 +97,12 @@ namespace VideocartLab.ModelViews
 
         private void OnNodePressed(object? sender, NodePressedArgs args)
         {
+            if (Mode == remove)
+            {
+                RemoveNode(args.Node);
+                return;
+            }
+
             if (Mode == addNode)
                 return;
 
@@ -204,7 +212,20 @@ namespace VideocartLab.ModelViews
             nodes.Remove(node);
         }
 
-        
+        public void RemoveNode(NodeModelView node)
+        {
+            if (SelectedNode == node)
+            {
+                SelectedNode = null;
+            }
+
+            nodes.Remove(node);
+        }
+
+        public void ToggleRemoveMode(bool turnOn)
+        {
+            Mode = turnOn ? remove : idle;
+        }
     }
 
     public class NodeAddedArgs : EventArgs

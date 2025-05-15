@@ -47,7 +47,11 @@
 				Margin="5,5,5,5">
 			<!--InnerMenu-->
 			<Menu >
-
+				<ToggleButton x:Name="removeToggleButton"
+							  Content="Удаление узла" 
+							  ClickMode="Press"
+							  Command="{Binding RemoveNodeCommand}"
+							  CommandParameter="{Binding $self.IsChecked}"/>
 			</Menu>
 		</Border>
 		<Grid>

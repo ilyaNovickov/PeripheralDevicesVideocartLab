@@ -102,6 +102,11 @@ public partial class NodeView : UserControl
     {
         if (e.Handled) return;
 
+        var properties = e.GetCurrentPoint(this).Properties;
+
+        if (!properties.IsLeftButtonPressed)
+            return;
+
         NodeVM.Clicked();
     }
 

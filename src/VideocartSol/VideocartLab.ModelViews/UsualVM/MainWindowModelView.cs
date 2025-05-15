@@ -23,6 +23,7 @@ namespace VideocartLab.ModelViews
             nodeListVM.SelectedItemChanged += NodeListVM_SelectedItemChanged;
 
             removeSelectedNode = new RelayCommand(projectVM.RemoveSelectedNode);
+            removeNode = new GenericCommand<bool>(projectVM.ToggleRemoveMode);
         }
 
         private void ProjectVM_NodeAdded(object? sender, NodeAddedArgs e)
@@ -61,5 +62,9 @@ namespace VideocartLab.ModelViews
         private RelayCommand removeSelectedNode;
 
         public RelayCommand RemoveSelectedNodeCommand => removeSelectedNode;
+
+        private GenericCommand<bool> removeNode;
+
+        public GenericCommand<bool> RemoveNodeCommand => removeNode;
     }
 }
