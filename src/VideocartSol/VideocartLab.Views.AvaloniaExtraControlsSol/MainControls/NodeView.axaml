@@ -50,6 +50,9 @@
 									<DataTemplate DataType="vm:ConnectionInterfaceModelView">
 										<cntr:ConnectionInterfaceView/>
 									</DataTemplate>
+									<DataTemplate DataType="vm:GPUControllerModelView">
+										<cntr:GPUControllerView/>
+									</DataTemplate>
 								</ContentControl.DataTemplates>
 							</ContentControl>
 						</ScrollViewer>

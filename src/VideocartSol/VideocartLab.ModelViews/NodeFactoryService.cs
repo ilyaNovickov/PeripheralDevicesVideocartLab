@@ -55,6 +55,15 @@ namespace VideocartLab.ModelViews
                 GetVMFunc = () => new ConnectionInterfaceModelView(),
                 Connections = new ConnectionsInfos[1]
             });
+
+            nodeInnerContentDict.Add(typeof(GPUControllerModelView), new NodeInfo()
+            {
+                Name = "Котнроллер GPU",
+                Width = 500,
+                Height = 500,
+                GetVMFunc = () => new GPUControllerModelView(),
+                Connections = new ConnectionsInfos[4]
+            });
         }
 
         internal Dictionary<Type, NodeInfo> NodeInfosDict => nodeInnerContentDict;

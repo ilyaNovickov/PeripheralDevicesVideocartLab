@@ -42,6 +42,9 @@
     <Compile Update="NodeContent\ConnectionInterfaceView.axaml.cs">
       <DependentUpon>ConnectionInterfaceView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="NodeContent\GPUControllerView.axaml.cs">
+      <DependentUpon>GPUControllerView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="NodeContent\VRAMContentView.axaml.cs">
       <DependentUpon>VRAMContentView.axaml</DependentUpon>
     </Compile>
