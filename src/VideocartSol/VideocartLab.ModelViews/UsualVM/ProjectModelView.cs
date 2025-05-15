@@ -40,6 +40,8 @@ namespace VideocartLab.ModelViews
         {
             this.factoryService = factoryService;
 
+            
+
             idle = new IdleMode(this);
             addNode = new AddingNodeMode(this);
             move = new MovingNodeMode(this);
@@ -47,6 +49,11 @@ namespace VideocartLab.ModelViews
             mode = idle;
 
             nodes.CollectionChanged += Nodes_CollectionChanged;
+        }
+
+        ~ProjectModelView()
+        {
+            nodes.CollectionChanged -= Nodes_CollectionChanged;
         }
 
         private void Nodes_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -57,6 +64,7 @@ namespace VideocartLab.ModelViews
                     OnNodeAdded(new NodeAddedArgs((NodeModelView)e.NewItems![0]!));
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    OnNodeRemoved(new NodeRemovedArgs((NodeModelView)e.OldItems![0]!));
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
                     break;
@@ -75,6 +83,15 @@ namespace VideocartLab.ModelViews
 
             NodeAdded?.Invoke(this, e);
         }
+
+        private void OnNodeRemoved(NodeRemovedArgs e)
+        {
+            e.RemovedNode.NodePressed -= OnNodePressed;
+
+            NodeRemoved?.Invoke(this, e);
+        }
+
+        public event EventHandler<NodeRemovedArgs>? NodeRemoved;
 
         private void OnNodePressed(object? sender, NodePressedArgs args)
         {
@@ -175,6 +192,19 @@ namespace VideocartLab.ModelViews
 
             return node;
         }
+
+        public void RemoveSelectedNode()
+        {
+            if (SelectedNode == null)
+                return;
+
+            var node = SelectedNode;
+            SelectedNode = null;
+
+            nodes.Remove(node);
+        }
+
+        
     }
 
     public class NodeAddedArgs : EventArgs
@@ -184,6 +214,16 @@ namespace VideocartLab.ModelViews
         public NodeAddedArgs(NodeModelView addedNode)
         {
             AddedNode = addedNode;
+        }
+    }
+
+    public class NodeRemovedArgs : EventArgs
+    {
+        public NodeModelView RemovedNode { get; private set; }
+
+        public NodeRemovedArgs(NodeModelView removedNode)
+        {
+            RemovedNode = removedNode;
         }
     }
 }

@@ -23,6 +23,7 @@ public partial class ProjectView : UserControl
             if (ProjectVM != null)
             {
                 ProjectVM.NodeAdded -= Project_NodeAdded;
+                ProjectVM.NodeRemoved -= Project_NodeRemoved;
             }
 
             SetValue(ProjectVMProperty, value);
@@ -31,7 +32,19 @@ public partial class ProjectView : UserControl
                 return;
 
             value.NodeAdded += Project_NodeAdded;
+            value.NodeRemoved += Project_NodeRemoved;
         }
+    }
+
+    private void Project_NodeRemoved(object? sender, NodeRemovedArgs e)
+    {
+        var node = e.RemovedNode;
+
+        var control = (from views in mainCanvas.Children 
+                            where views is NodeView nodeView && nodeView.NodeVM == node 
+                            select views).First();
+
+        mainCanvas.Children.Remove(control);
     }
 
     private void Project_NodeAdded(object? sender, NodeAddedArgs e)

@@ -11,6 +11,10 @@
 		x:DataType="vm:MainWindowModelView"
 		MinWidth="300"
 		MinHeight="300">
+	<Window.KeyBindings>
+		<KeyBinding Gesture="Delete" 
+					Command="{Binding RemoveSelectedNodeCommand}"/>
+	</Window.KeyBindings>
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.ThemeDictionaries>
@@ -77,7 +81,9 @@
 						<cntr:ProjectView x:Name="projectView"
 										  DataContext="{Binding Project}"
 										  Width="5000"
-										  Height="5000"/>
+										  Height="5000">
+
+						</cntr:ProjectView>
 					</pnz:ZoomBorder>
 				</Border>
 				<GridSplitter Grid.Row="1" Background="Gray" ResizeDirection="Rows"/>

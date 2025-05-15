@@ -17,9 +17,6 @@
 				PointerPressed="Canvas_PointerPressed"
 				PointerMoved="Canvas_PointerMoved"
 				PointerReleased="Canvas_PointerReleased">
-			<!--<cntr:NodeView X="100" Y="100" 
-						   Width="400"
-						   Height="300"/>-->
 		</Canvas>
 	</Border>
 </UserControl>
