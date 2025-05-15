@@ -9,14 +9,26 @@ namespace VideocartLab.MainModelsProj
     public enum GPUActions
     {
         Init,
-        HandshakeWithScreenStart,
         //Согласование интерфейсов
+        HandshakeWithScreenStart,
+        DesicionSolution,
+        DesicionColorDepth,
+        DesicionFrameRate,
         HandshakeWithScreenEnd,
+
         CPUSentsData,
-        ControllerPlaceDataInVRAM,
-        GPUCalculateDataStart,
+        //Размещение данных в памяти
+        ControllerPlaceDataInVRAMStart,
+        PlaceModels,
+        PlaceTextures,
+        PlaceSceneInfo,
+        ReservingPlaceForImage,
+        ControllerPlaceDataInVRAMEnd,
         //Обработка вершин и тд
+        GPUCalculateDataStart,
+
         GPUCalculateDataEnd,
+
         ControllerPlaceImageInVRAM,
         ControllerSentImageToScreen,
         ControollerFreeDataInVRAM,
