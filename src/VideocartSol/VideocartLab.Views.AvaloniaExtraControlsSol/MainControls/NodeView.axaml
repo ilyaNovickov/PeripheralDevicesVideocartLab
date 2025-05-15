@@ -56,49 +56,53 @@
 				<HeaderedContentControl BorderThickness="1"
 										BorderBrush="Black"
 										Header="Соединения"
-										Margin="2,2,2,2">
-					<ItemsControl ItemsSource="{Binding Connections}"
-								  ScrollViewer.HorizontalScrollBarVisibility="Auto">
-						<ItemsControl.ItemTemplate>
-							<DataTemplate>
-								<Grid ColumnDefinitions="*,*"
-									  RowDefinitions="*,*"
-									  Margin="0,5,0,5">
-									<TextBlock Text="ID"
-											   Grid.Column="0"
-											   Grid.Row="0"
-											   TextAlignment="Center"
-											   VerticalAlignment="Center"
-											   HorizontalAlignment="Right"
-											   Margin="1,1,1,1"/>
-									<TextBox Text="{Binding Id}"
-											 Grid.Column="1"
-											 Grid.Row="0"
-											 Margin="1,1,1,1"
-											 MinWidth="100"
-											 MaxWidth="100"
-											 MinHeight="50"
-											 MaxHeight="50"
-											 ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
-									<TextBlock Text="Тип"
-											   Grid.Column="0"
-											   Grid.Row="1"
-											   TextAlignment="Center"
-											   VerticalAlignment="Center"
-											   HorizontalAlignment="Right"
-											   Margin="1,1,1,1"/>
-									<ComboBox Grid.Column="1"
-											  Grid.Row="1"
-											  Margin="1,1,1,1"
-											  MinWidth="100"
-											  MaxWidth="100"
-											  PointerPressed="ComboBox_PointerPressed_1"
-											  SelectedValue="{Binding Type}"
-											  ItemsSource="{Binding AvaibleConnectionTypes}"/>
-								</Grid>
-							</DataTemplate>
-						</ItemsControl.ItemTemplate>
-					</ItemsControl>
+										Margin="2,2,2,2"
+										CornerRadius="1">
+					<ScrollViewer HorizontalScrollBarVisibility="Auto"
+								  VerticalScrollBarVisibility="Auto" 
+								  Height="{Binding #mainContentPanel.Height}">
+						<ItemsControl ItemsSource="{Binding Connections}">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<Grid ColumnDefinitions="*,*"
+										  RowDefinitions="*,*"
+										  Margin="0,5,20,5">
+										<TextBlock Text="ID"
+												   Grid.Column="0"
+												   Grid.Row="0"
+												   TextAlignment="Center"
+												   VerticalAlignment="Center"
+												   HorizontalAlignment="Right"
+												   Margin="1,1,1,1"/>
+										<TextBox Text="{Binding Id}"
+												 Grid.Column="1"
+												 Grid.Row="0"
+												 Margin="1,1,1,1"
+												 MinWidth="100"
+												 MaxWidth="100"
+												 MinHeight="50"
+												 MaxHeight="50"
+												 ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+										<TextBlock Text="Тип"
+												   Grid.Column="0"
+												   Grid.Row="1"
+												   TextAlignment="Center"
+												   VerticalAlignment="Center"
+												   HorizontalAlignment="Right"
+												   Margin="1,1,1,1"/>
+										<ComboBox Grid.Column="1"
+												  Grid.Row="1"
+												  Margin="1,1,1,1"
+												  MinWidth="100"
+												  MaxWidth="100"
+												  PointerPressed="ComboBox_PointerPressed_1"
+												  SelectedValue="{Binding Type}"
+												  ItemsSource="{Binding AvaibleConnectionTypes}"/>
+									</Grid>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</ScrollViewer>
 				</HeaderedContentControl>
 			</StackPanel>
 		</Border>

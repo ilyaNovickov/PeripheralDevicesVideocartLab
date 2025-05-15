@@ -25,7 +25,8 @@ namespace VideocartLab.ModelViews
                 Height = 300,
                 Name = "VRAM",
                 GetVMFunc = () => new VRAMModelView(),
-                Connections = new ConnectionsInfos[2]
+                Connections = new ConnectionsInfos[1]
+                //Connections = new ConnectionsInfos[64]
             });
 
             nodeInnerContentDict.Add(typeof(GPUContentModelView), new NodeInfo()
@@ -34,7 +35,7 @@ namespace VideocartLab.ModelViews
                 Height = 330,
                 Name = "GPU",
                 GetVMFunc = () => new GPUContentModelView(),
-                Connections = new ConnectionsInfos[2]
+                Connections = new ConnectionsInfos[1]
             });
 
             nodeInnerContentDict.Add(typeof(ScreenInterfaceViewModel), new NodeInfo()
