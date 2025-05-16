@@ -20,3 +20,9 @@ namespace VideocartLab.Views.AvaloniaProj
                 .LogToTrace();
     }
 }
+/*
+ * TODO:
+ * Доделать GPUController
+ * Что-то придумать с кнопкой "Удалть узел"
+ * Доделать моделирование 
+ */
