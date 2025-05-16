@@ -20,6 +20,9 @@ namespace VideocartLab.ModelViews
         public GPUControllerModelView()
         {
             InitList();
+
+            moveUp = new RelayCommand(MoveItemUp);
+            moveDown = new RelayCommand(MoveItemDown);
         }
 
         public ObservableCollection<GPUAction> GpuActions => actions;
@@ -59,6 +62,54 @@ namespace VideocartLab.ModelViews
 
             this.actions = new ObservableCollection<GPUAction>(actions);
         }
+
+        private GPUAction? selectedAction = null;
+
+        public GPUAction? SelectedAction
+        {
+            get => selectedAction;
+            set
+            {
+                selectedAction = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void MoveItemUp()
+        {
+            if (SelectedAction == null)
+                return;
+
+            int index = GpuActions.IndexOf(SelectedAction);
+
+            if (index == 0)
+                return;
+
+            var selectedAction = SelectedAction;
+            (GpuActions[index - 1], GpuActions[index]) = (GpuActions[index], GpuActions[index - 1]);
+            SelectedAction = selectedAction;
+        }
+
+        private void MoveItemDown()
+        {
+            if (SelectedAction == null)
+                return;
+
+            int index = GpuActions.IndexOf(SelectedAction);
+
+            if (index == GpuActions.Count - 1)
+                return;
+
+            var selectedAction = SelectedAction;
+            (GpuActions[index], GpuActions[index+1]) = (GpuActions[index+1], GpuActions[index]);
+            SelectedAction = selectedAction;
+        }
+
+        private RelayCommand moveUp;
+        private RelayCommand moveDown;
+
+        public RelayCommand MoveUpCommand => moveUp;
+        public RelayCommand MoveDownCommand => moveDown;
     }
 
     public class GPUAction
