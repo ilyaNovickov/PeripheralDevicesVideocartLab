@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VideocartLab.ModelViews.Models;
 
 namespace VideocartLab.ModelViews
 {
@@ -11,6 +12,9 @@ namespace VideocartLab.ModelViews
         private ProjectModelView? projectVM;
         private NodeListModelView? nodeListVM;
         private NodeFactoryService factoryService;
+        private StringBuilder report = new StringBuilder();
+
+        ModelingEnvironment modelingEnvironment;
 
         public MainWindowModelView()
         {
@@ -24,6 +28,22 @@ namespace VideocartLab.ModelViews
 
             removeSelectedNode = new RelayCommand(projectVM.RemoveSelectedNode);
             removeNode = new GenericCommand<bool>(projectVM.ToggleRemoveMode);
+            startModeling = new RelayCommand(this.StartModeling);
+
+            modelingEnvironment = new();
+            modelingEnvironment.Report += ModelingEnvironment_Report;
+        }
+
+        private void ModelingEnvironment_Report(object? sender, ReportArgs e)
+        {
+            report.AppendLine(e.Message);
+            report.AppendLine();
+            OnPropertyChanged(nameof(Report));
+        }
+
+        public string Report
+        {
+            get => report.ToString();
         }
 
         private void ProjectVM_NodeAdded(object? sender, NodeAddedArgs e)
@@ -66,5 +86,17 @@ namespace VideocartLab.ModelViews
         private GenericCommand<bool> removeNode;
 
         public GenericCommand<bool> RemoveNodeCommand => removeNode;
+
+        private RelayCommand startModeling;
+
+        public RelayCommand StartModelingCommand => startModeling;
+
+        private void StartModeling()
+        {
+            modelingEnvironment.ProjectVM = Project!;
+            modelingEnvironment.Start();
+
+
+        }
     }
 }

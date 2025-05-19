@@ -1,5 +1,6 @@
 ﻿using System;
 using Avalonia;
+using Avalonia.Dialogs;
 
 namespace VideocartLab.Views.AvaloniaProj
 {
@@ -17,7 +18,10 @@ namespace VideocartLab.Views.AvaloniaProj
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .WithInterFont()
-                .LogToTrace();
+                .LogToTrace()
+            //.UseSkia()
+            //.UseManagedSystemDialogs()
+            ;
     }
 }
 /*

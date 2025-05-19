@@ -47,11 +47,15 @@
 				Margin="5,5,5,5">
 			<!--InnerMenu-->
 			<Menu >
+				<Button Content="Запуск моделирования"
+						Command="{Binding StartModelingCommand}"/>
 				<ToggleButton x:Name="removeToggleButton"
 							  Content="Удаление узла" 
 							  ClickMode="Press"
 							  Command="{Binding RemoveNodeCommand}"
 							  CommandParameter="{Binding $self.IsChecked}"/>
+				<Button Content="Экспорт холста в изображение"
+						Click="CreateImage_Click"/>
 			</Menu>
 		</Border>
 		<Grid>
@@ -101,10 +105,17 @@
 						  BorderThickness="1"
 						  CornerRadius="2"
 						  Margin="2,2,2,2">
-						
+						<Button Content="Сохранить"
+								Click="SaveReport_Click"/>
+						<Button Content="Копировать"
+								Click="Copy_Click"/>
+						<Button Content="Очистить"
+								Click="Clear_Click"/>
 					</Menu>
 					<TextBox x:Name="textBox"
-							 AcceptsReturn="True"/>
+							 AcceptsReturn="True"
+							 Text="{Binding Report}"
+							 IsReadOnly="True"/>
 				</DockPanel>
 				
 			</Grid>
