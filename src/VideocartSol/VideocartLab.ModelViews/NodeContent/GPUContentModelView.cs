@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using VideocartLab.MainModelsProj;
-
-namespace VideocartLab.ModelViews
+﻿namespace VideocartLab.ModelViews
 {
+    /// <summary>
+    /// Цип GPU
+    /// </summary>
     public class GPUContentModelView : ModelViewBase
     {
         private string name = "";
@@ -17,7 +17,7 @@ namespace VideocartLab.ModelViews
         public string Name
         {
             get => name;
-            set 
+            set
             {
                 name = value;
                 OnPropertyChanged();
