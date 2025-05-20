@@ -90,7 +90,7 @@
 			<TextBlock Classes="name"
 					   Grid.Column="0"
 					   Grid.Row="4"
-					   Text="Эффективная частота"/>
+					   Text="Эффективная частота, [МГц]"/>
 			<!--GDDR6x (16) * 10.000 MHz = 160.000 MHz-->
 			<NumericUpDown Classes="rightItem"
 						   Grid.Column="1"

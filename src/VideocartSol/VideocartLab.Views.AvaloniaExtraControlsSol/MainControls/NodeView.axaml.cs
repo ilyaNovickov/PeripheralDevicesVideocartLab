@@ -1,7 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
-using Avalonia.Markup.Xaml;
 using VideocartLab.ModelViews;
 
 namespace VideocartLab.Views.AvaloniaExtraControlsSol;
@@ -17,24 +16,6 @@ public partial class NodeView : UserControl
     public NodeView()
     {
         InitializeComponent();
-
-        var vm = new NodeModelView()
-        {
-            Name = "Test",
-            InnerContent = new VRAMModelView(),
-        };
-
-        vm.Connections.Add(new ConnectionModelView()
-        {
-            Id = "1",
-            Type = ConnectionType.Duplex
-        });
-        vm.Connections.Add(new ConnectionModelView()
-        {
-            Id = "2",
-            Type = ConnectionType.Getting
-        });
-        DataContext = vm;
     }
 
     public NodeModelView? NodeVM
@@ -51,7 +32,7 @@ public partial class NodeView : UserControl
     {
         if (NodeVM == null)
             return;
-        
+
         Binding xbing = new Binding();
         xbing.Source = NodeVM;
         xbing.Path = nameof(NodeVM.X);
@@ -65,13 +46,11 @@ public partial class NodeView : UserControl
         Binding widthBing = new Binding();
         widthBing.Source = NodeVM;
         widthBing.Path = nameof(NodeVM.Width);
-        //this.Bind(WidthProperty, widthBing);
         mainContentPanel.Bind(StackPanel.WidthProperty, widthBing);
 
         Binding heightBing = new Binding();
         heightBing.Source = NodeVM;
         heightBing.Path = nameof(NodeVM.Height);
-        //this.Bind(HeightProperty, heightBing);
         mainContentPanel.Bind(StackPanel.HeightProperty, heightBing);
 
         Binding contentBing = new Binding();
@@ -107,7 +86,7 @@ public partial class NodeView : UserControl
         if (!properties.IsLeftButtonPressed)
             return;
 
-        NodeVM.Clicked();
+        NodeVM!.Clicked();
         e.Handled = true;
     }
 

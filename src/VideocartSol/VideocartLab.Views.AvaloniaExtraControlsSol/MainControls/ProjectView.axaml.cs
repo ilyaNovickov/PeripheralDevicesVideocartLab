@@ -1,6 +1,5 @@
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using VideocartLab.ModelViews;
 
 namespace VideocartLab.Views.AvaloniaExtraControlsSol;
@@ -47,9 +46,9 @@ public partial class ProjectView : UserControl
     {
         var node = e.RemovedNode;
 
-        var control = (from views in mainCanvas.Children 
-                            where views is NodeView nodeView && nodeView.NodeVM == node 
-                            select views).First();
+        var control = (from views in mainCanvas.Children
+                       where views is NodeView nodeView && nodeView.NodeVM == node
+                       select views).First();
 
         mainCanvas.Children.Remove(control);
     }
@@ -78,7 +77,7 @@ public partial class ProjectView : UserControl
 
         var p = e.GetPosition(mainCanvas);
 
-        ProjectVM.OnPointerPressed(p.X, p.Y);
+        ProjectVM!.OnPointerPressed(p.X, p.Y);
     }
 
     private void Canvas_PointerMoved(object? sender, Avalonia.Input.PointerEventArgs e)
@@ -87,13 +86,13 @@ public partial class ProjectView : UserControl
 
         var p = e.GetPosition(mainCanvas);
 
-        ProjectVM.OnPointerMoved(p.X, p.Y);
+        ProjectVM!.OnPointerMoved(p.X, p.Y);
     }
 
     private void Canvas_PointerReleased(object? sender, Avalonia.Input.PointerReleasedEventArgs e)
     {
         if (e.Handled) return;
 
-        ProjectVM.OnPointerReleased();
+        ProjectVM!.OnPointerReleased();
     }
 }
