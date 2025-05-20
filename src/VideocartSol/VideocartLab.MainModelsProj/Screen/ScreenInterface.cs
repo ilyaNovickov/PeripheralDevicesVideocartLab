@@ -11,7 +11,7 @@ namespace VideocartLab.MainModelsProj.Screen
         _1to1, _5to4, _4to3, _16to9,  _40to27
     }
 
-    public class ScreenInterface
+    public class ScreenInterface : BaseModel
     {
         private int bitPerPixel;
         private double bandwidth;

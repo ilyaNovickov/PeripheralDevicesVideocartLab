@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VideocartLab.ModelViews.Models
 {
-    internal class ConnectionModel
+    public class ConnectionModel
     {
         public string? Id { get; set; }
         public ConnectionType Type { get; set; }

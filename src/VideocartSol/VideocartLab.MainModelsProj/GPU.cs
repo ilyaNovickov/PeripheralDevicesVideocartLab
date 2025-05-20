@@ -1,6 +1,6 @@
 ﻿namespace VideocartLab.MainModelsProj
 {
-    public class GPU
+    public class GPU : BaseModel
     {
         private string? name = null;
         private int cores = 1;

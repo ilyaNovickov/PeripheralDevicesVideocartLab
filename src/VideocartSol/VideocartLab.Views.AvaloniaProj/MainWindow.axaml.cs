@@ -150,5 +150,47 @@ namespace VideocartLab.Views.AvaloniaProj
                 }
             }
         }
+
+        private async void SaveProject_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var file = await StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions()
+            {
+                FileTypeChoices = [new FilePickerFileType("JSON") { Patterns=["*.json"]}],
+                DefaultExtension = ".json",
+                Title = "Сохранение изображения"
+            });
+
+            if (file is null)
+                return;
+
+            string path = file.Path.LocalPath;
+
+            mainVM.SaveProject(path);
+
+            file?.Dispose();
+        }
+
+        private async void LoadProject_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var file = await StorageProvider.OpenFilePickerAsync(new Avalonia.Platform.Storage.FilePickerOpenOptions()
+            {
+                FileTypeFilter = [new FilePickerFileType("JSON") { Patterns = ["*.json"] }],
+                AllowMultiple = false,
+                Title = "Сохранение изображения"
+            });
+
+            if (file is null || file.Count != 1)
+                return;
+
+            string path = file[0].Path.LocalPath;
+
+            mainVM.LoadProject(path);
+
+            foreach (var item in file)
+            {
+                item.Dispose();
+            }
+            //file?.D();
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace VideocartLab.MainModelsProj.GPUMemory
     /// <summary>
     /// Класс типа GDDR памяти
     /// </summary>
-    public class GDDRType
+    public class GDDRType : BaseModel
     {
         /// <summary>
         /// Создание экземпляра памяти типа GDDR

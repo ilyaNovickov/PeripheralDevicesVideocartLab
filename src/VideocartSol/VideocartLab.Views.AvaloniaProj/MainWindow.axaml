@@ -33,6 +33,14 @@
 	<DockPanel LastChildFill="True">
 		<!--UpperMenu-->
 		<Menu DockPanel.Dock="Top" Margin="5,3,5,3">
+			<MenuItem Header="Файл">
+				<MenuItem Header="Сохранить"
+						  Click="SaveProject_Click"/>
+				<MenuItem Header="Загрузить"
+						  Click="LoadProject_Click"/>
+				<Separator/>
+				<MenuItem Header="Выход"/>
+			</MenuItem>
 			<Label Content="Тема"/>
 			<ComboBox SelectedIndex="0"
 					  SelectionChanged="ComboBox_SelectionChanged">

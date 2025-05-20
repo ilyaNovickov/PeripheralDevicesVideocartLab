@@ -39,7 +39,7 @@ internal class ModelingEnvironment
                     Width = nodeVM.Width,
                     Height = nodeVM.Height
                 };
-                nodeModel.InnerModel = projectConverter.ConvertToModel(nodeVM.InnerContent!);
+                nodeModel.InnerModel = (BaseModel)projectConverter.ConvertToModel(nodeVM.InnerContent!)!;
                 nodeModel.Connections = new ConnectionModel[nodeVM.Connections.Count];
 
                 for (int i = 0; i < nodeModel.Connections.Count(); i++)

@@ -9,7 +9,7 @@ using VideocartLab.MainModelsProj.Screen;
 
 namespace VideocartLab.MainModelsProj
 {
-    public class GPUController
+    public class GPUController : BaseModel
     {
         private GPU? gpu;
         private VRAM? vram;

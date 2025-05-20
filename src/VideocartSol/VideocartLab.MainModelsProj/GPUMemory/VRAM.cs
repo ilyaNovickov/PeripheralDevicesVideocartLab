@@ -9,7 +9,7 @@ namespace VideocartLab.MainModelsProj.GPUMemory
     /// <summary>
     /// Класс видеопамяти видеокарты
     /// </summary>
-    public class VRAM
+    public class VRAM : BaseModel
     {
         private GDDRType type = new GDDRType(GDDRTypes.GDDR);
         private int capacity = 1024;

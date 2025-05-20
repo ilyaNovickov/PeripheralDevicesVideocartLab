@@ -9,16 +9,16 @@ namespace VideocartLab.MainModelsProj.ConnectionInterface
     /// <summary>
     /// Абстактный класс для интерфейсов подключения видеокарты
     /// </summary>
-    public abstract class ConnectionInterface
+    public class ConnectionInterface : BaseModel
     {
         /// <summary>
         /// Абстрактное свойство пропускной способности интерфейса подключения [ГБ/с]
         /// </summary>
-        public abstract double Bandwidth
+        public virtual double Bandwidth
         {
             get;
         }
 
-        public abstract double Frequency { get; set; }
+        public virtual double Frequency { get; set; }
     }
 }

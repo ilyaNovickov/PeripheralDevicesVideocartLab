@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace VideocartLab.MainModelsProj.ConnectionInterface
 {
-
     public class AGP : ConnectionInterface
     {
         #region StandartPorts
