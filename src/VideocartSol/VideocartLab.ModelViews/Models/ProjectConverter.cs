@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VideocartLab.MainModelsProj;
+﻿using VideocartLab.MainModelsProj;
 using VideocartLab.MainModelsProj.GPUMemory;
 using VideocartLab.MainModelsProj.Screen;
 
 namespace VideocartLab.ModelViews.Models
 {
+    /// <summary>
+    /// Конвертер ViewModel в Model
+    /// </summary>
     internal class ProjectConverter
     {
+        /// <summary>
+        /// Словарь соотношений типов ModelView к функциям конвертации моделей 
+        /// </summary>
         private static Dictionary<Type, Func<ModelViewBase, object?>> modelDict;
 
         static ProjectConverter()
@@ -22,18 +23,19 @@ namespace VideocartLab.ModelViews.Models
                 ConnectionModelView? connVM = vm as ConnectionModelView;
                 ConnectionModel conn = new ConnectionModel()
                 {
-                    Id = connVM.Id,
+                    Id = connVM!.Id,
                     Type = connVM.Type
                 };
                 return conn;
             });
 
             #region UsualModels
-            modelDict.Add(typeof(VRAMModelView), (vm) => {
+            modelDict.Add(typeof(VRAMModelView), (vm) =>
+            {
                 VRAMModelView? vramVM = vm as VRAMModelView;
                 VRAM vram = new VRAM()
                 {
-                    Capacity = vramVM.Capacity!.Value,
+                    Capacity = vramVM!.Capacity!.Value,
                     Type = vramVM.SelectedGDDR!.Type,
                     MemoryBusCapacity = vramVM.MemoryBusCapacity!.Value,
                     RealFrequency = vramVM.RealFrequency!.Value,
@@ -79,6 +81,11 @@ namespace VideocartLab.ModelViews.Models
             #endregion
         }
 
+        /// <summary>
+        /// Конвертация ModelView в Model
+        /// </summary>
+        /// <param name="modelViewBase">Входное ModelView</param>
+        /// <returns>Модель</returns>
         public object? ConvertToModel(ModelViewBase modelViewBase)
         {
             return modelDict[modelViewBase.GetType()].Invoke(modelViewBase);

@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideocartLab.ModelViews.Models
+﻿namespace VideocartLab.ModelViews.Models
 {
+    /// <summary>
+    /// Модель соединения
+    /// </summary>
     public class ConnectionModel
     {
+        /// <summary>
+        /// ID соединения
+        /// </summary>
         public string? Id { get; set; }
+        /// <summary>
+        /// Тип соединения
+        /// </summary>
         public ConnectionType Type { get; set; }
     }
 }

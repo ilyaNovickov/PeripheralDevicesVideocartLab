@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
+﻿using System.Text;
 using VideocartLab.MainModelsProj;
 using VideocartLab.MainModelsProj.ConnectionInterface;
 using VideocartLab.MainModelsProj.GPUMemory;
@@ -11,8 +6,30 @@ using VideocartLab.MainModelsProj.Screen;
 
 namespace VideocartLab.ModelViews.Models;
 
+/// <summary>
+/// Среда для симуляции
+/// </summary>
 internal class ModelingEnvironment
 {
+    /// <summary>
+    /// Информация о соединених узлов
+    /// </summary>
+    private struct NodeConnectionInfo
+    {
+        /// <summary>
+        /// Исходный узел соединения
+        /// </summary>
+        public NodeModel SourseNode { get; set; }
+        /// <summary>
+        /// ID соединения
+        /// </summary>
+        public string? Id { get; set; }
+        /// <summary>
+        /// Тип соединения
+        /// </summary>
+        public ConnectionType Type { get; set; }
+    }
+
     private ProjectConverter projectConverter = new();
     private ProjectModel? project = null;
 
@@ -24,10 +41,15 @@ internal class ModelingEnvironment
 
     }
 
+    /// <summary>
+    /// ProjectViewModel для симуляции
+    /// </summary>
     public ProjectModelView ProjectVM
     {
         set
         {
+            //Создания ProjectModel и конвертация NodeModelView с содержанием
+            //к их моделям
             project = new ProjectModel();
 
             foreach (NodeModelView nodeVM in value.Nodes)
@@ -52,20 +74,23 @@ internal class ModelingEnvironment
         }
     }
 
+    /// <summary>
+    /// Событие вызова отчёта о действиях
+    /// </summary>
     public event EventHandler<ReportArgs>? Report;
 
+    /// <summary>
+    /// Начало моделирования
+    /// </summary>
     public void Start()
     {
         errors.Clear();
         warnings.Clear();
         Controller = null;
 
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
         BuildGPUEnvironment();
-        stopwatch.Stop();
 
-        var reports = CreateErrorReport();
+        StringBuilder reports = CreateErrorReport();
 
         Report?.Invoke(this, new ReportArgs(reports.ToString()));
 
@@ -74,8 +99,56 @@ internal class ModelingEnvironment
             Report?.Invoke(this, new ReportArgs("Моделирование не было запущено\n"));
             return;
         }
+
+        //...
     }
 
+    /// <summary>
+    /// Контроллер GPU для моделирования
+    /// </summary>
+    private GPUController? Controller
+    {
+        get; set;
+    }
+
+    /// <summary>
+    /// Формирование отчёта с предупреждениями и ошибками 
+    /// </summary>
+    /// <returns></returns>
+    private StringBuilder CreateErrorReport()
+    {
+        StringBuilder sb = new();
+
+        sb.AppendLine("=== Предупреждения ===");
+
+        if (warnings.Count == 0)
+            sb.AppendLine(" - Отсуствуют");
+        else
+            foreach (string warning in warnings)
+            {
+                sb.AppendLine($" - {warning}");
+            }
+
+        sb.AppendLine("======================");
+
+        sb.AppendLine("=== Ошибки ===");
+
+        if (errors.Count == 0)
+            sb.AppendLine(" - Отсуствуют");
+        else
+            foreach (string error in errors)
+            {
+                sb.AppendLine($" - {error}");
+            }
+
+        sb.AppendLine("==============");
+
+        return sb;
+    }
+
+    /// <summary>
+    /// Иницилизация GPUController с компонентами
+    /// </summary>
     private void BuildGPUEnvironment()
     {
         var controllers = project!.Nodes.FindAll((node) => node.InnerModel is GPUController);
@@ -84,6 +157,8 @@ internal class ModelingEnvironment
         var gpu = project.Nodes.FindAll((node) => node.InnerModel is GPU);
         var connectionInterface = project.Nodes.FindAll((node) => node.InnerModel is ConnectionInterface);
 
+        //Проверка правильного кол-во узлов
+        #region check1
         {
             List<(string, List<NodeModel>)> lists = new()
                 {
@@ -114,10 +189,24 @@ internal class ModelingEnvironment
                     $" Источник = \"{cortez.Item1}\"");
             }
         }
+        #endregion
 
         if (errors.Count != 0)
             return;
 
+        #region attention
+
+        GPUController controller = (controllers.First().InnerModel as GPUController)!;
+
+        GPU? gpuCandidate = null;
+        VRAM? vramCandidate = null;
+        ConnectionInterface? connectionInterfaceCandidate = null;
+
+        ScreenInterface? screenInterfaceCandidate = null;
+
+        #endregion
+
+        //Формирование списка соединений
         List<NodeConnectionInfo> conInfos = new(5);
 
         foreach (NodeModel node in project.Nodes)
@@ -133,10 +222,10 @@ internal class ModelingEnvironment
             }
         }
 
+        //Список уже проверенных (исключённых) соединений
         List<NodeConnectionInfo> exceptionInfos = new(5);
 
-        GPUController controller = (controllers.First().InnerModel as GPUController)!;
-
+        //Соединения контроллера
         var controllerConnections = conInfos.FindAll((info) =>
         {
             return info.SourseNode == controllers.First();
@@ -144,11 +233,9 @@ internal class ModelingEnvironment
 
         exceptionInfos.AddRange(controllerConnections);
 
-        //duplex
+        //Проверка соединений типа Duplex у контроллера 
         #region DuplexConnection
-        GPU? gpuCandidate = null;
-        VRAM? vramCandidate = null;
-        ConnectionInterface? connectionInterfaceCandidate = null;
+
 
         var duplexConnections = controllerConnections.FindAll((info) => info.Type == ConnectionType.Duplex && (info.Id != null && info.Id != ""));
 
@@ -207,10 +294,8 @@ internal class ModelingEnvironment
         }
         #endregion
 
-        //sending
+        //Проверка соединений типа Sending у контроллера
         #region SendingConnection
-        ScreenInterface? screenInterfaceCandidate = null;
-
         var sendingConnections = controllerConnections.FindAll((info) => info.Type == ConnectionType.Sending && (info.Id != null && info.Id != ""));
 
         if (sendingConnections.Count != 1)
@@ -268,16 +353,22 @@ internal class ModelingEnvironment
         }
         #endregion
 
+        //Проверка на недостижимые узлы
+        #region checkN-1
         exceptionInfos.AddRange(conInfos.FindAll((info) => info.Id == null || info.Id == ""));
 
         foreach (NodeConnectionInfo item in conInfos.Except(exceptionInfos))
         {
             exceptionInfos.Add(item);
         }
+        #endregion
 
+        //Кол-во проверенных (исключённых) узлов должен совпадать с общем кол-во
         if (exceptionInfos.Count != conInfos.Count)
             return;
 
+        //Проверка кандидатов на моделирование
+        #region checkN
         if (screenInterfaceCandidate != null)
             controller.ScreenInterface = screenInterfaceCandidate;
         else
@@ -297,63 +388,14 @@ internal class ModelingEnvironment
             controller.VRAM = vramCandidate;
         else
             errors.Enqueue("Не обнаружено соединение контроллера и памяти");
+        #endregion
 
         if (errors.Count != 0)
             return;
-
+        //Всё правильно
         Controller = controller;
     }
-
-    private GPUController? Controller
-    {
-        get; set;
-    }
-
-    private StringBuilder CreateErrorReport()
-    {
-        StringBuilder sb = new();
-
-        sb.AppendLine("=== Предупреждения ===");
-
-        if (warnings.Count == 0)
-            sb.AppendLine(" - Отсуствуют");
-        else
-            foreach (string warning in warnings)
-            {
-                sb.AppendLine($" - {warning}");
-            }
-
-        sb.AppendLine("======================");
-
-        sb.AppendLine("=== Ошибки ===");
-
-        if (errors.Count == 0)
-            sb.AppendLine(" - Отсуствуют");
-        else
-            foreach (string error in errors)
-            {
-                sb.AppendLine($" - {error}");
-            }
-
-        sb.AppendLine("==============");
-
-        return sb;
-    }
 }
 
-internal struct NodeConnectionInfo
-{
-    public NodeModel SourseNode { get; set; }
-    public string? Id { get; set; }
-    public  ConnectionType Type { get; set; }
-}
 
-internal class ReportArgs : EventArgs
-{
-    public string Message { get; private set; }
 
-    public ReportArgs(string message)
-    {
-        Message = message;
-    }
-}

@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace VideocartLab.ModelViews.Models
 {
+    /// <summary>
+    /// Модель проекта
+    /// </summary>
     public class ProjectModel
     {
         private List<NodeModel> nodes = new List<NodeModel>();
 
+        /// <summary>
+        /// Список узлов в проекте
+        /// </summary>
         [JsonInclude]
         public List<NodeModel> Nodes
         {
