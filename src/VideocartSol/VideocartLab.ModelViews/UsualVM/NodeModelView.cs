@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace VideocartLab.ModelViews
 {
+    /// <summary>
+    /// Узел
+    /// </summary>
     public class NodeModelView : ModelViewBase
     {
-        #region Properties
+        private ObservableCollection<ConnectionModelView> connections = new();
+
+        /// <summary>
+        /// Соединения узла
+        /// </summary>
+        public ObservableCollection<ConnectionModelView> Connections => connections;
+
+        #region StandartProperties
         private double x;
         private double y;
         private double width;
@@ -18,6 +22,9 @@ namespace VideocartLab.ModelViews
         private ModelViewBase? innerContent = null;
         private string? name = null;
 
+        /// <summary>
+        /// Координата X
+        /// </summary>
         public double X
         {
             get => x;
@@ -27,6 +34,10 @@ namespace VideocartLab.ModelViews
                 OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Координата Y
+        /// </summary>
         public double Y
         {
             get => y;
@@ -36,6 +47,10 @@ namespace VideocartLab.ModelViews
                 OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Ширина узла
+        /// </summary>
         public double Width
         {
             get => width;
@@ -45,6 +60,10 @@ namespace VideocartLab.ModelViews
                 OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Высота узла
+        /// </summary>
         public double Height
         {
             get => height;
@@ -55,6 +74,9 @@ namespace VideocartLab.ModelViews
             }
         }
 
+        /// <summary>
+        /// Внутренний ModelView узла
+        /// </summary>
         public ModelViewBase? InnerContent
         {
             get => innerContent;
@@ -64,6 +86,10 @@ namespace VideocartLab.ModelViews
                 OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Имя узла
+        /// </summary>
         public string? Name
         {
             get => name;
@@ -75,69 +101,14 @@ namespace VideocartLab.ModelViews
         }
         #endregion
 
+        /// <summary>
+        /// Событие нажатия на узел
+        /// </summary>
         public event EventHandler<NodePressedArgs>? NodePressed;
 
-        public void Clicked()
-        {
-            NodePressed?.Invoke(this, new NodePressedArgs(this));
-        }
-
-
-
-        private ObservableCollection<ConnectionModelView> connections = new();
-
-        public ObservableCollection<ConnectionModelView> Connections => connections;
-    }
-
-    public class NodePressedArgs : EventArgs
-    {
-        public NodeModelView Node { get; private set; }
-
-        public NodePressedArgs(NodeModelView node)
-        {
-            Node = node;
-        }
-    }
-
-    public enum ConnectionType
-    {
-        Undef, 
-        Getting,
-        Sending,
-        Duplex
-    }
-
-    public class ConnectionModelView : ModelViewBase
-    {
-        private ConnectionType type = ConnectionType.Undef;
-        private string? id = "";
-
-        public ConnectionType Type
-        {
-            get => type;
-            set
-            {
-                type = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string? Id
-        {
-            get => id;
-            set
-            {
-                id = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ImmutableArray<ConnectionType> AvaibleConnectionTypes { get; } = (new List<ConnectionType>() 
-        { 
-            ConnectionType.Undef,
-            ConnectionType.Getting,
-            ConnectionType.Sending,
-            ConnectionType.Duplex
-        }).ToImmutableArray<ConnectionType>();
+        /// <summary>
+        /// Вызов события нажатия на узел
+        /// </summary>
+        public void Clicked() => NodePressed?.Invoke(this, new NodePressedArgs(this));
     }
 }

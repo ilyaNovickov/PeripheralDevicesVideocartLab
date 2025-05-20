@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideocartLab.ModelViews
+﻿namespace VideocartLab.ModelViews
 {
     public partial class ProjectModelView
     {
+        /// <summary>
+        /// Режим перемещения узла
+        /// </summary>
         private class MovingNodeMode : IModeBase
         {
             public MovingNodeMode(ProjectModelView parent)
@@ -21,7 +18,7 @@ namespace VideocartLab.ModelViews
 
             public void OnPointerPressed()
             {
-                //StartMove();
+                //Нажато на пустое пространство
                 this.Parent.SelectedNode = null;
             }
 

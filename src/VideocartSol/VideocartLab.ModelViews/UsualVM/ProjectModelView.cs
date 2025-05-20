@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace VideocartLab.ModelViews
 {
+    /// <summary>
+    /// Проект
+    /// </summary>
     public partial class ProjectModelView : ModelViewBase
     {
         private struct Point
@@ -31,17 +29,16 @@ namespace VideocartLab.ModelViews
 
         private ObservableCollection<NodeModelView> nodes = new();
 
-        #if DEBUG
+#if DEBUG
         public ProjectModelView()
         {
 
         }
-        #endif
+#endif
+
         public ProjectModelView(NodeFactoryService factoryService)
         {
             this.factoryService = factoryService;
-
-            
 
             idle = new IdleMode(this);
             addNode = new AddingNodeMode(this);
@@ -58,6 +55,11 @@ namespace VideocartLab.ModelViews
             nodes.CollectionChanged -= Nodes_CollectionChanged;
         }
 
+        /// <summary>
+        /// Обработка события изменения списка узлов
+        /// </summary>
+        /// <param name="sender">Источник события</param>
+        /// <param name="e">Аргументы события</param>
         private void Nodes_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -80,6 +82,10 @@ namespace VideocartLab.ModelViews
             }
         }
 
+        /// <summary>
+        /// Обработка события добавления узла
+        /// </summary>
+        /// <param name="e"></param>
         private void OnNodeAdded(NodeAddedArgs e)
         {
             e.AddedNode.NodePressed += OnNodePressed;
@@ -87,6 +93,10 @@ namespace VideocartLab.ModelViews
             NodeAdded?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Обработка события удаления узла
+        /// </summary>
+        /// <param name="e"></param>
         private void OnNodeRemoved(NodeRemovedArgs e)
         {
             e.RemovedNode.NodePressed -= OnNodePressed;
@@ -94,10 +104,26 @@ namespace VideocartLab.ModelViews
             NodeRemoved?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Событие очистки списка узлов
+        /// </summary>
         public event EventHandler? NodeListCleared;
 
+        /// <summary>
+        /// Событие удаления узла
+        /// </summary>
         public event EventHandler<NodeRemovedArgs>? NodeRemoved;
 
+        /// <summary>
+        /// Событие добавления узла
+        /// </summary>
+        public event EventHandler<NodeAddedArgs>? NodeAdded;
+
+        /// <summary>
+        /// Обработка события нажатия на узел
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void OnNodePressed(object? sender, NodePressedArgs args)
         {
             if (Mode == remove)
@@ -109,7 +135,6 @@ namespace VideocartLab.ModelViews
             if (Mode == addNode)
                 return;
 
-            //if (Mode == move && args.Node == this.SelectedNode)
             if (Mode == move)
             {
                 if (args.Node == this.SelectedNode)
@@ -133,10 +158,13 @@ namespace VideocartLab.ModelViews
                 Mode = idle;
         }
 
-        public event EventHandler<NodeAddedArgs>? NodeAdded;
+
 
         private NodeFactoryService NodeFactoryService { get { return factoryService; } }
 
+        /// <summary>
+        /// Кандидат на добавление
+        /// </summary>
         public Type? CandidateToAdd
         {
             get => candidatToAdd;
@@ -144,15 +172,18 @@ namespace VideocartLab.ModelViews
             {
                 candidatToAdd = value;
 
-                
+
                 if (candidatToAdd != null)
                     Mode = addNode;
                 else
                     Mode = idle;
-                
+
             }
         }
 
+        /// <summary>
+        /// Выбранный узел
+        /// </summary>
         public NodeModelView? SelectedNode
         {
             get => selectedNode;
@@ -162,6 +193,9 @@ namespace VideocartLab.ModelViews
             }
         }
 
+        /// <summary>
+        /// Режим проекта
+        /// </summary>
         private IModeBase Mode
         {
             get => mode;
@@ -171,9 +205,16 @@ namespace VideocartLab.ModelViews
             }
         }
 
+        /// <summary>
+        /// Список узлов проекта
+        /// </summary>
         internal ObservableCollection<NodeModelView> Nodes => nodes;
-        
 
+        /// <summary>
+        /// Нажатие на проект мышью
+        /// </summary>
+        /// <param name="x">Координата X</param>
+        /// <param name="y">Координата Y</param>
         public void OnPointerPressed(double x, double y)
         {
             prevPoint.X = x;
@@ -182,6 +223,11 @@ namespace VideocartLab.ModelViews
             Mode.OnPointerPressed();
         }
 
+        /// <summary>
+        /// Перемещение мыши
+        /// </summary>
+        /// <param name="newX">Новая координата X</param>
+        /// <param name="newY">Новая координата Y</param>
         public void OnPointerMoved(double newX, double newY)
         {
             double dx = newX - prevPoint.X;
@@ -193,11 +239,18 @@ namespace VideocartLab.ModelViews
             prevPoint.Y = newY;
         }
 
+        /// <summary>
+        /// Отпускание мыши
+        /// </summary>
         public void OnPointerReleased()
         {
             Mode.OnPointerReleased();
         }
 
+        /// <summary>
+        /// Добавление узла
+        /// </summary>
+        /// <returns></returns>
         public NodeModelView? AddNode()
         {
             if (CandidateToAdd == null)
@@ -208,6 +261,9 @@ namespace VideocartLab.ModelViews
             return node;
         }
 
+        /// <summary>
+        /// Удаление выбранного узла
+        /// </summary>
         public void RemoveSelectedNode()
         {
             if (SelectedNode == null)
@@ -219,6 +275,10 @@ namespace VideocartLab.ModelViews
             nodes.Remove(node);
         }
 
+        /// <summary>
+        /// Удаление узла
+        /// </summary>
+        /// <param name="node">Узел на удаление</param>
         public void RemoveNode(NodeModelView node)
         {
             if (SelectedNode == node)
@@ -229,34 +289,21 @@ namespace VideocartLab.ModelViews
             nodes.Remove(node);
         }
 
+        /// <summary>
+        /// Переключение в режим удаление
+        /// </summary>
+        /// <param name="turnOn"></param>
         public void ToggleRemoveMode(bool turnOn)
         {
             Mode = turnOn ? remove : idle;
         }
 
+        /// <summary>
+        /// Установка в режи простоя
+        /// </summary>
         public void SetIdleMode()
         {
             this.Mode = idle;
-        }
-    }
-
-    public class NodeAddedArgs : EventArgs
-    {
-        public NodeModelView AddedNode { get; private set; }
-
-        public NodeAddedArgs(NodeModelView addedNode)
-        {
-            AddedNode = addedNode;
-        }
-    }
-
-    public class NodeRemovedArgs : EventArgs
-    {
-        public NodeModelView RemovedNode { get; private set; }
-
-        public NodeRemovedArgs(NodeModelView removedNode)
-        {
-            RemovedNode = removedNode;
         }
     }
 }

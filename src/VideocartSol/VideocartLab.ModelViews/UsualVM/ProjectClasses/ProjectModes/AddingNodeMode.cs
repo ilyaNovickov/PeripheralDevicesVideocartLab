@@ -1,34 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.XPath;
-
-namespace VideocartLab.ModelViews
+﻿namespace VideocartLab.ModelViews
 {
     public partial class ProjectModelView
     {
-        private class IdleMode : IModeBase
+        /// <summary>
+        /// Режим добавления узла
+        /// </summary>
+        private class AddingNodeMode : IModeBase
         {
-            public IdleMode(ProjectModelView parent) 
+            public AddingNodeMode(ProjectModelView parent)
             {
                 Parent = parent;
             }
+
             public ProjectModelView Parent { get; private set; }
 
             public void OnPointerPressed()
             {
+                var node = Parent.AddNode();
 
+                Parent.Nodes.Add(node!);
             }
+
             public void OnPointerMoved(double dx, double dy)
             {
-
+                return;
             }
+
             public void OnPointerReleased()
             {
-
+                return;
             }
         }
-    } 
+    }
 }

@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using System.Threading.Tasks;
-using VideocartLab.ModelViews.Models;
-using System.Text.Json.Serialization.Metadata;
+﻿using System.Text;
 using VideocartLab.MainModelsProj;
-using VideocartLab.MainModelsProj.GPUMemory;
-using VideocartLab.MainModelsProj.Screen;
-using VideocartLab.MainModelsProj.ConnectionInterface;
+using VideocartLab.ModelViews.Models;
+using VideocartLab.ModelViews.Serializaion;
 
 namespace VideocartLab.ModelViews;
 
+/// <summary>
+/// ModelView для основного окна
+/// </summary>
 public class MainWindowModelView : ModelViewBase
 {
     private ProjectModelView? projectVM;
     private NodeListModelView? nodeListVM;
     private NodeFactoryService factoryService;
     private StringBuilder report = new StringBuilder();
+
+    private RelayCommand removeSelectedNode;
+    private GenericCommand<bool> removeNode;
+    private RelayCommand startModeling;
 
     VideocartLab.ModelViews.Models.ModelingEnvironment modelingEnvironment;
 
@@ -41,31 +39,15 @@ public class MainWindowModelView : ModelViewBase
         modelingEnvironment.Report += ModelingEnvironment_Report;
     }
 
-    private void ModelingEnvironment_Report(object? sender, ReportArgs e)
-    {
-        report.AppendLine(e.Message);
-        report.AppendLine();
-        OnPropertyChanged(nameof(Report));
-    }
+    #region Properties
+    /// <summary>
+    /// Отчёт о симуляции
+    /// </summary>
+    public string Report => report.ToString();
 
-    public string Report
-    {
-        get => report.ToString();
-    }
-
-    private void ProjectVM_NodeAdded(object? sender, NodeAddedArgs e)
-    {
-        nodeListVM!.SelectedItem = null;
-    }
-
-    private void NodeListVM_SelectedItemChanged(object? sender, SelectedNodeItemChangedArgs e)
-    {
-        if (e.NewItem == null)
-            projectVM!.CandidateToAdd = null;
-        else
-            projectVM!.CandidateToAdd = e.NewItem.NodeType;
-    }
-
+    /// <summary>
+    /// ProjectModelView
+    /// </summary>
     public ProjectModelView? Project
     {
         get => projectVM;
@@ -76,6 +58,9 @@ public class MainWindowModelView : ModelViewBase
         }
     }
 
+    /// <summary>
+    /// NodeListModelView
+    /// </summary>
     public NodeListModelView? NodeList
     {
         get => nodeListVM;
@@ -85,33 +70,78 @@ public class MainWindowModelView : ModelViewBase
             OnPropertyChanged();
         }
     }
+    #endregion
 
-    private RelayCommand removeSelectedNode;
-
+    #region Commands
+    /// <summary>
+    /// Команда удаления выбранного узла
+    /// </summary>
     public RelayCommand RemoveSelectedNodeCommand => removeSelectedNode;
 
-    private GenericCommand<bool> removeNode;
-
+    /// <summary>
+    /// Команда перехода в режим удаления узла
+    /// </summary>
     public GenericCommand<bool> RemoveNodeCommand => removeNode;
 
-    private RelayCommand startModeling;
-
+    /// <summary>
+    /// Команда запуска ма=оделировани
+    /// </summary>
     public RelayCommand StartModelingCommand => startModeling;
 
+    /// <summary>
+    /// ЗАпуск симуляции
+    /// </summary>
     private void StartModeling()
     {
         modelingEnvironment.ProjectVM = Project!;
         modelingEnvironment.Start();
+    }
+    #endregion
 
-
+    #region EventHandlers
+    /// <summary>
+    /// Обработка события формирования отчёта о симуляции
+    /// </summary>
+    /// <param name="sender">Источник события</param>
+    /// <param name="e">Аргументы события</param>
+    private void ModelingEnvironment_Report(object? sender, ReportArgs e)
+    {
+        report.AppendLine(e.Message);
+        report.AppendLine();
+        OnPropertyChanged(nameof(Report));
     }
 
+    /// <summary>
+    /// Обработка события формирования отчёта о симуляции
+    /// </summary>
+    /// <param name="sender">Источник события</param>
+    /// <param name="e">Аргументы события</param>
+    private void ProjectVM_NodeAdded(object? sender, NodeAddedArgs e)
+    {
+        nodeListVM!.SelectedItem = null;
+    }
+
+    /// <summary>
+    /// Изменния выбранного узла на добавление
+    /// </summary>
+    /// <param name="sender">Источник события</param>
+    /// <param name="e">Аргументы события</param>
+    private void NodeListVM_SelectedItemChanged(object? sender, SelectedNodeItemChangedArgs e)
+    {
+        if (e.NewItem == null)
+            projectVM!.CandidateToAdd = null;
+        else
+            projectVM!.CandidateToAdd = e.NewItem.NodeType;
+    }
+    #endregion
+
+    [Obsolete]
     public void SaveProject(string path)
     {
         ProjectConverter projectConverter = new();
         ProjectModel project = new ProjectModel();
 
-        foreach (NodeModelView nodeVM in projectVM.Nodes)
+        foreach (NodeModelView nodeVM in projectVM!.Nodes)
         {
             NodeModel nodeModel = new NodeModel()
             {
@@ -132,14 +162,15 @@ public class MainWindowModelView : ModelViewBase
             project.Nodes.Add(nodeModel);
         }
 
-        ProjectSerializer.SerializeToFileAsync(project, path);
+        using var _ = ProjectSerializer.SerializeToFileAsync(project, path);
     }
 
+    [Obsolete]
     public async void LoadProject(string path)
     {
         var projectModelTask = await ProjectSerializer.DeserializeFromFileAsync(path);
 
-        Project.Nodes.Clear();
+        Project!.Nodes.Clear();
 
         Project.CandidateToAdd = null;
         Project.SetIdleMode();
@@ -153,152 +184,3 @@ public class MainWindowModelView : ModelViewBase
     }
 }
 
-public static class ProjectVMConverter
-{
-    private static Dictionary<Type, Func<object, ModelViewBase>> modelViewDict;
-
-    public static IEnumerable<NodeModelView> ConvertToModelView(IEnumerable<NodeModel> nodes)
-    {
-        List<NodeModelView> nodesVM = new(nodes.Count());
-
-        foreach (NodeModel node in nodes) 
-        {
-            NodeModelView nodeVM = new NodeModelView()
-            {
-                Name = node.Name,
-                X = node.X,
-                Y = node.Y,
-                Width = node.Width,
-                Height = node.Height
-            };
-
-            if (node.InnerModel == null)
-                throw new Exception("У узла нет дочернего элемента");
-
-            nodeVM.InnerContent = modelViewDict[node.InnerModel.GetType()].Invoke(node.InnerModel);
-
-            if (node.Connections == null)
-                throw new Exception("У узла нет каких-либо соединений");
-
-            foreach (ConnectionModel connection in node.Connections)
-            {
-                ConnectionModelView? connVM = modelViewDict[connection.GetType()].Invoke(connection) 
-                    as ConnectionModelView;
-                nodeVM.Connections.Add(connVM!);
-            }
-
-            nodesVM.Add(nodeVM);
-        }
-
-        return nodesVM;
-    }
-
-    static ProjectVMConverter()
-    {
-        modelViewDict = new Dictionary<Type, Func<object, ModelViewBase>>();
-
-        modelViewDict.Add(typeof(ConnectionModel), (model) =>
-        {
-            ConnectionModel conn = model as ConnectionModel;
-            ConnectionModelView connVM = new()
-            {
-                Id = conn.Id,
-                Type = conn.Type
-            };
-            return connVM;
-        });
-        #region Models
-        modelViewDict.Add(typeof(GPU), (model) =>
-        {
-            GPU gpu = model as GPU;
-            GPUContentModelView gpuVM = new()
-            {
-                Name = gpu.Name,
-                Cores = gpu.Cores,
-                Frequency = gpu.Frequency,
-                TextureMappingUnits = gpu.TextureMappingUnits,
-                RenderOutputPipelines = gpu.RenderOutputPipelines
-            };
-            return gpuVM;
-        });
-        modelViewDict.Add(typeof(VRAM), (model) => {
-            VRAM? vram = model as VRAM;
-            VRAMModelView vramVM = new VRAMModelView()
-            {
-                Capacity = vram.Capacity,
-                MemoryBusCapacity = vram.MemoryBusCapacity,
-            };
-            vramVM.SelectedGDDR = vramVM.GDDRTypes
-            .ToList()
-            .Find((item) => item.Type == vram.Type);
-            vramVM.RealFrequency = vram.RealFrequency;
-            //vramVM.EffectiveFrequency = vram.EffectiveFrequency;
-            return vramVM;
-        });
-        modelViewDict.Add(typeof(GPUController), (model) =>
-        {
-            GPUController? controller = model as GPUController;
-            GPUControllerModelView controllerVM = new GPUControllerModelView();
-            //
-            return controllerVM;
-        });
-        modelViewDict.Add(typeof(ScreenInterface), (model) =>
-        {
-            ScreenInterface? screen = model as ScreenInterface;
-            ScreenInterfaceViewModel screenVM = new ScreenInterfaceViewModel()
-            {
-                ScreenHeight = screen.MaxHeight,
-                ScreenWidth = screen.MaxWidth,
-                BitPerPixel = screen.BitPerPixel,
-                Frequency = screen.Frequency,
-                Bandwidth = screen.Bandwidth,
-            };
-            return screenVM;
-        });
-        modelViewDict.Add(typeof(ConnectionInterface), (model) =>
-        {
-            ConnectionInterface? connection = model as ConnectionInterface;
-            ConnectionInterfaceModelView connectionVM = new ConnectionInterfaceModelView();
-            //connectionVM.ConnectionInfos[0].
-
-            return connectionVM;
-        });
-        #endregion
-    }
-}
-
-public static class ProjectSerializer
-{
-    private static readonly JsonSerializerOptions _options = new JsonSerializerOptions
-    {
-        WriteIndented = true,
-        // Если хочешь сериализовать object (InnerModel), стоит добавить:
-         IncludeFields = true,
-         ReferenceHandler = ReferenceHandler.Preserve,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-    };
-
-    public static string Serialize(ProjectModel project)
-    {
-        return JsonSerializer.Serialize(project, _options);
-    }
-
-    public static ProjectModel? Deserialize(string json)
-    {
-        return JsonSerializer.Deserialize<ProjectModel>(json, _options);
-    }
-
-    // Для сохранения в файл
-    public static async Task SerializeToFileAsync(ProjectModel project, string filePath)
-    {
-        using var stream = File.Create(filePath);
-        await JsonSerializer.SerializeAsync(stream, project, _options);
-    }
-
-    // Для загрузки из файла
-    public static async Task<ProjectModel?> DeserializeFromFileAsync(string filePath)
-    {
-        using var stream = File.OpenRead(filePath);
-        return await JsonSerializer.DeserializeAsync<ProjectModel>(stream, _options);
-    }
-}
