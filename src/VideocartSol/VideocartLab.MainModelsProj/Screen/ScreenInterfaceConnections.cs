@@ -6,13 +6,28 @@ using System.Threading.Tasks;
 
 namespace VideocartLab.MainModelsProj.Screen
 {
+    /// <summary>
+    /// Стандратные разрешения экрана
+    /// </summary>
     internal enum Solutions
     {
         _1080p, _4k, _8k, _720p
     }
 
+    /// <summary>
+    /// Иницилизация стандратых настроек для портов подключения к экрану
+    /// </summary>
     internal static class ScreenInterfaceConnections
     {
+        /// <summary>
+        /// Иницилизирует экземпляры портов подключения к экрану
+        /// </summary>
+        /// <param name="bandwidth">Требуемая пропускная способность</param>
+        /// <param name="frequency">Частота обновления экрана [Гц]</param>
+        /// <param name="bitPerPix">Глубина цвета [бит]</param>
+        /// <param name="solution">Разрешение экрана</param>
+        /// <returns>Экземпляр порта подключения к экрану</returns>
+        /// <exception cref="NotImplementedException">Используется нестандартное подключение к экрану</exception>
         internal static ScreenInterface CreateInterface(double bandwidth, double frequency, int bitPerPix, Solutions solution)
         {
             switch (solution)

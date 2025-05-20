@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideocartLab.MainModelsProj.ConnectionInterface
+﻿namespace VideocartLab.MainModelsProj.ConnectionInterface
 {
+    /// <summary>
+    /// Типы кодировок для сжатия данных
+    /// </summary>
     public enum EncodingType
     {
         Another,

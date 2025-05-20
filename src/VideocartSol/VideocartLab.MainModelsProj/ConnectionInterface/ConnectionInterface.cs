@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideocartLab.MainModelsProj.ConnectionInterface
+﻿namespace VideocartLab.MainModelsProj.ConnectionInterface
 {
     /// <summary>
     /// Абстактный класс для интерфейсов подключения видеокарты
@@ -14,10 +8,7 @@ namespace VideocartLab.MainModelsProj.ConnectionInterface
         /// <summary>
         /// Абстрактное свойство пропускной способности интерфейса подключения [ГБ/с]
         /// </summary>
-        public virtual double Bandwidth
-        {
-            get;
-        }
+        public virtual double Bandwidth { get; }
 
         public virtual double Frequency { get; set; }
     }

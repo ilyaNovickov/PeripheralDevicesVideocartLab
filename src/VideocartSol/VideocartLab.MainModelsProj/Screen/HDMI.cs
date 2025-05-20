@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideocartLab.MainModelsProj.Screen
+﻿namespace VideocartLab.MainModelsProj.Screen
 {
+    /// <summary>
+    /// Стандратные настройки для разных версий порта HDMI
+    /// </summary>
     public static class HDMI
     {
-        public static ScreenInterface HDMI1dot3_1080p => ScreenInterfaceConnections.CreateInterface(8.16d, 144, 8, Solutions._1080p); 
+        public static ScreenInterface HDMI1dot3_1080p => ScreenInterfaceConnections.CreateInterface(8.16d, 144, 8, Solutions._1080p);
         public static ScreenInterface HDMI1dot3_720p => ScreenInterfaceConnections.CreateInterface(8.16d, 144, 8, Solutions._720p);
         public static ScreenInterface HDMI1dot3_4k => ScreenInterfaceConnections.CreateInterface(8.16d, 30, 8, Solutions._4k);
 

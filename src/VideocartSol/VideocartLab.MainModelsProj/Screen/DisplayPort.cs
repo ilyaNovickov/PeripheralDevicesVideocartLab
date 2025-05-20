@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideocartLab.MainModelsProj.Screen
+﻿namespace VideocartLab.MainModelsProj.Screen
 {
+    /// <summary>
+    /// Стандартные настройки для разных версий порта DisplayPort
+    /// </summary>
     public static class DisplayPort
     {
         public static ScreenInterface DP2_1080p => ScreenInterfaceConnections.CreateInterface(77.37d, 240, 8, Solutions._1080p);

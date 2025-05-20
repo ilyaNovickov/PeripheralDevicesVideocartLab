@@ -1,5 +1,8 @@
 ﻿namespace VideocartLab.MainModelsProj
 {
+    /// <summary>
+    /// Цип GPU
+    /// </summary>
     public class GPU : BaseModel
     {
         private string? name = null;

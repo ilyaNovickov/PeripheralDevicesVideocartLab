@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideocartLab.MainModelsProj.GPUMemory
+﻿namespace VideocartLab.MainModelsProj.GPUMemory
 {
     /// <summary>
     /// Класс типа GDDR памяти
@@ -105,7 +99,6 @@ namespace VideocartLab.MainModelsProj.GPUMemory
                     break;
                 default:
                     throw new Exception("Unsupported GDDR type");
-                    break;
             }
         }
     }

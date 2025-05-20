@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideocartLab.MainModelsProj
+﻿namespace VideocartLab.MainModelsProj
 {
+    /// <summary>
+    /// Класс для определения правильности введённых значений
+    /// </summary>
     public static class ValuesValidator
     {
         public static void ValidUnnegativeArgument(double value)
