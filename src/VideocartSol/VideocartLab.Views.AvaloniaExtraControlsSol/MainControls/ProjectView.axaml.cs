@@ -24,6 +24,7 @@ public partial class ProjectView : UserControl
             {
                 ProjectVM.NodeAdded -= Project_NodeAdded;
                 ProjectVM.NodeRemoved -= Project_NodeRemoved;
+                ProjectVM.NodeListCleared -= Project_NodeListCleared;
             }
 
             SetValue(ProjectVMProperty, value);
@@ -33,7 +34,13 @@ public partial class ProjectView : UserControl
 
             value.NodeAdded += Project_NodeAdded;
             value.NodeRemoved += Project_NodeRemoved;
+            value.NodeListCleared += Project_NodeListCleared;
         }
+    }
+
+    private void Project_NodeListCleared(object? sender, EventArgs e)
+    {
+        mainCanvas.Children.Clear();
     }
 
     private void Project_NodeRemoved(object? sender, NodeRemovedArgs e)

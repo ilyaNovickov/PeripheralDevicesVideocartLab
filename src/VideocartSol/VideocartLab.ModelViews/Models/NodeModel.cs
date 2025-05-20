@@ -9,6 +9,7 @@ namespace VideocartLab.ModelViews.Models
 {
     public class NodeModel
     {
+        public string? Name { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
         public double Width { get; set; }

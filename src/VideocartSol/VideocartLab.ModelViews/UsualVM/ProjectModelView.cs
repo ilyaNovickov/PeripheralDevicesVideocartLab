@@ -73,6 +73,7 @@ namespace VideocartLab.ModelViews
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    NodeListCleared?.Invoke(this, new EventArgs());
                     break;
                 default:
                     break;
@@ -92,6 +93,8 @@ namespace VideocartLab.ModelViews
 
             NodeRemoved?.Invoke(this, e);
         }
+
+        public event EventHandler? NodeListCleared;
 
         public event EventHandler<NodeRemovedArgs>? NodeRemoved;
 
@@ -229,6 +232,11 @@ namespace VideocartLab.ModelViews
         public void ToggleRemoveMode(bool turnOn)
         {
             Mode = turnOn ? remove : idle;
+        }
+
+        public void SetIdleMode()
+        {
+            this.Mode = idle;
         }
     }
 
