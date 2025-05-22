@@ -7,7 +7,7 @@
 		xmlns:vm="clr-namespace:VideocartLab.ModelViews;assembly=VideocartLab.ModelViews"
         x:Class="VideocartLab.Views.AvaloniaProj.MainWindow"
 		xmlns:cntr="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol"
-        Title="VideocartLab.Views.AvaloniaProj"
+        Title="Виртуальная лабораторная работа 'Видеокарта'"
 		x:DataType="vm:MainWindowModelView"
 		MinWidth="300"
 		MinHeight="300">

@@ -6,6 +6,9 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <PublishAot>False</PublishAot>
   </PropertyGroup>
 
   <ItemGroup>
