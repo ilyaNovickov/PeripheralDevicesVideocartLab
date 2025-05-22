@@ -62,6 +62,7 @@
 				<ToggleButton x:Name="removeToggleButton"
 							  Content="Удаление узла" 
 							  ClickMode="Press"
+							  Click="ToggleButton_Click_1"
 							  Command="{Binding RemoveNodeCommand}"
 							  CommandParameter="{Binding $self.IsChecked}"/>
 				<Button Content="Экспорт холста в изображение"

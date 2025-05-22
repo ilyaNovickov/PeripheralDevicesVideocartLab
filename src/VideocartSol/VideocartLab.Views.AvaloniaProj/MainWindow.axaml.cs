@@ -24,6 +24,7 @@ namespace VideocartLab.Views.AvaloniaProj
             projectView.ProjectVM = mainVM.Project;
             nodeListView.NodeListVM = mainVM.NodeList;
 
+            //nodeListView.SelectionChanged 
         }
 
         private void ComboBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
@@ -178,6 +179,21 @@ namespace VideocartLab.Views.AvaloniaProj
                 item.Dispose();
             }
             //file?.D();
+        }
+
+        private void ToggleButton_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if (removeToggleButton.IsChecked!.Value)
+                nodeListView.SelectionChanged += NodeListView_SelectionChanged;
+            else
+                nodeListView.SelectionChanged -= NodeListView_SelectionChanged;
+        }
+
+        private void NodeListView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            nodeListView.SelectionChanged -= NodeListView_SelectionChanged;
+
+            removeToggleButton.IsChecked = false;
         }
     }
 }

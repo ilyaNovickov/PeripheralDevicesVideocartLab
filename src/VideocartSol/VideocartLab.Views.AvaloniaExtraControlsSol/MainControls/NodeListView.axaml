@@ -21,10 +21,12 @@
 	<Design.DataContext>
 		<vm:NodeListModelView/>
 	</Design.DataContext>
-	<ListBox ItemsSource="{Binding AvaibleNodes}"
+	<ListBox x:Name="listBox1"
+			 ItemsSource="{Binding AvaibleNodes}"
 			 SelectedItem="{Binding SelectedItem}"
 			 SelectionMode="Toggle" 
-			 ScrollViewer.AllowAutoHide="False">
+			 ScrollViewer.AllowAutoHide="False"
+			 SelectionChanged="ListBox_SelectionChanged">
 		<ListBox.ItemTemplate>
 			<DataTemplate>
 				<Border Margin="2,2,2,2"

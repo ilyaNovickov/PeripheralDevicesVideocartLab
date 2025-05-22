@@ -22,4 +22,11 @@ public partial class NodeListView : UserControl
             SetValue(NodeListVMProperty, value);
         }
     }
+
+    public event EventHandler<SelectionChangedEventArgs>? SelectionChanged;
+
+    private void ListBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
+    {
+        SelectionChanged?.Invoke(this, e);
+    }
 }
