@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
+VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideocartLab.Views.AvaloniaProj", "VideocartLab.Views.AvaloniaProj\VideocartLab.Views.AvaloniaProj.csproj", "{F2885D0C-EE68-4FD9-A9EE-CF1B895AB11D}"
 EndProject
@@ -15,24 +15,33 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		ReleaseAOT|Any CPU = ReleaseAOT|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F2885D0C-EE68-4FD9-A9EE-CF1B895AB11D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F2885D0C-EE68-4FD9-A9EE-CF1B895AB11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2885D0C-EE68-4FD9-A9EE-CF1B895AB11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2885D0C-EE68-4FD9-A9EE-CF1B895AB11D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2885D0C-EE68-4FD9-A9EE-CF1B895AB11D}.ReleaseAOT|Any CPU.ActiveCfg = ReleaseAOT|Any CPU
+		{F2885D0C-EE68-4FD9-A9EE-CF1B895AB11D}.ReleaseAOT|Any CPU.Build.0 = ReleaseAOT|Any CPU
 		{FEA9B378-972D-4804-88C3-3DF0EA401C44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FEA9B378-972D-4804-88C3-3DF0EA401C44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEA9B378-972D-4804-88C3-3DF0EA401C44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEA9B378-972D-4804-88C3-3DF0EA401C44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEA9B378-972D-4804-88C3-3DF0EA401C44}.ReleaseAOT|Any CPU.ActiveCfg = ReleaseAOT|Any CPU
+		{FEA9B378-972D-4804-88C3-3DF0EA401C44}.ReleaseAOT|Any CPU.Build.0 = ReleaseAOT|Any CPU
 		{ACBB6F00-DD00-4ACC-B325-936D61B0FAE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACBB6F00-DD00-4ACC-B325-936D61B0FAE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACBB6F00-DD00-4ACC-B325-936D61B0FAE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACBB6F00-DD00-4ACC-B325-936D61B0FAE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACBB6F00-DD00-4ACC-B325-936D61B0FAE7}.ReleaseAOT|Any CPU.ActiveCfg = Release|Any CPU
+		{ACBB6F00-DD00-4ACC-B325-936D61B0FAE7}.ReleaseAOT|Any CPU.Build.0 = Release|Any CPU
 		{D82847B5-29CD-4096-B128-00069790B004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D82847B5-29CD-4096-B128-00069790B004}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D82847B5-29CD-4096-B128-00069790B004}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D82847B5-29CD-4096-B128-00069790B004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D82847B5-29CD-4096-B128-00069790B004}.ReleaseAOT|Any CPU.ActiveCfg = Release|Any CPU
+		{D82847B5-29CD-4096-B128-00069790B004}.ReleaseAOT|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

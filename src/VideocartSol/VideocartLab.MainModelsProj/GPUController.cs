@@ -48,5 +48,10 @@ namespace VideocartLab.MainModelsProj
             get => screenInterface;
             set => screenInterface = value;
         }
+
+        /// <summary>
+        /// Список действий контроллера
+        /// </summary>
+        public List<GPUActions>? Actions { get; set; }
     }
 }

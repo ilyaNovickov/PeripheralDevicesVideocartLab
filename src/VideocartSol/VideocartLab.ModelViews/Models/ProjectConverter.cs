@@ -46,7 +46,8 @@ namespace VideocartLab.ModelViews.Models
             {
                 GPUControllerModelView? controllerVM = vm as GPUControllerModelView;
                 GPUController controller = new GPUController();
-                //
+                controller.Actions = (from action in controllerVM!.GpuActions 
+                                      select action.Action).ToList();
                 return controller;
             });
             modelDict.Add(typeof(ScreenInterfaceViewModel), (vm) =>

@@ -59,27 +59,34 @@ public class GPUControllerModelView : ModelViewBase
         actions.Add(new GPUAction(GPUActions.DesicionFrameRate, "Согласование с монитором частоты кадров"));
         actions.Add(new GPUAction(GPUActions.HandshakeWithScreenEnd, "КОНЕЦ согласования с экраном"));
 
-        actions.Add(new GPUAction(GPUActions.CPUSentsData, "Прцоессор посылает данные на обработку"));
+        actions.Add(new GPUAction(GPUActions.CPUSentsData, "Процессор посылает данные на обработку"));
 
         //Размещение данных в памяти
-        actions.Add(new GPUAction(GPUActions.ControllerPlaceDataInVRAMStart, " НАЧАЛО контроллер GPU размещает данные в памяти VRAM"));
+        actions.Add(new GPUAction(GPUActions.ControllerPlaceDataInVRAMStart, "НАЧАЛО контроллер GPU размещает данные в памяти VRAM"));
         actions.Add(new GPUAction(GPUActions.PlaceModels, "Размещение информации о моделе (вершинах)"));
         actions.Add(new GPUAction(GPUActions.PlaceTextures, "Размещение текстур"));
         actions.Add(new GPUAction(GPUActions.PlaceSceneInfo, "Размещение информации о сцене"));
         actions.Add(new GPUAction(GPUActions.ReservingPlaceForImage, "Резервирования места под формируемое изображение"));
-        actions.Add(new GPUAction(GPUActions.ControllerPlaceDataInVRAMEnd, " КОНЕЦ контроллер GPU размещает данные в памяти VRAM"));
+        actions.Add(new GPUAction(GPUActions.ControllerPlaceDataInVRAMEnd, "КОНЕЦ контроллер GPU размещает данные в памяти VRAM"));
 
         //Обработка данных
         actions.Add(new GPUAction(GPUActions.GPUCalculateDataStart, "НАЧАЛО обработки данных"));
-
+        actions.Add(new GPUAction(GPUActions.TransformModels, "Трансформация вершин 3D-моделей"));
+        actions.Add(new GPUAction(GPUActions.ProjectionModelsTo2DScreen, "Проэцирование моделей на 2D плоскость"));
+        actions.Add(new GPUAction(GPUActions.UseTextureAndShaders, "Применение текстур, фильтрации и шейдеров"));
+        actions.Add(new GPUAction(GPUActions.RasterizationAndCreationImange, "Растеризация и запись изображения в память"));
         actions.Add(new GPUAction(GPUActions.GPUCalculateDataEnd, "КОНЕЦ обработки данных"));
 
-        actions.Add(new GPUAction(GPUActions.ControllerPlaceImageInVRAM, "Контроллер размещает изображение в памяти VRAM"));
+        //actions.Add(new GPUAction(GPUActions.ControllerPlaceImageInVRAM, "Контроллер размещает изображение в памяти VRAM"));
         actions.Add(new GPUAction(GPUActions.ControllerSentImageToScreen, "Отправка изображения на экран"));
-        actions.Add(new GPUAction(GPUActions.ControollerFreeDataInVRAM, "Освобождение данных из памяти"));
+        actions.Add(new GPUAction(GPUActions.ControllerFreeDataInVRAM, "Освобождение данных из памяти"));
 
+#if DEBUG
+
+#else
         //Перетасовка элементов списка
         Random.Shared.Shuffle(CollectionsMarshal.AsSpan(actions));
+#endif
 
         this.actions = new ObservableCollection<GPUAction>(actions);
     }

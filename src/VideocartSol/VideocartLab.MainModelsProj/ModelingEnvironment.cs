@@ -26,12 +26,14 @@ namespace VideocartLab.MainModelsProj
         ControllerPlaceDataInVRAMEnd,
         //Обработка вершин и тд
         GPUCalculateDataStart,
-
+        TransformModels,
+        ProjectionModelsTo2DScreen,
+        UseTextureAndShaders,
+        RasterizationAndCreationImange,
         GPUCalculateDataEnd,
 
-        ControllerPlaceImageInVRAM,
         ControllerSentImageToScreen,
-        ControollerFreeDataInVRAM,
+        ControllerFreeDataInVRAM,
     }
 
     public class ModelingEnvironment 

@@ -135,6 +135,12 @@ public class MainWindowModelView : ModelViewBase
     }
     #endregion
 
+    public void ClearReport()
+    {
+        report.Clear();
+        OnPropertyChanged(nameof(Report));
+    }
+
     [Obsolete]
     public void SaveProject(string path)
     {

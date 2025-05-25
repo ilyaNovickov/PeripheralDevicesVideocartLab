@@ -98,9 +98,14 @@
         {
             double requiredBandwidth = width * height * BitPerPixel * 3d * Frequency / 1024d / 1024d / 1024d;
 
-            if (requiredBandwidth > Bandwidth)
-                throw new ArgumentException("Слишком большое разрещеие экрана. Нехватает пропускной способности");
+            //if (requiredBandwidth > Bandwidth)
+            //    throw new ArgumentException("Слишком большое разрещеие экрана. Нехватает пропускной способности");
 
         }
+
+        /// <summary>
+        /// Требуема пропускная способность [ГБ/с]
+        /// </summary>
+        public double RequiredBandwidth => MaxWidth * MaxHeight * BitPerPixel * 3d * Frequency / 1024d / 1024d / 1024d;
     }
 }

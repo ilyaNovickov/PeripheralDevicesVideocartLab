@@ -38,7 +38,7 @@ internal class ModelingEnvironment
 
     public ModelingEnvironment()
     {
-
+        InitDict();
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ internal class ModelingEnvironment
             return;
         }
 
-        //...
+        Modeling();
     }
 
     /// <summary>
@@ -394,6 +394,300 @@ internal class ModelingEnvironment
             return;
         //Всё правильно
         Controller = controller;
+    }
+
+    private void Modeling()
+    {
+        for (int i = 0; i < Controller!.Actions!.Count; i++)
+        {
+            bool result = etalon[Controller!.Actions[i]].Invoke(this, i);
+
+            if (!result)
+            {
+                Report?.Invoke(this, new ReportArgs("Моделирование было остановлено из-за нарушения одного из правил\n" +
+                    "Просмотрите отчёт на наличие ошибок моделирования или измените последовательность дейтсвий GPU"));
+                break;
+            }
+        }
+
+        Report?.Invoke(this, new ReportArgs("Конец моделирования\n" +
+            "Моделирование было успешно проведено"));
+    }
+
+    private Dictionary<GPUActions, Func<ModelingEnvironment, int, bool>> etalon = 
+        new Dictionary<GPUActions, Func<ModelingEnvironment, int, bool>>();
+
+    private void InitDict()
+    {
+        etalon.Add(GPUActions.Init, (env, index) =>
+        {
+                if (index != 0)
+                    return false;
+
+                env.Report?.Invoke(env, new ReportArgs("Иницилизация системы"));
+                return true;
+        });
+
+        #region screen
+        etalon.Add(GPUActions.HandshakeWithScreenStart, (env, index) =>
+        {
+            if (index != 1)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Начало согласования свойств передачи видеоинформации с экраном"));
+
+            if (env.Controller.ScreenInterface.RequiredBandwidth > env.Controller.ScreenInterface.Bandwidth)
+            {
+                env.Report?.Invoke(env, new ReportArgs($"Пропускная способность интерфейса : {env.Controller.ScreenInterface.Bandwidth}\n" +
+                    $"Требуемая пропускная способность : {env.Controller.ScreenInterface.Bandwidth}\n" +
+                    $"Остановка моделирования : Требуется болшая пропускная способность\n" +
+                    "Измените одно из свойств : 'Разрешение экрана', 'Глубина цвета', 'Частота кадров'"));
+                return false;
+            }
+            return true;
+        });
+
+        etalon.Add(GPUActions.DesicionSolution, (env, index) =>
+        {
+            if (index != 2 && index != 3 && index != 4)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Определение разрещения экрана\n" +
+                $"Установлено разрешение : {env.Controller.ScreenInterface.MaxHeight}x{env.Controller.ScreenInterface.MaxWidth}"));
+            
+            return true;
+        });
+
+        etalon.Add(GPUActions.DesicionColorDepth, (env, index) =>
+        {
+            if (index != 2 && index != 3 && index != 4)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Определение глубины цвета экрана\n" +
+                $"Установлена глубина цвета : {env.Controller.ScreenInterface.BitPerPixel} бит"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.DesicionFrameRate, (env, index) =>
+        {
+            if (index != 2 && index != 3 && index != 4)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Определение частоты обновления кадров экрана\n" +
+                $"Установлена частоты обновления кадров : {env.Controller.ScreenInterface.Frequency} Гц"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.HandshakeWithScreenEnd, (env, index) =>
+        {
+            if (index != 5)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs($"Пропускная способность порта подключения к экрану : {env.Controller.ScreenInterface.Bandwidth} Гбит/с"));
+            env.Report?.Invoke(env, new ReportArgs("Конец согласования свойств передачи видеоинформации с экраном"));
+            
+            return true;
+        });
+        #endregion
+
+        etalon.Add(GPUActions.CPUSentsData, (env, index) =>
+        {
+            if (index != 6)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("CPU отправляет данные видеокарте\n" +
+                $"Видеокарта подключена к материнской плате по интерфейсу " +
+                $"{env.Controller.ConnectionInterface.GetType().Name} " +
+                $"с пропускной способностью {env.Controller.ConnectionInterface.Bandwidth} ГБ/с"));
+
+            return true;
+        });
+
+        #region vram
+        etalon.Add(GPUActions.ControllerPlaceDataInVRAMStart, (env, index) =>
+        {
+            if (index != 7)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Начало размещения данных в памяти\n" +
+                "Информация о видеопамяти :\n" +
+                $"\tОбъём = {env.Controller!.VRAM!.Capacity} МБ\n" +
+                $"\tШирина шины = {env.Controller.VRAM!.MemoryBusCapacity} бит\n" +
+                $"\tТип памяти = {env.Controller.VRAM.Type.Type}\n" +
+                $"\tРеальная частота = {env.Controller.VRAM.RealFrequency} МГц\n" +
+                $"\tЭффективная частота частота = {env.Controller.VRAM.EffectiveFrequency} МГц\n"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.PlaceTextures, (env, index) =>
+        {
+            if (index != 8 && index != 9 && index != 10 && index != 11)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Размещение в памяти текстур"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.PlaceSceneInfo, (env, index) =>
+        {
+            if (index != 8 && index != 9 && index != 10 && index != 11)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Размещение в память информацию о сцене"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.PlaceModels, (env, index) =>
+        {
+            if (index != 8 && index != 9 && index != 10 && index != 11)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Размещение в память 3D моделей"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.ReservingPlaceForImage, (env, index) =>
+        {
+            if (index != 8 && index != 9 && index != 10 && index != 11)
+                return false;
+
+            double imageWeight = env.Controller!.ScreenInterface!.RequiredBandwidth * 1024d /
+                env.Controller.ScreenInterface.BitPerPixel;
+
+            env.Report?.Invoke(env, new ReportArgs("Резервирование в памяти места " +
+                "для выходного изображения\n" +
+                $"Требуется минимум {imageWeight} МБ"));
+
+            if (imageWeight > env.Controller!.VRAM!.Capacity)
+            {
+                env.Report?.Invoke(env, new ReportArgs("Нехватает памяти для выходного изображения\n" +
+                    "Выход из симуляции"));
+                return false;
+            }
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.ControllerPlaceDataInVRAMEnd, (env, index) =>
+        {
+            if (index != 12)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Конец размещения данных в памяти"));
+
+            return true;
+        });
+        #endregion
+
+        #region calculate
+        etalon.Add(GPUActions.GPUCalculateDataStart, (env, index) =>
+        {
+            if (index != 13)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Начало расчётов графики"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.TransformModels, (env, index) =>
+        {
+            if (index != 14)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Трансформация вершин моделей " +
+                "с применением матриц трансформации"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.ProjectionModelsTo2DScreen, (env, index) =>
+        {
+            if (index != 15)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Проэцирование моделей на 2D плоскоть экрана\n" +
+                "Применение Z-буферизации и отсечение невидимых граней"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.UseTextureAndShaders, (env, index) =>
+        {
+            if (index != 16)
+                return false;
+
+            if (env.Controller!.GPU!.TextureMappingUnits == 0)
+            {
+                env.Report?.Invoke(env, new ReportArgs("Остановка моделирования : отсутсвуют блоки текстурирвоания\n" +
+                    "Измените одно из свойств : 'Кол-во текстурных блоков'"));
+                return false;
+            }
+
+            env.Report?.Invoke(env, new ReportArgs("Применением тектстур к моделям\n" +
+                $"Использование одного из текстурных блоков (1/{env.Controller.GPU.TextureMappingUnits})\n" +
+                $"Применение текстелей со скоростью {env.Controller.GPU.TextureFillRate} ГТекселей/с\n" +
+                $"Применение методов фильтрации и шейдеров"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.RasterizationAndCreationImange, (env, index) =>
+        {
+            if (index != 17)
+                return false;
+
+            if (env.Controller!.GPU!.RenderOutputPipelines == 0)
+            {
+                env.Report?.Invoke(env, new ReportArgs("Остановка моделирования : отсутсвуют блоки растеризации\n" +
+                    "Измените одно из свойств : 'Кол-во блоков растеризации'"));
+                return false;
+            }
+
+            env.Report?.Invoke(env, new ReportArgs("Начал растеризации\n" +
+                $"Использование одного из блоков растеризации (1/{env.Controller.GPU.RenderOutputPipelines})\n" +
+                $"Растеризация со скоростью {env.Controller.GPU.PixelFillRate} ГПикселей/с\n" +
+                $"Запись растрового изображения в зарезервированное место в памяти"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.GPUCalculateDataEnd, (env, index) =>
+        {
+            if (index != 18)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Конец расчётов графики"));
+
+            return true;
+        });
+        #endregion
+
+        etalon.Add(GPUActions.ControllerSentImageToScreen, (env, index) =>
+        {
+            if (index != 19)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Отправка изображения на монитор по порту"));
+
+            return true;
+        });
+
+        etalon.Add(GPUActions.ControllerFreeDataInVRAM, (env, index) =>
+        {
+            if (index != 20)
+                return false;
+
+            env.Report?.Invoke(env, new ReportArgs("Освобождение ранее зарезервированной памяти"));
+
+            return true;
+        });
     }
 }
 

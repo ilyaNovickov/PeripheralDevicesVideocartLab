@@ -47,7 +47,8 @@ namespace VideocartLab.Views.AvaloniaProj
 
         private void Clear_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            this.textBox.Clear();
+            this.mainVM.ClearReport();
+            //this.textBox.Clear();
         }
 
         //Сохранение отчёта в файл
