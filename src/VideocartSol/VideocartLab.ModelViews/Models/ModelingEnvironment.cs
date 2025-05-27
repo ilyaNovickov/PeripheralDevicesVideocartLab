@@ -612,7 +612,7 @@ internal class ModelingEnvironment
             if (index != 15)
                 return false;
 
-            env.Report?.Invoke(env, new ReportArgs("Проэцирование моделей на 2D плоскоть экрана\n" +
+            env.Report?.Invoke(env, new ReportArgs("Проецирование  моделей на 2D плоскоть экрана\n" +
                 "Применение Z-буферизации и отсечение невидимых граней"));
 
             return true;

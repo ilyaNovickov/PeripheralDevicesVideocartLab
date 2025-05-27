@@ -51,7 +51,7 @@ public class GPUControllerModelView : ModelViewBase
     {
         List<GPUAction> actions = new(30);
 
-        actions.Add(new GPUAction(GPUActions.Init, "Иницилизация устройства"));
+        actions.Add(new GPUAction(GPUActions.Init, "Инициализация устройства"));
         //Согласование с экраном
         actions.Add(new GPUAction(GPUActions.HandshakeWithScreenStart, "НАЧАЛО согласования с экраном"));
         actions.Add(new GPUAction(GPUActions.DesicionSolution, "Согласование с монитором разрешения экрана"));
@@ -63,7 +63,7 @@ public class GPUControllerModelView : ModelViewBase
 
         //Размещение данных в памяти
         actions.Add(new GPUAction(GPUActions.ControllerPlaceDataInVRAMStart, "НАЧАЛО контроллер GPU размещает данные в памяти VRAM"));
-        actions.Add(new GPUAction(GPUActions.PlaceModels, "Размещение информации о моделе (вершинах)"));
+        actions.Add(new GPUAction(GPUActions.PlaceModels, "Размещение информации о моделях (вершинах)"));
         actions.Add(new GPUAction(GPUActions.PlaceTextures, "Размещение текстур"));
         actions.Add(new GPUAction(GPUActions.PlaceSceneInfo, "Размещение информации о сцене"));
         actions.Add(new GPUAction(GPUActions.ReservingPlaceForImage, "Резервирования места под формируемое изображение"));
@@ -72,7 +72,7 @@ public class GPUControllerModelView : ModelViewBase
         //Обработка данных
         actions.Add(new GPUAction(GPUActions.GPUCalculateDataStart, "НАЧАЛО обработки данных"));
         actions.Add(new GPUAction(GPUActions.TransformModels, "Трансформация вершин 3D-моделей"));
-        actions.Add(new GPUAction(GPUActions.ProjectionModelsTo2DScreen, "Проэцирование моделей на 2D плоскость"));
+        actions.Add(new GPUAction(GPUActions.ProjectionModelsTo2DScreen, "Проецирование моделей на 2D плоскость"));
         actions.Add(new GPUAction(GPUActions.UseTextureAndShaders, "Применение текстур, фильтрации и шейдеров"));
         actions.Add(new GPUAction(GPUActions.RasterizationAndCreationImange, "Растеризация и запись изображения в память"));
         actions.Add(new GPUAction(GPUActions.GPUCalculateDataEnd, "КОНЕЦ обработки данных"));
