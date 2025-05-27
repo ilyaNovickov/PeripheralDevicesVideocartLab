@@ -406,7 +406,7 @@ internal class ModelingEnvironment
             {
                 Report?.Invoke(this, new ReportArgs("Моделирование было остановлено из-за нарушения одного из правил\n" +
                     "Просмотрите отчёт на наличие ошибок моделирования или измените последовательность дейтсвий GPU"));
-                break;
+                return;
             }
         }
 
