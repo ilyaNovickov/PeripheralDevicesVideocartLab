@@ -31,10 +31,10 @@ namespace VideocartLab.Views.AvaloniaProj
         {
             switch ((string)((ComboBoxItem)e.AddedItems[0]!).Content!)
             {
-                case "Light":
+                case "Светлая":
                     this.RequestedThemeVariant = ThemeVariant.Light;
                     break;
-                case "Dark":
+                case "Тёмная":
                     this.RequestedThemeVariant = ThemeVariant.Dark;
                     break;
             }
