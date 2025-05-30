@@ -7,15 +7,19 @@
     public class PCIe : ConnectionInterface
     {
         /// <summary>
-        /// Экземпляр PCEe6.0x16
+        /// Экземпляр PCIe1.0x16
+        /// </summary>
+        public static PCIe PCEe1dot0x16 => new PCIe(16, 2500, 1, EncodingType._8bOn10b);
+        /// <summary>
+        /// Экземпляр PCIe6.0x16
         /// </summary>
         public static PCIe PCIe6dot0x16 => new PCIe(16, 32000, 2, EncodingType._242On256);
         /// <summary>
-        /// Экземпляр PCEe4.0x8
+        /// Экземпляр PCIe4.0x8
         /// </summary>
         public static PCIe PCIe4dot0x8 => new PCIe(8, 16000, 1, EncodingType._128On130b);
         /// <summary>
-        /// Экземпляр PCE2.0x4
+        /// Экземпляр PCIe2.0x4
         /// </summary>
         public static PCIe PCIe2dot0x4 => new PCIe(4, 5000, 1, EncodingType._8bOn10b);
 

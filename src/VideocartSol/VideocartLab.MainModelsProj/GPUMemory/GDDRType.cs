@@ -46,6 +46,14 @@
             Type = type;
         }
 
+        public GDDRType(int effectiveRation)
+        {
+            if (effectiveRation <= 0)
+                throw new Exception("Коэффициент отношения эффективной частоты к реальной не может быть меньше или равным 0");
+            
+            fromRealToEffectivFrequency = effectiveRation;
+        }
+
         /// <summary>
         /// Тип GDDR памяти
         /// </summary>

@@ -48,6 +48,7 @@ public class VRAMModelView : ModelViewBase
     private void InitList()
     {
         #region addGDDRTypes
+        gddrInfos.Add(new GDDRTypeInfo(new GDDRType(1), "SDR"));
         gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR, "GDDR"));
         gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR2, "GDDR2"));
         gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR3, "GDDR3"));
@@ -58,7 +59,7 @@ public class VRAMModelView : ModelViewBase
         gddrInfos.Add(new GDDRTypeInfo(GDDRType.GDDR6X, "GDDR6X"));
         #endregion
 
-        SelectedGDDR = gddrInfos[0];
+        SelectedGDDR = gddrInfos[1];
     }
 
     /// <summary>
