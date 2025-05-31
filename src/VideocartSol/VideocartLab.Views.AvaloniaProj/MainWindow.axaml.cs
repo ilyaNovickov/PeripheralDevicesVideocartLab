@@ -138,6 +138,21 @@ namespace VideocartLab.Views.AvaloniaProj
             }
         }
 
+        private void ToggleButton_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if (removeToggleButton.IsChecked!.Value)
+                nodeListView.SelectionChanged += NodeListView_SelectionChanged;
+            else
+                nodeListView.SelectionChanged -= NodeListView_SelectionChanged;
+        }
+
+        private void NodeListView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            nodeListView.SelectionChanged -= NodeListView_SelectionChanged;
+
+            removeToggleButton.IsChecked = false;
+        }
+
         [Obsolete]
         private async void SaveProject_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
@@ -180,21 +195,6 @@ namespace VideocartLab.Views.AvaloniaProj
                 item.Dispose();
             }
             //file?.D();
-        }
-
-        private void ToggleButton_Click_1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            if (removeToggleButton.IsChecked!.Value)
-                nodeListView.SelectionChanged += NodeListView_SelectionChanged;
-            else
-                nodeListView.SelectionChanged -= NodeListView_SelectionChanged;
-        }
-
-        private void NodeListView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
-        {
-            nodeListView.SelectionChanged -= NodeListView_SelectionChanged;
-
-            removeToggleButton.IsChecked = false;
         }
     }
 }
