@@ -10,8 +10,12 @@
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <PublishAot>False</PublishAot>
     <Configurations>Debug;Release;ReleaseAOT</Configurations>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAOT|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAOT|x64'">
     <Optimize>True</Optimize>
   </PropertyGroup>
 
