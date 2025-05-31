@@ -1,0 +1,169 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="clr-namespace:VideocartLab.ModelViews;assembly=VideocartLab.ModelViews"
+			 xmlns:local="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol"
+             x:Class="VideocartLab.Views.AvaloniaExtraControlsSol.ConnectionInterfaceView"
+			 x:DataType="vm:ConnectionInterfaceModelView">
+	<Design.DataContext>
+		<vm:ConnectionInterfaceModelView/>
+	</Design.DataContext>
+	<UserControl.Styles>
+		<Style Selector="TextBlock.name">
+			<Setter Property="TextAlignment" Value="End"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+		<Style Selector="TextBlock.rightItem">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+		<Style Selector="NumericUpDown">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="TextBox.rightItem">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+	</UserControl.Styles>
+	<UserControl.Resources>
+		
+	</UserControl.Resources>
+	<ThemeVariantScope RequestedThemeVariant="Light">
+		<StackPanel Background="White">
+			<TextBlock TextAlignment="Start"
+					   VerticalAlignment="Center"
+					   HorizontalAlignment="Center"
+					   Margin="5,5,5,5"
+					   Foreground="Black"
+					   Text="Стандартные интерфейсы"/>
+			<ComboBox Margin="5,5,5,5"
+					  ItemsSource="{Binding ConnectionInfos}"
+					  SelectedItem="{Binding SelectedInterface}"
+					  DisplayMemberBinding="{Binding Name}"
+					  PointerPressed="ComboBox_PointerPressed"/>
+			<ContentControl Content="{Binding SelectedInterface.VM}">
+				<ContentControl.DataTemplates>
+					<DataTemplate DataType="vm:AGPViewModel">
+						<Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*">
+							<TextBlock Grid.Column="0"
+									   Grid.Row="0"
+									   Classes="name"
+									   Text="Частота, [МГц]"/>
+							<TextBlock Grid.Column="1"
+									   Grid.Row="0"
+									   Classes="rightItem"
+									   Text="{Binding Frequency}"/>
+							<TextBlock Grid.Column="0"
+									   Grid.Row="1"
+									   Classes="name"
+									   Text="Ширина шины, [бит]"/>
+							<TextBlock Grid.Column="1"
+									   Grid.Row="1"
+									   Classes="rightItem"
+									   Text="{Binding MemoryBusCapacity}"/>
+							<TextBlock Grid.Column="0"
+									   Grid.Row="2"
+									   Classes="name"
+									   Text="Кол-во бит за такт, [бит/такт]"/>
+							<TextBlock Grid.Column="1"
+									   Grid.Row="2"
+									   Classes="rightItem"
+									   Text="{Binding BitPerClock}"/>
+							<TextBlock Grid.Column="0"
+									   Grid.Row="3"
+									   Classes="name"
+									   Text="Пропускная способность, [Гбит/с]"/>
+							<TextBlock Grid.Column="1"
+									   Grid.Row="3"
+									   Classes="rightItem"
+									   Text="{Binding Bandwidth}"/>
+						</Grid>
+					</DataTemplate>
+					<DataTemplate DataType="vm:PCIViewModel">
+						<Grid ColumnDefinitions="*,*"
+							  RowDefinitions="*,*,*">
+							<TextBlock Classes="name"
+									   Grid.Column="0"
+									   Grid.Row="0"
+									   Text="Частота, [МГц]"/>
+							<TextBlock Classes="rightItem"
+									   Grid.Column="1"
+									   Grid.Row="0"
+									   Text="{Binding Frequency}"/>
+							<TextBlock Classes="name"
+									   Grid.Column="0"
+									   Grid.Row="1"
+									   Text="Ширина шины, [бит]"/>
+							<TextBlock Classes="rightItem"
+									   Grid.Column="1"
+									   Grid.Row="1"
+									   Text="{Binding MemoryBusCapacity}"/>
+							<TextBlock Classes="name"
+									   Grid.Column="0"
+									   Grid.Row="2"
+									   Text="Пропускная способность, [ГБ/с]"/>
+							<TextBlock Classes="rightItem"
+									   Grid.Column="1"
+									   Grid.Row="2"
+									   Text="{Binding Bandwidth}"/>
+						</Grid>
+					</DataTemplate>
+					<DataTemplate DataType="vm:PCIExpressViewModel">
+						<Grid ColumnDefinitions="*,*"
+							  RowDefinitions="*,*,*,*,*">
+							<TextBlock Classes="name"
+									   Grid.Column="0"
+									   Grid.Row="0"
+									   Text="Частота, [МГц]"/>
+							<TextBlock Classes="rightItem"
+									   Grid.Column="1"
+									   Grid.Row="0"
+									   Text="{Binding Frequency}"/>
+							<TextBlock Classes="name"
+									   Grid.Column="0"
+									   Grid.Row="1"
+									   Text="Кол-во линий"/>
+							<TextBlock Classes="rightItem"
+									   Grid.Column="1"
+									   Grid.Row="1"
+									   Text="{Binding Lines}"/>
+							<TextBlock Classes="name"
+									   Grid.Column="0"
+									   Grid.Row="2"
+									   Text="Тип передачи"/>
+							<TextBlock Classes="rightItem"
+									   Grid.Column="1"
+									   Grid.Row="2"
+									   Text="{Binding Type.Name}"/>
+							<TextBlock Classes="name"
+									   Grid.Column="0"
+									   Grid.Row="3"
+									   Text="Бит за такт, [бит/такт]"/>
+							<TextBlock Classes="rightItem"
+									   Grid.Column="1"
+									   Grid.Row="3"
+									   Text="{Binding BitPerClock}"/>
+							<TextBlock Classes="name"
+									   Grid.Column="0"
+									   Grid.Row="4"
+									   Text="Пропускная способность, [ГБ/с]"/>
+							<TextBlock Classes="rightItem"
+									   Grid.Column="1"
+									   Grid.Row="4"
+									   Text="{Binding Bandwidth}"/>
+						</Grid>
+					</DataTemplate>
+				</ContentControl.DataTemplates>
+			</ContentControl>
+		</StackPanel>
+	</ThemeVariantScope>
+</UserControl>

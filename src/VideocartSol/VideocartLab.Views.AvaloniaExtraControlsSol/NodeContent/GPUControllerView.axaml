@@ -1,0 +1,60 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="clr-namespace:VideocartLab.ModelViews;assembly=VideocartLab.ModelViews"
+             x:Class="VideocartLab.Views.AvaloniaExtraControlsSol.GPUControllerView"
+			 x:DataType="vm:GPUControllerModelView">
+	<Design.DataContext>
+		<vm:GPUControllerModelView/>
+	</Design.DataContext>
+	<ThemeVariantScope RequestedThemeVariant="Light">
+		<HeaderedContentControl Header="Алгоритм работы контроллера"
+								FontSize="16"
+								Background="White">
+			<DockPanel LastChildFill="True"
+					   Background="White">
+
+				<Border DockPanel.Dock="Left"
+						BorderThickness="1"
+						BorderBrush="Black"
+						CornerRadius="2"
+						Margin="4,4,4,4">
+					<StackPanel>
+						<Button Content="↑" Margin="2,2,2,2"
+								Command="{Binding MoveUpCommand}"/>
+						<Button Content="↓" Margin="2,2,2,2"
+								Command="{Binding MoveDownCommand}"/>
+					</StackPanel>
+				</Border>
+				<Border BorderBrush="Black"
+						BorderThickness="2"
+						CornerRadius="3"
+						Margin="3,3,3,3">
+
+
+					<ListBox ItemsSource="{Binding GpuActions}"
+							 SelectionMode="Toggle"
+							 SelectedValue="{Binding SelectedAction}"
+							 MinWidth="500"
+							 MaxWidth="500"
+							 MinHeight="300"
+							 MaxHeight="300"
+							 Margin="10,10,10,10"
+							 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+							 ScrollViewer.VerticalScrollBarVisibility="Auto">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding Name}"
+										   Width="500"/>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+					
+					
+				</Border>
+			</DockPanel>
+		</HeaderedContentControl>
+	</ThemeVariantScope>
+</UserControl>
