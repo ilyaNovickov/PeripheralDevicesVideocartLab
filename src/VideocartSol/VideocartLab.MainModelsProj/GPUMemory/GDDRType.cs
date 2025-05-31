@@ -89,8 +89,6 @@
             {
                 case GDDRTypes.GDDR:
                 case GDDRTypes.GDDR2:
-                    fromRealToEffectivFrequency = 1;
-                    break;
                 case GDDRTypes.GDDR3:
                 case GDDRTypes.GDDR4:
                     fromRealToEffectivFrequency = 2;

@@ -464,7 +464,8 @@ internal class ModelingEnvironment
                 return false;
 
             env.Report?.Invoke(env, new ReportArgs("Определение глубины цвета экрана\n" +
-                $"Установлена глубина цвета : {env.Controller.ScreenInterface.BitPerPixel} бит"));
+                $"Установлена глубина цвета : {env.Controller.ScreenInterface.BitPerPixel} бит\n" +
+                $"Всего цветов : {Math.Pow(2, env.Controller.ScreenInterface.BitPerPixel)}"));
 
             return true;
         });
@@ -557,8 +558,8 @@ internal class ModelingEnvironment
             if (index != 8 && index != 9 && index != 10 && index != 11)
                 return false;
 
-            double imageWeight = env.Controller!.ScreenInterface!.RequiredBandwidth * 1024d /
-                env.Controller.ScreenInterface.BitPerPixel;
+            double imageWeight = env.Controller!.ScreenInterface!.RequiredBandwidth /
+                env.Controller.ScreenInterface.Frequency / 8d * 1024d;
 
             env.Report?.Invoke(env, new ReportArgs("Резервирование в памяти места " +
                 "для выходного изображения\n" +

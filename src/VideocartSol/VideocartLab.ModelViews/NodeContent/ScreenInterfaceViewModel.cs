@@ -289,7 +289,7 @@ public class ScreenInterfaceViewModel : ModelViewBase
     public double RequiredBandwidth
     {
         get => ScreenWidth!.Value * ScreenHeight!.Value *
-            BitPerPixel!.Value * 3d * Frequency!.Value / 1024d / 1024d / 1024d;
+            BitPerPixel!.Value * Frequency!.Value / 1024d / 1024d / 1024d;
     }
     #endregion
 
