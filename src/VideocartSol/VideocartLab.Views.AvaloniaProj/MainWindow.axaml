@@ -71,7 +71,7 @@
 		</Border>
 		<Grid>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="0.15*" MinWidth="5"/>
+				<ColumnDefinition Width="0.15*" MinWidth="80"/>
 				<ColumnDefinition Width="5"/>
 				<ColumnDefinition Width="*" MinWidth="5"/>
 			</Grid.ColumnDefinitions>
@@ -86,9 +86,9 @@
 			<GridSplitter Grid.Column="1" Background="Gray" ResizeDirection="Columns"/>
 			<Grid Grid.Column="2">
 				<Grid.RowDefinitions>
-					<RowDefinition MinHeight="5"/>
+					<RowDefinition MinHeight="20"/>
 					<RowDefinition Height="5"/>
-					<RowDefinition MinHeight="5"/>
+					<RowDefinition MinHeight="60"/>
 				</Grid.RowDefinitions>
 				<!--Canvas-->
 				<Border BorderThickness="1"
