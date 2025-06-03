@@ -122,7 +122,7 @@ internal class ModelingEnvironment
         sb.AppendLine("=== Предупреждения ===");
 
         if (warnings.Count == 0)
-            sb.AppendLine(" - Отсуствуют");
+            sb.AppendLine(" - Отсутствуют");
         else
             foreach (string warning in warnings)
             {
@@ -134,7 +134,7 @@ internal class ModelingEnvironment
         sb.AppendLine("=== Ошибки ===");
 
         if (errors.Count == 0)
-            sb.AppendLine(" - Отсуствуют");
+            sb.AppendLine(" - Отсутствуют");
         else
             foreach (string error in errors)
             {
@@ -165,7 +165,7 @@ internal class ModelingEnvironment
                     ("Контроллеры GPU", controllers),
                     ("VRAM", vrams),
                     ("Интерфейсы подключения к монитору", screenInterface),
-                    ("Ципы GPU", gpu),
+                    ("Чипы GPU", gpu),
                     ("Интерфейсы подключения к материнской плате", connectionInterface)
                 };
 
@@ -405,12 +405,12 @@ internal class ModelingEnvironment
             if (!result)
             {
                 Report?.Invoke(this, new ReportArgs("Моделирование было остановлено из-за нарушения одного из правил\n" +
-                    "Просмотрите отчёт на наличие ошибок моделирования или измените последовательность дейтсвий GPU"));
+                    "Просмотрите отчёт на наличие ошибок моделирования или измените последовательность действий контроллера GPU"));
                 return;
             }
         }
 
-        Report?.Invoke(this, new ReportArgs("Конец моделирования\n" +
+        Report?.Invoke(this, new ReportArgs("Конец моделирования\n\n" +
             "Моделирование было успешно проведено"));
     }
 
@@ -424,7 +424,7 @@ internal class ModelingEnvironment
                 if (index != 0)
                     return false;
 
-                env.Report?.Invoke(env, new ReportArgs("Иницилизация системы"));
+                env.Report?.Invoke(env, new ReportArgs("Инициализация системы"));
                 return true;
         });
 
@@ -436,7 +436,7 @@ internal class ModelingEnvironment
 
             env.Report?.Invoke(env, new ReportArgs("Начало согласования свойств передачи видеоинформации с экраном"));
 
-            if (env.Controller.ScreenInterface.RequiredBandwidth > env.Controller.ScreenInterface.Bandwidth)
+            if (env.Controller!.ScreenInterface!.RequiredBandwidth > env.Controller.ScreenInterface.Bandwidth)
             {
                 env.Report?.Invoke(env, new ReportArgs($"Пропускная способность интерфейса : {env.Controller.ScreenInterface.Bandwidth}\n" +
                     $"Требуемая пропускная способность : {env.Controller.ScreenInterface.Bandwidth}\n" +
@@ -452,8 +452,8 @@ internal class ModelingEnvironment
             if (index != 2 && index != 3 && index != 4)
                 return false;
 
-            env.Report?.Invoke(env, new ReportArgs("Определение разрещения экрана\n" +
-                $"Установлено разрешение : {env.Controller.ScreenInterface.MaxHeight}x{env.Controller.ScreenInterface.MaxWidth}"));
+            env.Report?.Invoke(env, new ReportArgs("Определение разрешения экрана\n" +
+                $"Установлено разрешение : {env.Controller!.ScreenInterface!.MaxHeight}x{env.Controller.ScreenInterface.MaxWidth}"));
             
             return true;
         });
@@ -464,7 +464,7 @@ internal class ModelingEnvironment
                 return false;
 
             env.Report?.Invoke(env, new ReportArgs("Определение глубины цвета экрана\n" +
-                $"Установлена глубина цвета : {env.Controller.ScreenInterface.BitPerPixel} бит\n" +
+                $"Установлена глубина цвета : {env.Controller!.ScreenInterface!.BitPerPixel} бит\n" +
                 $"Всего цветов : {Math.Pow(2, env.Controller.ScreenInterface.BitPerPixel)}"));
 
             return true;
@@ -518,7 +518,7 @@ internal class ModelingEnvironment
                 $"\tШирина шины = {env.Controller.VRAM!.MemoryBusCapacity} бит\n" +
                 $"\tТип памяти = {env.Controller.VRAM.Type.Type}\n" +
                 $"\tРеальная частота = {env.Controller.VRAM.RealFrequency} МГц\n" +
-                $"\tЭффективная частота частота = {env.Controller.VRAM.EffectiveFrequency} МГц\n"));
+                $"\tЭффективная частота = {env.Controller.VRAM.EffectiveFrequency} МГц\n"));
 
             return true;
         });
@@ -613,7 +613,7 @@ internal class ModelingEnvironment
             if (index != 15)
                 return false;
 
-            env.Report?.Invoke(env, new ReportArgs("Проецирование  моделей на 2D плоскоть экрана\n" +
+            env.Report?.Invoke(env, new ReportArgs("Проецирование  моделей на 2D плоскость экрана\n" +
                 "Применение Z-буферизации и отсечение невидимых граней"));
 
             return true;
@@ -631,7 +631,7 @@ internal class ModelingEnvironment
                 return false;
             }
 
-            env.Report?.Invoke(env, new ReportArgs("Применением тектстур к моделям\n" +
+            env.Report?.Invoke(env, new ReportArgs("Применением текстур к моделям\n" +
                 $"Использование одного из текстурных блоков (1/{env.Controller.GPU.TextureMappingUnits})\n" +
                 $"Применение текстелей со скоростью {env.Controller.GPU.TextureFillRate} ГТекселей/с\n" +
                 $"Применение методов фильтрации и шейдеров"));

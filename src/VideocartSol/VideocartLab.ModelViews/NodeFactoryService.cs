@@ -90,7 +90,7 @@ public class NodeFactoryService
 
         nodeInnerContentDict.Add(typeof(ConnectionInterfaceModelView), new NodeInfo()
         {
-            Name = "Интерфейс подключени устройства",
+            Name = "Интерфейс подключения устройства",
             Width = 500,
             Height = 250,
             GetVMFunc = () => new ConnectionInterfaceModelView(),
@@ -99,7 +99,7 @@ public class NodeFactoryService
 
         nodeInnerContentDict.Add(typeof(GPUControllerModelView), new NodeInfo()
         {
-            Name = "Котнроллер GPU",
+            Name = "Контроллер GPU",
             Width = 600,
             Height = 400,
             GetVMFunc = () => new GPUControllerModelView(),
