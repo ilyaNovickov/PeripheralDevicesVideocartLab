@@ -8,7 +8,7 @@
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
-    <PublishAot>False</PublishAot>
+    <PublishAot>True</PublishAot>
     <Configurations>Debug;Release;ReleaseAOT</Configurations>
     <Platforms>AnyCPU;x64</Platforms>
     <AssemblyName>Видеокарта</AssemblyName>
