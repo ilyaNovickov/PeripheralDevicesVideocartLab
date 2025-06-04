@@ -35,19 +35,23 @@ public class GPUControllerModelView : ModelViewBase
     private GPUAction? selectedAction = null;
     private RelayCommand moveUp;
     private RelayCommand moveDown;
+    private RelayCommand setRightList;
 
     public GPUControllerModelView()
     {
-        InitList();
+        var actions = InitList();
+        Random.Shared.Shuffle(CollectionsMarshal.AsSpan(actions));
+        this.actions = new ObservableCollection<GPUAction>(actions);
 
         moveUp = new RelayCommand(MoveItemUp);
         moveDown = new RelayCommand(MoveItemDown);
+        setRightList = new RelayCommand(SetRightList);
     }
 
     /// <summary>
     /// Иницилизация списка действий контроллера
     /// </summary>
-    private void InitList()
+    private List<GPUAction> InitList()
     {
         List<GPUAction> actions = new(30);
 
@@ -81,14 +85,7 @@ public class GPUControllerModelView : ModelViewBase
         actions.Add(new GPUAction(GPUActions.ControllerSentImageToScreen, "Отправка изображения на экран"));
         actions.Add(new GPUAction(GPUActions.ControllerFreeDataInVRAM, "Освобождение данных из памяти"));
 
-#if DEBUG
-
-#else
-        //Перетасовка элементов списка
-        Random.Shared.Shuffle(CollectionsMarshal.AsSpan(actions));
-#endif
-
-        this.actions = new ObservableCollection<GPUAction>(actions);
+        return actions;
     }
 
 
@@ -119,6 +116,8 @@ public class GPUControllerModelView : ModelViewBase
     /// Команда перемещение выбранного элемента списка вниз
     /// </summary>
     public RelayCommand MoveDownCommand => moveDown;
+
+    public RelayCommand SetRightListCommand => setRightList;
 
     /// <summary>
     /// Перемещение выбранного элемента вверх списка
@@ -154,6 +153,13 @@ public class GPUControllerModelView : ModelViewBase
         var selectedAction = SelectedAction;
         (GpuActions[index], GpuActions[index + 1]) = (GpuActions[index + 1], GpuActions[index]);
         SelectedAction = selectedAction;
+    }
+
+    private void SetRightList()
+    {
+        var actions = InitList();
+        this.actions = new ObservableCollection<GPUAction>(actions);
+        OnPropertyChanged(nameof(GpuActions));
     }
 }
 

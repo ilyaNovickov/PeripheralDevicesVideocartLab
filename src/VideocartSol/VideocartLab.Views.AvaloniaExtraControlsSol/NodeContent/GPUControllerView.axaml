@@ -26,6 +26,9 @@
 								Command="{Binding MoveUpCommand}"/>
 						<Button Content="↓" Margin="2,2,2,2"
 								Command="{Binding MoveDownCommand}"/>
+						<Label Content=" " Margin="2,2,2,2"
+							   Background="White"
+							   x:Name="lab"/>
 					</StackPanel>
 				</Border>
 				<Border BorderBrush="Black"
