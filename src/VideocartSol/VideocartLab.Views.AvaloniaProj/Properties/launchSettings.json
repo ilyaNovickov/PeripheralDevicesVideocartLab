@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "VideocartLab.Views.AvaloniaProj": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}

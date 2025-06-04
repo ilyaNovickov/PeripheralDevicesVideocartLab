@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="clr-namespace:VideocartLab.ModelViews;assembly=VideocartLab.ModelViews"
+             x:Class="VideocartLab.Views.AvaloniaExtraControlsSol.NodeListView"
+			 x:DataType="vm:NodeListModelView">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.ThemeDictionaries>
+				<ResourceDictionary x:Key="Light">
+					<SolidColorBrush x:Key="borderBrush" Color="Black"/>
+				</ResourceDictionary>
+				<ResourceDictionary x:Key="Dark">
+					<SolidColorBrush x:Key="borderBrush" Color="White"/>
+				</ResourceDictionary>
+			</ResourceDictionary.ThemeDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	<Design.DataContext>
+		<vm:NodeListModelView/>
+	</Design.DataContext>
+	<ListBox x:Name="listBox1"
+			 ItemsSource="{Binding AvaibleNodes}"
+			 SelectedItem="{Binding SelectedItem}"
+			 SelectionMode="Toggle" 
+			 ScrollViewer.AllowAutoHide="False"
+			 SelectionChanged="ListBox_SelectionChanged">
+		<ListBox.ItemTemplate>
+			<DataTemplate>
+				<Border Margin="2,2,2,2"
+						BorderThickness="2"
+						BorderBrush="{DynamicResource borderBrush}">
+					<TextBlock Text="{Binding Name}"
+							   VerticalAlignment="Center"
+							   HorizontalAlignment="Center"
+							   TextAlignment="Center"
+							   TextWrapping="Wrap"/>
+				</Border>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+	</ListBox>
+</UserControl>

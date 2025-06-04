@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;ReleaseAOT</Configurations>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Avalonia">
+    <AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.7" />
+    <PackageReference Include="Avalonia.Controls.PanAndZoom" Version="11.2.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.2.7" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.2.7" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.7" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VideocartLab.ModelViews\VideocartLab.ModelViews.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="MainControls\NodeListView.axaml.cs">
+      <DependentUpon>NodeListView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainControls\NodeView.axaml.cs">
+      <DependentUpon>NodeView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="NodeContent\GPUContentView.axaml.cs">
+      <DependentUpon>GPUContentView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainControls\ProjectView.axaml.cs">
+      <DependentUpon>ProjectView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="NodeContent\ScreenInterfaceView.axaml.cs">
+      <DependentUpon>ScreenInterfaceView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="NodeContent\ConnectionInterfaceView.axaml.cs">
+      <DependentUpon>ConnectionInterfaceView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="NodeContent\GPUControllerView.axaml.cs">
+      <DependentUpon>GPUControllerView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="NodeContent\VRAMContentView.axaml.cs">
+      <DependentUpon>VRAMContentView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

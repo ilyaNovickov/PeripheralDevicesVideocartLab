@@ -1,0 +1,135 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:pnz="clr-namespace:Avalonia.Controls.PanAndZoom;assembly=Avalonia.Controls.PanAndZoom"
+		xmlns:vm="clr-namespace:VideocartLab.ModelViews;assembly=VideocartLab.ModelViews"
+        x:Class="VideocartLab.Views.AvaloniaProj.MainWindow"
+		xmlns:cntr="clr-namespace:VideocartLab.Views.AvaloniaExtraControlsSol;assembly=VideocartLab.Views.AvaloniaExtraControlsSol"
+        Title="Виртуальная лабораторная работа 'Видеокарта'"
+		x:DataType="vm:MainWindowModelView"
+		MinWidth="300"
+		MinHeight="300">
+	<Window.KeyBindings>
+		<KeyBinding Gesture="Delete" 
+					Command="{Binding RemoveSelectedNodeCommand}"/>
+	</Window.KeyBindings>
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.ThemeDictionaries>
+				<ResourceDictionary x:Key="Light">
+					<SolidColorBrush x:Key="borderBrush" Color="Black"/>
+				</ResourceDictionary>
+				<ResourceDictionary x:Key="Dark">
+					<SolidColorBrush x:Key="borderBrush" Color="White"/>
+				</ResourceDictionary>
+			</ResourceDictionary.ThemeDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
+	<Design.DataContext>
+		<vm:MainWindowModelView/>
+	</Design.DataContext>
+	<DockPanel LastChildFill="True">
+		<!--UpperMenu-->
+		<Menu DockPanel.Dock="Top" Margin="5,3,5,3">
+			<!--
+			<MenuItem Header="Файл">
+				<MenuItem Header="Сохранить"
+						  Click="SaveProject_Click"/>
+				<MenuItem Header="Загрузить"
+						  Click="LoadProject_Click"/>
+				<Separator/>
+				<MenuItem Header="Выход"/>
+			</MenuItem>
+			-->
+			<Label Content="Тема"/>
+			<ComboBox SelectedIndex="0"
+					  SelectionChanged="ComboBox_SelectionChanged">
+				<ComboBoxItem Content="Светлая"/>
+				<ComboBoxItem Content="Тёмная"/>
+			</ComboBox>
+		</Menu>
+		<Border DockPanel.Dock="Top"
+				CornerRadius="2"
+				BorderThickness="2"
+				BorderBrush="{DynamicResource borderBrush}"
+				Margin="5,5,5,5">
+			<!--InnerMenu-->
+			<Menu >
+				<Button Content="Запуск моделирования"
+						Command="{Binding StartModelingCommand}"/>
+				<ToggleButton x:Name="removeToggleButton"
+							  Content="Удаление узла" 
+							  ClickMode="Press"
+							  Click="ToggleButton_Click_1"
+							  Command="{Binding RemoveNodeCommand}"
+							  CommandParameter="{Binding $self.IsChecked}"/>
+				<Button Content="Экспорт холста в изображение"
+						Click="CreateImage_Click"/>
+			</Menu>
+		</Border>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.15*" MinWidth="80"/>
+				<ColumnDefinition Width="5"/>
+				<ColumnDefinition Width="*" MinWidth="5"/>
+			</Grid.ColumnDefinitions>
+			<!--NodeList-->
+			<Border BorderThickness="1"
+					BorderBrush="{DynamicResource borderBrush}"
+					Margin="3,3,3,3">
+				<cntr:NodeListView x:Name="nodeListView"
+								   DataContext="{Binding NodeList}"/>
+			</Border>
+			
+			<GridSplitter Grid.Column="1" Background="Gray" ResizeDirection="Columns"/>
+			<Grid Grid.Column="2">
+				<Grid.RowDefinitions>
+					<RowDefinition MinHeight="20"/>
+					<RowDefinition Height="5"/>
+					<RowDefinition MinHeight="60"/>
+				</Grid.RowDefinitions>
+				<!--Canvas-->
+				<Border BorderThickness="1"
+						BorderBrush="{DynamicResource borderBrush}"
+						Margin="3,3,3,3">
+					<pnz:ZoomBorder Grid.Row="0"
+									ClipToBounds="True"
+									Background="DarkGray">
+						<cntr:ProjectView x:Name="projectView"
+										  DataContext="{Binding Project}"
+										  Width="5000"
+										  Height="5000">
+
+						</cntr:ProjectView>
+					</pnz:ZoomBorder>
+				</Border>
+				<GridSplitter Grid.Row="1" Background="Gray" ResizeDirection="Rows"/>
+				<!--TextBlock-->
+				<DockPanel Grid.Row="2" 
+					       ClipToBounds="True"
+					       Margin="3,3,3,3"
+						   LastChildFill="True">
+					<Menu DockPanel.Dock="Top" 
+						  BorderBrush="{DynamicResource borderBrush}"
+						  BorderThickness="1"
+						  CornerRadius="2"
+						  Margin="2,2,2,2">
+						<Button Content="Сохранить"
+								Click="SaveReport_Click"/>
+						<Button Content="Копировать"
+								Click="Copy_Click"/>
+						<Button Content="Очистить"
+								Click="Clear_Click"/>
+					</Menu>
+					<TextBox x:Name="textBox"
+							 AcceptsReturn="True"
+							 Text="{Binding Report}"
+							 IsReadOnly="True"/>
+				</DockPanel>
+				
+			</Grid>
+		</Grid>
+	</DockPanel>
+</Window>

@@ -1,0 +1,118 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="clr-namespace:VideocartLab.ModelViews;assembly=VideocartLab.ModelViews"
+             x:Class="VideocartLab.Views.AvaloniaExtraControlsSol.GPUContentView"
+			 x:DataType="vm:GPUContentModelView">
+	<Design.DataContext>
+		<vm:GPUContentModelView/>
+	</Design.DataContext>
+	<UserControl.Styles>
+		<Style Selector="TextBlock.name">
+			<Setter Property="TextAlignment" Value="End"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+		<Style Selector="TextBlock.rightItem">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+		<Style Selector="NumericUpDown">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="TextBox.rightItem">
+			<Setter Property="Margin" Value="5,5,5,5"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+	</UserControl.Styles>
+	<ThemeVariantScope RequestedThemeVariant="Light">
+		<Grid ColumnDefinitions="*,*"
+			  RowDefinitions="*,*,*,*,*,*,*"
+			  Background="White">
+			<TextBlock Grid.Column="0"
+					   Grid.Row="0"
+					   Classes="name"
+					   Text="Имя GPU"/>
+			<TextBox Grid.Column="1"
+					 Grid.Row="0"
+					 Classes="rightItem"
+					 Text="{Binding Name}"
+					 MinWidth="100"
+					 MaxWidth="100"
+					 MinHeight="50"
+					 MaxHeight="50"
+					 ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+			<TextBlock Grid.Column="0"
+					   Grid.Row="1"
+					   Classes="name"
+					   Text="Кол-во ядер"/>
+			<NumericUpDown Grid.Column="1"
+						   Grid.Row="1"
+						   Classes="rightItem"
+						   Value="{Binding Cores}"
+						   ParsingNumberStyle="Integer"
+						   Increment="1"
+						   Minimum="0"
+						   Maximum="100000"/>
+			<TextBlock Grid.Column="0"
+					   Grid.Row="2"
+					   Classes="name"
+					   Text="Кол-во TMU"/>
+			<NumericUpDown Grid.Column="1"
+						   Grid.Row="2"
+						   Classes="rightItem"
+						   Value="{Binding TextureMappingUnits}"
+						   ParsingNumberStyle="Integer"
+						   Increment="1"
+						   Minimum="0"
+						   Maximum="10000"/>
+			<TextBlock Grid.Column="0"
+					   Grid.Row="3"
+					   Classes="name"
+					   Text="Кол-во ROP"/>
+			<NumericUpDown Grid.Column="1"
+						   Grid.Row="3"
+						   Classes="rightItem"
+						   Value="{Binding RenderOutputPipelines}"
+						   ParsingNumberStyle="Integer"
+						   Increment="1"
+						   Minimum="0"
+						   Maximum="10000"/>
+			<TextBlock Grid.Column="0"
+					   Grid.Row="4"
+					   Classes="name"
+					   Text="Частота, [МГц]"/>
+			<NumericUpDown Grid.Column="1"
+						   Grid.Row="4"
+						   Classes="rightItem"
+						   Value="{Binding Frequency}"
+						   Increment="1"
+						   Minimum="0"
+						   Maximum="10000"/>
+			<TextBlock Grid.Column="0"
+					   Grid.Row="5"
+					   Classes="name"
+					   Text="TFR, [ГТекстелей/с]"/>
+			<TextBlock Grid.Column="1"
+						   Grid.Row="5"
+						   Classes="rightItem"
+						   Text="{Binding TextureFillRate}"/>
+			<TextBlock Grid.Column="0"
+					   Grid.Row="6"
+					   Classes="name"
+					   Text="PFR, [ГПикселей/с]"/>
+			<TextBlock Grid.Column="1"
+						   Grid.Row="6"
+						   Classes="rightItem"
+						   Text="{Binding PixelFillRate}"/>
+		</Grid>
+	</ThemeVariantScope>
+</UserControl>
