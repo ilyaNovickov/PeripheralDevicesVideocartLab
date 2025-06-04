@@ -8,10 +8,11 @@
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
-    <PublishAot>True</PublishAot>
+    <PublishAot>False</PublishAot>
     <Configurations>Debug;Release;ReleaseAOT</Configurations>
     <Platforms>AnyCPU;x64</Platforms>
     <AssemblyName>Видеокарта</AssemblyName>
+    <PublishTrimmed>False</PublishTrimmed>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAOT|AnyCPU'">
     <Optimize>True</Optimize>
