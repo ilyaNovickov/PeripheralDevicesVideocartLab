@@ -40,9 +40,9 @@ namespace VideocartLab.ModelViews
             connectionInfos.Add(new ConnectionInterfaceInfo("PCIe 1.0x1", new PCIe(), new PCIExpressViewModel()));
             connectionInfos.Add(new ConnectionInterfaceInfo("PCIe 1.0x16", PCIe.PCEe1dot0x16, new PCIExpressViewModel()));
             connectionInfos.Add(new ConnectionInterfaceInfo("PCIe 2.0x4", PCIe.PCIe2dot0x4, new PCIExpressViewModel()));
-            connectionInfos.Add(new ConnectionInterfaceInfo("PCIe 3.0x8", new PCIe(8, 8000, 1, EncodingType._128On130b), new PCIExpressViewModel()));
             connectionInfos.Add(new ConnectionInterfaceInfo("PCIe 2.0x16", new PCIe(16, 5000, 1, EncodingType._8bOn10b), new PCIExpressViewModel()));
             connectionInfos.Add(new ConnectionInterfaceInfo("PCIe 3.0x4", new PCIe(4, 8000, 1, EncodingType._128On130b), new PCIExpressViewModel()));
+            connectionInfos.Add(new ConnectionInterfaceInfo("PCIe 3.0x8", new PCIe(8, 8000, 1, EncodingType._128On130b), new PCIExpressViewModel()));
             connectionInfos.Add(new ConnectionInterfaceInfo("PCIe 4.0x4", new PCIe(4, 16000, 1, EncodingType._128On130b), new PCIExpressViewModel()));
             connectionInfos.Add(new ConnectionInterfaceInfo("PCIe 4.0x8", PCIe.PCIe4dot0x8, new PCIExpressViewModel()));
             connectionInfos.Add(new ConnectionInterfaceInfo("PCIe 6.0x16", PCIe.PCIe6dot0x16, new PCIExpressViewModel()));
