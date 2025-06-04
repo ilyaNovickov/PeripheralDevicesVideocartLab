@@ -453,7 +453,7 @@ internal class ModelingEnvironment
                 return false;
 
             env.Report?.Invoke(env, new ReportArgs("Определение разрешения экрана\n" +
-                $"Установлено разрешение : {env.Controller!.ScreenInterface!.MaxHeight}x{env.Controller.ScreenInterface.MaxWidth}"));
+                $"Установлено разрешение : {env.Controller!.ScreenInterface!.MaxWidth}x{env.Controller.ScreenInterface.MaxHeight}"));
             
             return true;
         });
