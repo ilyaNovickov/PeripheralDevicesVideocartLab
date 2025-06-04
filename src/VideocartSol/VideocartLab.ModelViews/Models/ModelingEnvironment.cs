@@ -518,7 +518,8 @@ internal class ModelingEnvironment
                 $"\tШирина шины = {env.Controller.VRAM!.MemoryBusCapacity} бит\n" +
                 $"\tТип памяти = {env.Controller.VRAM.Type.Type}\n" +
                 $"\tРеальная частота = {env.Controller.VRAM.RealFrequency} МГц\n" +
-                $"\tЭффективная частота = {env.Controller.VRAM.EffectiveFrequency} МГц\n"));
+                $"\tЭффективная частота = {env.Controller.VRAM.EffectiveFrequency} МГц\n" +
+                $"\tПропускная способность = {env.Controller.VRAM.MemoryBandwidth} ГБ/с\n"));
 
             return true;
         });
