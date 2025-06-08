@@ -96,7 +96,10 @@
 						Margin="3,3,3,3">
 					<pnz:ZoomBorder Grid.Row="0"
 									ClipToBounds="True"
-									Background="DarkGray">
+									Background="DarkGray"
+									Stretch="None"
+									VerticalAlignment="Stretch" 
+									HorizontalAlignment="Stretch">
 						<cntr:ProjectView x:Name="projectView"
 										  DataContext="{Binding Project}"
 										  Width="5000"
