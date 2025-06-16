@@ -17,4 +17,9 @@ public partial class GPUControllerView : UserControl
             gpuControllerVM.SetRightListCommand.Execute(null);
         };
     }
+
+    private void ListBox_PointerWheelChanged(object? sender, Avalonia.Input.PointerWheelEventArgs e)
+    {
+        e.Handled = true;
+    }
 }
